@@ -29,6 +29,7 @@ class App {
 
   private middleware() {
     // TODO : CORS
+    this.app.use(cors());
   }
 
   private route() {
