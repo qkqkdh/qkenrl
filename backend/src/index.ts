@@ -19,7 +19,7 @@ class App {
     // TODO : DB CONFIG
     const connect = mongoose.connect('mongodb://mongo/admin',{
       useNewUrlParser: true,
-      user: "root2",
+      user: "root",
       pass: "root",
       dbName: 'abaotest',
 
