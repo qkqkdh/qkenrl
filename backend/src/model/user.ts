@@ -8,7 +8,12 @@ interface IUser {
 
 }
 
-export interface UserDocument extends IUser, Document {};
+export interface UserDocument extends IUser, Document {
+  authenticate(): Promise<UserDocument>;
+};
+
+
+
 interface UserModel extends Model<UserDocument> {};
 
 const userSchema = new Schema({
@@ -31,8 +36,10 @@ const userSchema = new Schema({
 });
 
 // CUSTOM METHODs
-userSchema.methods.test = () => {};
-userSchema.statics.findWithsth = () => {};
+userSchema.methods.authenticate = async function(this: UserDocument) {
+  this.status = "active";
+  return this.save()
+}
 
 // MODEL : Responsible for CRUD
 // MODEL로 생성한 객체는 Document 
