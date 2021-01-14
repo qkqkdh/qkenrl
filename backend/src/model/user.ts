@@ -1,6 +1,17 @@
-import mongoose from 'mongoose';
+import { Schema, model, Document, Model, Query } from 'mongoose';
 
-const userSchema = new mongoose.Schema({
+interface IUser {
+  username: string;
+  password: string;
+  email: string;
+  status: string; // To authentication status (default: "pending")
+
+}
+
+export interface UserDocument extends IUser, Document {};
+interface UserModel extends Model<UserDocument> {};
+
+const userSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -9,8 +20,20 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "pending",
+  }
 });
 
-const User = mongoose.model('User', userSchema);
+// CUSTOM METHODs
+userSchema.methods.test = () => {};
+userSchema.statics.findWithsth = () => {};
 
-export {User};
+// MODEL : Responsible for CRUD
+// MODEL로 생성한 객체는 Document 
+export default model<UserDocument, UserModel>('User', userSchema);
