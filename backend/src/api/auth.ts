@@ -46,8 +46,7 @@ router.get('/verification/:userid/:secretCode', async (req: Request, res: Respon
   if(user && user.status === "pending") {
     const code = await SecretCodeModel.findOne({userid, code: secretCode});
     if(code) { // 통과
-      user.status = "active";
-      await user.save();
+      await user.authenticate();
       await SecretCodeModel.deleteOne({_id: code._id});
       res.redirect('/');
     }
