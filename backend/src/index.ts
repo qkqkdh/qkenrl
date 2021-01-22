@@ -32,6 +32,9 @@ class App {
   private middleware() {
     // TODO : CORS
     this.app.use(cors());
+    const swaggerUi = require("swagger-ui-express"),
+    swaggerDocument = require("../swagger.json");
+    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }
 
   private route() {
