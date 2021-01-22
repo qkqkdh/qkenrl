@@ -35,11 +35,6 @@ const userSchema = new Schema({
   }
 });
 
-// CUSTOM METHODs
-userSchema.methods.authenticate = async function(this: UserDocument) {
-  this.status = "active";
-  return this.save()
-}
 
 // MODEL : Responsible for CRUD
 // MODEL로 생성한 객체는 Document 
