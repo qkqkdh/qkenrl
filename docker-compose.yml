@@ -3,15 +3,11 @@ services:
   client:
     build:
       context: ./frontend
-    volumes:
-      - ./frontend/:/app
     networks:
       - backend
   server:
     build:
       context: ./backend
-    volumes:
-      - ./backend/:/app
     networks:
       - backend
     depends_on:
@@ -28,8 +24,6 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    volumes:
-      - data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
