@@ -1,0 +1,28 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "BABAO Pit Pet",
+        "description": "BABAO Pit Pet API Document",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+    }
+    },
+    "tags": [
+    {
+    "name": "Users",
+    "description": "API for users in the system"
+    }
+    ],
+    "schemes": [
+    "http"
+    ],
+    "consumes": [
+    "application/json"
+    ],
+    "produces": [
+    "application/json"
+    ]
+    }
+    

@@ -1,0 +1,15 @@
+@import "./base/mixin";
+
+.search_form {
+  @include desktop {
+    margin: 50px 25px 0 0;
+    justify-content: flex-end;
+    display: flex;
+  }
+  input {
+    @include desktop {
+      width: 250px;
+      height: 30px;
+    }
+  }
+}

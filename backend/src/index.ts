@@ -3,6 +3,8 @@ import cors from 'cors';
 import * as bodyParser from 'body-parser';
 import api from './api';
 import mongoose from 'mongoose';
+import {API_PORT} from './utils/constants';
+
 class App {
   app: express.Application;
 
@@ -19,7 +21,7 @@ class App {
     // TODO : DB CONFIG
     const connect = mongoose.connect('mongodb://mongo/admin',{
       useNewUrlParser: true,
-      user: "root2",
+      user: "root",
       pass: "root",
       dbName: 'abaotest',
 
@@ -30,6 +32,9 @@ class App {
   private middleware() {
     // TODO : CORS
     this.app.use(cors());
+    const swaggerUi = require("swagger-ui-express"),
+    swaggerDocument = require("../swagger.json");
+    this.app.use('/docs', swaggerUi.serveWithOptions({redirect: false}), swaggerUi.setup(swaggerDocument));
   }
 
   private route() {
@@ -39,5 +44,4 @@ class App {
 
 const app = new App().app;
 
-const API_PORT = 3001;
 app.listen(API_PORT, () => { console.log(`LISTEN ON PORT ${API_PORT}`)});

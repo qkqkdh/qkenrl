@@ -10,6 +10,7 @@ type Props = { // Props 정의
 type FormData = {
   id: string;
   password: string;
+  email: string;
 }
 
 const Register: React.FunctionComponent<Props> = ({children}) => {
@@ -18,8 +19,8 @@ const Register: React.FunctionComponent<Props> = ({children}) => {
 
   const onSubmit = (data: FormData) => { // 폼 버튼 클릭 시 호출
     setLogin(true);
-    const { id, password } = data;
-    axios.post('/api/register', {id, password}) // /api/register API 에 데이터 전달 및 호출, 비밀번호는 암호화 해서 보내야ㅏ 함  !
+    const { id, password, email } = data;
+    axios.post('/api/auth/signup', {id, password, email}) // /api/register API 에 데이터 전달 및 호출, 비밀번호는 암호화 해서 보내야ㅏ 함  !
     .then((response) => {
       if(response.status === 200) { // 요청 성공 시
         alert("회원가입 성공했습니다.");
@@ -46,6 +47,7 @@ const Register: React.FunctionComponent<Props> = ({children}) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField name="id" placeholder="ID" inputRef={register}/>
       <TextField name="password" placeholder="PASSWORD" type="password" inputRef={register} />
+      <TextField name="email" placeholder="EMAIL" type="email" inputRef={register} />
       {login ? <CircularProgress /> : <Button type="submit">회원가입</Button>}
     </form>
     </>
