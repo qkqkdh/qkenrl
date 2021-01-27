@@ -54,7 +54,9 @@
 		"comma-dangle": 0, // 마지막에 콤마 안붙여도 되게 하기
 		"object-curly-newline": 0, // {}에서 새로운 line에 매개변수 쓰지 않아도 되게
 		"quotes": 0, // string에 doublequotes 가능
-		"react/jsx-indent-props": [2, "tab"] // jsx props tab으로 들여쓰기
+		"react/jsx-indent-props": [2, "tab"], // jsx props tab으로 들여쓰기
+		"no-underscore-dangle": 0, // _ 쓰기
+		"no-shadow" : ["warn"] // 변수 가리기 경고만 하기
 	},
 	"settings": {
 		"import/resolver":
