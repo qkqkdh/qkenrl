@@ -1,34 +1,59 @@
 .header {
-  width: 100%;
-  background-color: #000000;
-  color: #ffffff;
+  width: calc(100%-2*$padding);
+  background-color: $main-color;
+  color: black;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 $padding;
   @include desktop {
     height: 70px;
   }
   @include mobile {
   }
-}
-
-.header .logo {
-  font-size: 30px;
-}
-
-.header .nav {
-  display: flex;
-  flex: 1 0 auto;
-  align-items: center;
-  justify-content: flex-end;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-    @include desktop {
-      padding: 0 30px;
-    }
-    &:hover {
-      color: #a3a3a3;
-    }
+  &>div{
+	display: flex;
+	height: 100%;
+	align-items: center;
+  }
+  .h-title-con{
+	width: 30%;
+	flex : 0 0 auto;
+	img{
+		height: 100%;
+		margin-right: 10px;
+	}
+	h1{
+		font-size: 2rem;
+		font-weight: 600;
+	}
+  }
+  .nav-con{
+	width: 60%;
+	flex : 1 1 auto;
+	justify-content: space-around;
+	span{
+		padding: 10px;
+		border-bottom: 1px solid transparent;
+		&:hover{
+			& a{
+				font-weight: 600;
+			}
+			border-bottom: 1px solid black;
+		}
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		
+	}
+  }
+  .profile-con{
+	width: 20%;
+	flex : 0 0 auto;
+	justify-content: flex-end;
+	.modal{
+		position: absolute;
+	}
   }
 }
