@@ -1,7 +1,9 @@
 import React from "react";
 
-import { Grid } from "@material-ui/core";
+import { Layout } from "../components";
 
-const SetPet: React.FunctionComponent = () => <Grid>setting pets profile</Grid>;
+const SetPet: React.FunctionComponent = () => (
+	<Layout>setting pets profile</Layout>
+);
 
 export default SetPet;

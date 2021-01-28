@@ -1,7 +1,9 @@
 import React from "react";
 
-import { Grid } from "@material-ui/core";
+import { Layout } from "../components";
 
-const Account: React.FunctionComponent = () => <Grid>account</Grid>;
+const Account: React.FunctionComponent = () => (
+	<Layout>this is account page.</Layout>
+);
 
 export default Account;

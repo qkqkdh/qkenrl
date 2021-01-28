@@ -1,7 +1,9 @@
 import React from "react";
 
-import { Grid } from "@material-ui/core";
+import { Layout } from "../components";
 
-const Login: React.FunctionComponent = () => <Grid>Login</Grid>;
+const Login: React.FunctionComponent = () => (
+	<Layout>this is login page.</Layout>
+);
 
 export default Login;
