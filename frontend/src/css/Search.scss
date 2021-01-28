@@ -1,0 +1,11 @@
+// Search page scss
+
+// default scss
+@import './base/base';
+@import './base/materialUI';
+@import './base/mixin';
+@import './base/reset';
+
+// components scss
+@import './components/header';
+@import './components/searchform';

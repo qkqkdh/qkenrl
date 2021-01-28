@@ -34,7 +34,7 @@ class App {
     this.app.use(cors());
     const swaggerUi = require("swagger-ui-express"),
     swaggerDocument = require("../swagger.json");
-    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    this.app.use('/docs', swaggerUi.serveWithOptions({redirect: false}), swaggerUi.setup(swaggerDocument));
   }
 
   private route() {
