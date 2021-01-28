@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useEffect } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
+import "../css/Search.scss";
 import { CircularProgress } from "@material-ui/core";
-import Layout from "../components/Layout";
-import SearchForm from "../components/SearchForm";
-import SearchContent from "../components/SearchContent";
+import { Layout, SearchForm, SearchContent } from "../components";
 
 interface SearchResult {
 	keyword: string;
