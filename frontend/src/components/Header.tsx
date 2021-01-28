@@ -1,5 +1,4 @@
 // Header Component
-import "./css/_header.scss";
 import React from "react";
 import { Link } from "react-router-dom";
 
