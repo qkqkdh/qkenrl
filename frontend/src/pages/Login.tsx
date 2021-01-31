@@ -1,9 +1,11 @@
 import React from "react";
 
-import { Layout } from "../components";
+import { SignIn } from "../components";
 
 const Login: React.FunctionComponent = () => (
-	<Layout>this is login page.</Layout>
+	<>
+		<SignIn />
+	</>
 );
 
 export default Login;
