@@ -52,8 +52,13 @@
 	width: 20%;
 	flex : 0 0 auto;
 	justify-content: flex-end;
-	.modal{
-		position: absolute;
+	p{
+		margin-right: 1rem;
+	}
+	.menu-btn{
+		background-color: $dark-gray;
+		color: white;
+		cursor: pointer;
 	}
   }
 }
