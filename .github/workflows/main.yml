@@ -40,8 +40,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run Dependecy Installation & Build App
         run: |
-          yarn install
-          yarn build
+          npm install
+          npm run build
           
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
