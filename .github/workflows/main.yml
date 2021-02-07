@@ -19,10 +19,11 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
+    env:
+      working-directory: ./frontend
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,17 +34,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
     
-      # Runs a single command using the runners shell
-      - name: Change Directory to frontend
-        run: cd frontend
-
+      
       # Runs a set of commands using the runners shell
-      - name: Run Dependecy Installation & Build App
+      - name: Run Dependecy Installation
         run: |
           npm install
-      - name: Run Dependecy Installation & Build App
+        working-directory: ${{ env.working-directory }}
+        
+      - name: Build App
         run: |
           npm run build
+        working-directory: ${{ env.working-directory }}
           
       - name: Deploy to S3
         uses: jakejarvis/s3-sync-action@master
@@ -54,5 +55,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          SOURCE_DIR: "build"
+          SOURCE_DIR: "frontend/build"
       
