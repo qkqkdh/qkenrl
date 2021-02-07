@@ -41,6 +41,8 @@ jobs:
       - name: Run Dependecy Installation & Build App
         run: |
           npm install
+      - name: Run Dependecy Installation & Build App
+        run: |
           npm run build
           
       - name: Deploy to S3
