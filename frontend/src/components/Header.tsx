@@ -30,13 +30,13 @@ const Header: React.FunctionComponent<Props> = () => {
 					<Link to="/pets">마이펫</Link>
 				</span>
 				<span>
-					<Link to="/search">검색</Link>
+					<Link to="/search">음식 검색</Link>
 				</span>
 				<span>
-					<Link to="/search">검색</Link>
+					<Link to="/pets">메뉴 3</Link>
 				</span>
 				<span>
-					<Link to="/search">검색</Link>
+					<Link to="/search">메뉴 4</Link>
 				</span>
 			</Grid>
 			<Grid className="profile-con">
