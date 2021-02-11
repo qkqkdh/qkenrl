@@ -1,10 +1,9 @@
 {
-	"env": {
-		"browser": true,
-		"node": true
-	},
-	"extends": [
-		"plugin:prettier/recommended", // prettier를 먼저 동작시켜야 고쳐준다.
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": [
 		"plugin:react/recommended",
 		"airbnb"
 	],
@@ -21,7 +20,6 @@
 		"@typescript-eslint",
 		"eslint-plugin-import",
 		"eslint-plugin-jsx-a11y",
-		"eslint-plugin-prettier",
 		"eslint-plugin-react",
 		"eslint-plugin-react-hooks"
 	],
@@ -94,9 +92,8 @@
 			"tab"
 		], // jsx props tab으로 들여쓰기
 		"no-underscore-dangle": 0, // _ 쓰기
-		"no-shadow": [
-			"warn"
-		] // 변수 가리기 경고만 하기
+		"no-shadow" : ["warn"], // 변수 가리기 경고만 하기
+		"jsx-a11y/click-events-have-key-events" : 0 // onClick쓰려면 다른 event handler도 등록해야하는 옵션 끄기
 	},
 	"settings": {
 		"import/resolver": {
