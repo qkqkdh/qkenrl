@@ -1,11 +1,15 @@
 import React from "react";
-import Header from "./Header";
-import "./css/base/_reset.css";
+import '../css/Layout.scss';
+import { Grid } from "@material-ui/core";
+
+import { Header } from ".";
 
 const Layout: React.FunctionComponent = ({ children }) => (
 	<>
 		<Header />
-		{children}
+		<Grid id="wrap">
+			{children}
+		</Grid>
 	</>
 );
 

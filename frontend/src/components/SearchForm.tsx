@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@material-ui/core";
-import "./css/_searchform.scss";
 
 interface Props {
 	// TODO : Type definition

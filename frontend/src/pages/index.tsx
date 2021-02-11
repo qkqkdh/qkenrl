@@ -1,6 +1,6 @@
-import React from "react";
-import Layout from "../components/Layout";
-
-const App: React.FunctionComponent = () => <Layout>this is main page.</Layout>;
-
-export default App;
+export { default as Login } from "./Login";
+export { default as SetPet } from "./SetPet";
+export { default as PetCustom } from "./PetCustom";
+export { default as Search } from "./Search";
+export { default as Account } from "./Account";
+export { default as NotFound } from "./404";
