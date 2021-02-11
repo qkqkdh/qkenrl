@@ -23,7 +23,7 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			"mongodb://mongo/admin",
+			"mongodb://localhost:27017/admin",
 			{
 				useNewUrlParser: true,
 				user: "root",
@@ -44,7 +44,7 @@ class App {
 		this.app.use(cors());
 		this.app.use(
 			"/docs",
-			swaggerUi.serveWithOptions({ redirect: false }),
+			swaggerUi.serve,
 			swaggerUi.setup(swaggerDocument)
 		);
 	}

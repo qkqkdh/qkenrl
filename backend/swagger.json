@@ -1,28 +1,677 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0.0",
-        "title": "BABAO Pit Pet",
-        "description": "BABAO Pit Pet API Document",
-        "license": {
-        "name": "MIT",
-        "url": "https://opensource.org/licenses/MIT"
-    }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BABAO Backend API",
+    "description": "BABAO API",
+    "contact": {
+      "url": "https://github.com/dghg/abao"
     },
-    "tags": [
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0-oas3"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
     {
-    "name": "Users",
-    "description": "API for users in the system"
+      "url": "https://virtserver.swaggerhub.com/gmldms784/test/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://petstore.swagger.io/v2"
     }
-    ],
-    "schemes": [
-    "http"
-    ],
-    "consumes": [
-    "application/json"
-    ],
-    "produces": [
-    "application/json"
-    ]
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "api about user"
+    },
+    {
+      "name": "pet",
+      "description": "api about pet"
+    },
+    {
+      "name": "search",
+      "description": "api about search"
     }
-    
+  ],
+  "paths": {
+    "/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates a user.",
+        "description": "회원가입. 비밀번호는 프론트에서 암호화 후 전송. 이메일로 인증메일 보내야 함. 인증메일을 타고 들어오면 쿠키 발급.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "정상처리",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청. 빠진 데이터가 존재하거나 이미 계정이 존재할 때"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/{id}/{email}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "중복 확인",
+        "description": "회원가입 시 id와 email 중복 확인. 이메일 당 아이디 3개까지 생성 가능",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "정상처리",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청. 아이디 및 email이 제대로 기재되지 않았을 때."
+          },
+          "409": {
+            "description": "해당 이메일에 이미 3개의 계정이 존재할 때. 해당 아이디가 이미 존재할 때."
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "로그인",
+        "description": "로그인. 자동 로그인 체크 시 자동 로그인 되도록 처리.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "정상처리. 토큰 발급"
+          },
+          "400": {
+            "description": "로그인 정보 잘못 입력. 이외의 모든 기타 오류 나 400으로 처리."
+          },
+          "401": {
+            "description": "이메일 인증이 안되어 있음"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/login/trial": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "둘러보기",
+        "description": "둘러보기 token 발급",
+        "responses": {
+          "200": {
+            "description": "정상처리. 토큰 발급"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/verification/{userId}/{secretCode}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "이메일 인증 처리",
+        "description": "이메일 인증 처리. 회원가입 시 이메일로 secretCode를 포함한 url 전송. 클릭 시 해당 api가 동작하여 이메일 인증",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "secretCode",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "정상처리. 인증 완료"
+          },
+          "400": {
+            "description": "이미 인증 완료"
+          },
+          "404": {
+            "description": "찾을 수 없음"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/info": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "정보 수정",
+        "description": "정보 수정",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "정상처리. 수정 완료."
+          },
+          "400": {
+            "description": "잘못된 요청"
+          },
+          "401": {
+            "description": "토큰이 유효하지 않음"
+          },
+          "404": {
+            "description": "찾을 수 없음"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/auth/find": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "비밀번호 찾기",
+        "description": "비밀번호 찾기. 임시 비밀번호를 생성 후에 이메일로 전송",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_3"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "정상처리. 비밀번호 변경 됨."
+          },
+          "400": {
+            "description": "잘못된 요청"
+          },
+          "404": {
+            "description": "계정 정보를 찾을 수 없음"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/pet": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "마이펫 받아오기",
+        "description": "토큰에 해당하는 유저의 마이펫 받아오기",
+        "responses": {
+          "200": {
+            "description": "정상처리."
+          },
+          "401": {
+            "description": "인증 오류. (토큰 오류)"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "마이펫 수정",
+        "description": "마이펫 수정하기.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_4"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "정상처리. 수정됨."
+          },
+          "400": {
+            "description": "잘못된 요청. 기존에 없는 펫인 경우"
+          },
+          "401": {
+            "description": "인증 오류. (토큰 오류)"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "마이펫 등록",
+        "description": "마이펫 등록하기.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_5"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "정상처리. 등록됨"
+          },
+          "400": {
+            "description": "잘못된 요청. 이미 펫이 n마리 이상인 경우."
+          },
+          "401": {
+            "description": "인증 오류. (토큰 오류)"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/pet/{id}": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "마이펫 한마리 정보 받아오기",
+        "description": "id에 해당하는 마이펫 정보 받아오기",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "정상처리."
+          },
+          "400": {
+            "description": "잘못된 요청. 기존에 없는 펫인 경우"
+          },
+          "401": {
+            "description": "인증 오류. (토큰 오류)"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "마이펫 삭제",
+        "description": "마이펫 삭제하기",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "정상처리. 삭제됨."
+          },
+          "400": {
+            "description": "잘못된 요청. 기존에 없는 펫인 경우"
+          },
+          "401": {
+            "description": "인증 오류. (토큰 오류)"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/search/{keyword}": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "검색하기",
+        "description": "키워드에 맞는 음식 검색하기",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "정상처리.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultArr"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청. db data에 없는 경우"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    },
+    "/v1/search/recommend": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "검색 첫 화면 표시환",
+        "description": "검색 첫 화면에 표시할 음식 랜덤으로 3개 반환",
+        "responses": {
+          "200": {
+            "description": "정상처리.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultArr"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "잘못된 요청. db data에 없는 경우"
+          },
+          "500": {
+            "description": "서버 에러"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultArr": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Result"
+        }
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "info": {
+            "$ref": "#/components/schemas/Result_info"
+          }
+        }
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "birth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agreement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "body_1": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "auto": {
+            "type": "boolean"
+          }
+        }
+      },
+      "body_2": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "birth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "body_3": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "body_4": {
+        "type": "object",
+        "properties": {
+          "pet": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "birth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          }
+        }
+      },
+      "body_5": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "birth": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "breed": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          }
+        }
+      },
+      "Result_info": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "nutrient": {
+            "type": "string"
+          },
+          "eatable": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
