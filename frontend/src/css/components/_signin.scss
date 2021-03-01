@@ -1,7 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
 
-.root {
-    height: 100vh;
+// .root {
+//     height: 100vh;
+// }
+
+.loginBody{
+	position: absolute;
+	width: 40%;
+	background-color: #ffffff !important;
+	border: none;
+
+	.rightSort{
+		display: flex;
+		justify-content: flex-end;
+
+		.closeBtn{
+			color: #000 !important;
+			background-color: rgb(202, 202, 202) !important;
+			width: 1rem;
+			height: 1rem;
+			margin: 1rem 1rem 0 1rem;
+		}
+	}
+
+	.loginContainer{
+		padding: 0 5% 5% 5%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		flex-wrap: nowrap;
+
+		.avatar {
+			margin: 2rem;
+			width: 6rem !important;
+			height: 6rem !important;
+			background-color: #ffffff !important;
+			color: #000 !important;
+			border: solid 1px black;
+		}
+	}
 }
 
 .image {
@@ -32,14 +70,6 @@
 
 .paperBG {
     background-color: #DADADA !important;
-}
-
-.avatar {
-    margin: 2rem;
-    width: 6rem !important;
-    height: 6rem !important;
-    background-color: #ffffff !important;
-    color: #000 !important;
 }
 
 .form {
