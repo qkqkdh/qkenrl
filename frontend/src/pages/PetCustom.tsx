@@ -55,9 +55,20 @@ const PetCustom: React.FunctionComponent = () => {
 					<Grid>
 						<span className="shadow">
 							<span>
-								<p>몸무게 : {dog.weight} kg</p>
-								<p>성별 : {dog.gender}</p>
-								<p>견종 : {dog.breed}</p>
+								<p>
+									몸무게 :
+									{dog.weight}
+									{' '}
+									kg
+								</p>
+								<p>
+									성별 :
+									{dog.gender}
+								</p>
+								<p>
+									견종 :
+									{dog.breed}
+								</p>
 							</span>
 						</span>
 						<img src="/img/dog.PNG" alt="dog profile" />
