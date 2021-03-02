@@ -56,7 +56,7 @@ export default function SignInSide() {
 	const body = (
 		<div className="loginBody" style={getModalStyle()}>
 			<div className="rightSort">
-				<IconButton className="closeBtn">
+				<IconButton className="closeBtn" onClick={handleClose}>
 					<CloseIcon fontSize="small" />
 				</IconButton>
 			</div>
@@ -64,7 +64,48 @@ export default function SignInSide() {
 				<Avatar className="avatar">
 					<PetsIcon fontSize="large" />
 				</Avatar>
-				<h2>Hi</h2>
+				<Typography className="Title">BDCS</Typography>
+				<form className="form" noValidate>
+					<TextField
+						variant="outlined"
+						fullWidth
+						size="small"
+						required
+						id="ID"
+						className="loginInputs"
+						placeholder="ID"
+						autoFocus
+					/>
+					<TextField
+						variant="outlined"
+						fullWidth
+						size="small"
+						required
+						id="password"
+						type="password"
+						className="loginInputs"
+						placeholder="PASSWORD"
+						autoFocus
+					/>
+					<Button
+						type="submit"
+						variant="contained"
+						size="large"
+						fullWidth
+						className="submit"
+					>
+						LOGIN
+					</Button>
+					<Grid container className="registerGrid">
+						<Grid item>
+							<Link href="# " className="link">회원가입</Link>
+						</Grid>
+						<Grid item>|</Grid>
+						<Grid item>
+							<Link href="# " className="link">비밀번호 찾기</Link>
+						</Grid>
+					</Grid>
+				</form>
 			</Grid>
 		</div>
 	);

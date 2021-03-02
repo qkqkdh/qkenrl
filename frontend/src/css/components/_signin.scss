@@ -1,12 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap');
-
-// .root {
-//     height: 100vh;
-// }
-
 .loginBody{
 	position: absolute;
-	width: 40%;
+	width: 100%;
 	background-color: #ffffff !important;
 	border: none;
 
@@ -29,55 +23,50 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		flex-wrap: nowrap;
 
 		.avatar {
-			margin: 2rem;
-			width: 6rem !important;
-			height: 6rem !important;
-			background-color: #ffffff !important;
-			color: #000 !important;
+			margin: 1rem;
+			width: 6rem;
+			height: 6rem;
+			background-color: #ffffff;
+			color: #000;
 			border: solid 1px black;
+		}
+		.Title{
+			font-size: 2.5rem;
+			color: darken(gray,20%);
+			font-weight: 700;
 		}
 	}
 }
 
-.image {
-    background-color: #fafafa;
-    font-family: 'Noto Sans KR', sans-serif;
-    span{
-        position: fixed;
-        top: 70%;
-        left: 10%;
-    }
-    h1{
-        font-weight: 700;
-        font-size: 2rem;
-    }
-}
-
-.paper {
-    margin: 3rem 3rem 11rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'Noto Sans KR', sans-serif;
-    h1{
-        font-weight: 700;
-        font-size: 2rem;
-    }
-}
-
-.paperBG {
-    background-color: #DADADA !important;
-}
-
 .form {
-    width: 100%;
-    margin-top: 1rem;
-    border-color: #707070;
+    width: 70%;
+    margin: 1rem;
+	
+	.loginInputs{
+		margin: 0.5rem 0;
+		border-radius: 0.5rem !important;
+		box-shadow: 1px 1px 2px gray;
+	}
+	.submit {
+		margin: 0.5rem 0 !important;
+		background-color: #777777 !important;
+		color: white !important;
+		border-radius: 0.5rem !important;
+		font-size: 0.8rem;
+	}
+	.registerGrid{
+		margin: 1rem 0;
+		justify-content: center;
+
+		.link{
+			padding: 0 8px;
+			font-size: 0.8rem;
+			text-decoration: none !important;
+		}
+	}
     a{
-        text-decoration: none !important;
         color:#000 !important;
         &:hover{
             color:#222 !important;
@@ -86,19 +75,11 @@
     }
 }
 
-.submit {
-    margin: 1.5rem 0 1.5rem !important;
-    background-color: #777777 !important;
-    border-radius: 0.5rem !important;
-}
-
-.btn {
-    position: fixed !important;
-    left: 70%;
-    top: 70%;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50% !important;
-    z-index: 1400 !important;
-    background-color: #707070 !important;
+@media (min-width:769px){
+	.loginBody{
+		width: 50%;
+	}
+	.form{
+		width: 40%;
+	}
 }
