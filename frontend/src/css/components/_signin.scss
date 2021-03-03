@@ -39,7 +39,9 @@
 		}
 	}
 }
-
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+	border: solid 1px black !important;
+}
 .form {
     width: 70%;
     margin: 1rem;

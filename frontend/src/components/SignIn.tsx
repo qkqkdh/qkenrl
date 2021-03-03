@@ -71,7 +71,6 @@ export default function SignInSide() {
 						fullWidth
 						size="small"
 						required
-						id="ID"
 						className="loginInputs"
 						placeholder="ID"
 						autoFocus
@@ -81,7 +80,6 @@ export default function SignInSide() {
 						fullWidth
 						size="small"
 						required
-						id="password"
 						type="password"
 						className="loginInputs"
 						placeholder="PASSWORD"
