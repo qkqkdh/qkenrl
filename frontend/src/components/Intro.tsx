@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Button, Avatar } from '@material-ui/core';
+import { Grid, Link, Button, Avatar } from '@material-ui/core';
 import PetsIcon from "@material-ui/icons/Pets";
 
 const Intro: React.FunctionComponent = () => {
@@ -27,7 +27,9 @@ const Intro: React.FunctionComponent = () => {
 						{slogan()}
 					</Grid>
 				</Grid>
-				<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
+				<Link id="btn-link" href="# ">
+					<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
+				</Link>
 			</Grid>
 		</Grid>
 	);
