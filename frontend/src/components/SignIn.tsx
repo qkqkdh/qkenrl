@@ -33,24 +33,24 @@ const SignIn: React.FunctionComponent = () => {
 	};
 
 	const body = (
-		<div className="loginBody" style={getModalStyle()}>
-			<div className="rightSort">
-				<IconButton className="closeBtn" onClick={handleClose}>
+		<div className="login-body" style={getModalStyle()}>
+			<div className="right-sort">
+				<IconButton className="close-btn" onClick={handleClose}>
 					<CloseIcon fontSize="small" />
 				</IconButton>
 			</div>
-			<Grid container className="loginContainer">
+			<Grid container className="login-container">
 				<Avatar className="avatar">
 					<PetsIcon fontSize="large" />
 				</Avatar>
-				<Typography className="Title">BDCS</Typography>
+				<Typography className="title">BDCS</Typography>
 				<form className="form" noValidate>
 					<TextField
 						variant="outlined"
 						fullWidth
 						size="small"
 						required
-						className="loginInputs"
+						className="login-inputs"
 						placeholder="ID"
 						autoFocus
 					/>
@@ -73,16 +73,16 @@ const SignIn: React.FunctionComponent = () => {
 					>
 						LOGIN
 					</Button>
-					<Grid container className="registerGrid">
-						<Grid item>
-							<Link href="# " className="link">회원가입</Link>
-						</Grid>
-						<Grid item>|</Grid>
-						<Grid item>
-							<Link href="# " className="link">비밀번호 찾기</Link>
-						</Grid>
-					</Grid>
 				</form>
+				<Grid container className="register-grid">
+					<Grid item>
+						<Link href="# " className="link">회원가입</Link>
+					</Grid>
+					<Grid item>|</Grid>
+					<Grid item>
+						<Link href="# " className="link">비밀번호 찾기</Link>
+					</Grid>
+				</Grid>
 			</Grid>
 		</div>
 	);

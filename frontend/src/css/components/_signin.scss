@@ -1,14 +1,14 @@
-.loginBody{
+.login-body{
 	position: absolute;
 	width: 100%;
 	background-color: #ffffff !important;
 	border: none;
 
-	.rightSort{
+	.right-sort{
 		display: flex;
 		justify-content: flex-end;
 
-		.closeBtn{
+		.close-btn{
 			color: #000 !important;
 			background-color: rgb(202, 202, 202) !important;
 			width: 1rem;
@@ -17,7 +17,7 @@
 		}
 	}
 
-	.loginContainer{
+	.login-container{
 		padding: 0 5% 5% 5%;
 		display: flex;
 		justify-content: center;
@@ -32,7 +32,7 @@
 			color: #000;
 			border: solid 1px black;
 		}
-		.Title{
+		.title{
 			font-size: 2.5rem;
 			color: darken(gray,20%);
 			font-weight: 700;
@@ -46,7 +46,7 @@
     width: 70%;
     margin: 1rem;
 	
-	.loginInputs{
+	.login-inputs{
 		margin: 0.5rem 0;
 		border-radius: 0.5rem !important;
 		box-shadow: 1px 1px 2px gray;
@@ -58,27 +58,25 @@
 		border-radius: 0.5rem !important;
 		font-size: 0.8rem;
 	}
-	.registerGrid{
-		margin: 1rem 0;
-		justify-content: center;
+}
+.register-grid{
+	margin: 1rem 0;
+	justify-content: center;
 
-		.link{
-			padding: 0 8px;
-			font-size: 0.8rem;
-			text-decoration: none !important;
+	.link{
+		padding: 0 8px;
+		font-size: 0.8rem;
+		text-decoration: none !important;
+		color:#000 !important;
+		&:hover{
+			color:#222 !important;
+			font-weight: 600 !important;
 		}
 	}
-    a{
-        color:#000 !important;
-        &:hover{
-            color:#222 !important;
-            font-weight: 600 !important;
-        }
-    }
 }
 
-@media (min-width:769px){
-	.loginBody{
+@media (min-width:769px){ // desktop
+	.login-body{
 		width: 50%;
 	}
 	.form{
