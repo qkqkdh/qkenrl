@@ -126,7 +126,7 @@ export default function SignInSide() {
 				color="primary"
 				size="large"
 				className="btn"
-				href="# "
+				href="/main"
 			>
 				둘러보기
 			</Button>

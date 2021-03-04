@@ -1,0 +1,15 @@
+@import './base';
+@import './components/placeselector';
+
+#map {
+	position: absolute;
+	z-index: 1;
+	@include desktop {
+		width: 100vw;
+		height: 100vh;
+	}
+	@include mobile {
+		width: 100vw;
+		height: 100vh;	
+	}
+}
