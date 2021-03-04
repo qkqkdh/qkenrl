@@ -60,7 +60,7 @@ const SignIn: React.FunctionComponent = () => {
 						size="small"
 						required
 						type="password"
-						className="loginInputs"
+						className="login-inputs"
 						placeholder="PASSWORD"
 						autoFocus
 					/>

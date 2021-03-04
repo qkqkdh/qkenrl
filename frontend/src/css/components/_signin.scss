@@ -48,14 +48,14 @@
 	
 	.login-inputs{
 		margin: 0.5rem 0;
-		border-radius: 0.5rem !important;
+		border-radius: 0.5rem;
 		box-shadow: 1px 1px 2px gray;
 	}
 	.submit {
-		margin: 0.5rem 0 !important;
+		margin: 0.5rem 0;
 		background-color: #777777 !important;
-		color: white !important;
-		border-radius: 0.5rem !important;
+		color: white;
+		border-radius: 0.5rem;
 		font-size: 0.8rem;
 	}
 }
@@ -69,8 +69,8 @@
 		text-decoration: none !important;
 		color:#000 !important;
 		&:hover{
-			color:#222 !important;
-			font-weight: 600 !important;
+			color:#222;
+			font-weight: 600;
 		}
 	}
 }
