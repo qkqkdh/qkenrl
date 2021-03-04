@@ -6,3 +6,4 @@ export { default as SearchForm } from "./SearchForm";
 export { default as UserList } from "./UserList";
 export { default as SignIn } from "./SignIn";
 export { default as PageHeader } from "./PageHeader";
+export { default as SmallPlaceInfo } from "./SmallPlaceInfo";
