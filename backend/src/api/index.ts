@@ -1,8 +1,11 @@
 import { Router } from "express";
-import auth from "./auth";
+import user from "./user";
+import place from './place';
+import search from './search';
 
 const router = Router();
 
-router.use("/auth", auth);
-
+router.use("/user", user);
+router.use("/place", place);
+router.use("/search", search);
 export default router;
