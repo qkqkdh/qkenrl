@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Layout, SignIn } from "../components";
+import { Layout } from "../components";
 
 const Account: React.FunctionComponent = () => (
-	<Layout><SignIn /></Layout>
+	<Layout>this is account page.</Layout>
 );
 
 export default Account;
