@@ -1,0 +1,67 @@
+
+.intro-root {
+    height:100vh;
+}
+
+.back-ground {
+    width: 100%;
+    height: 100%;
+    img {
+        width : 100%;
+        height : 100%;
+        z-index: 0;
+    }
+}
+
+#logo {
+    margin-bottom: 2rem;
+    width: 6rem;
+    height: 6rem;
+    background-color: #ffffff;
+    color: #000;
+}
+
+.intro-container {
+    position : absolute;
+    top:0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+}
+
+.text-area {
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    .title-area {
+        font-size:3rem;
+        font-weight:700;
+        margin-bottom:2rem;
+    }
+    .slogan-area {
+        p {
+            font-weight : 300;
+            font-size : 1.5rem;
+            line-height : 2.5rem;
+        }
+    }
+}
+
+#btn-go-service {
+    margin-top:2rem;
+    border-radius: 2rem;
+    border-color: #ffffff;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+#btn-link:hover {
+    text-decoration: none;
+}
