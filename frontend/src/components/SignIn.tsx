@@ -10,40 +10,9 @@ import { Avatar,
 } from "@material-ui/core";
 import PetsIcon from "@material-ui/icons/Pets";
 import CloseIcon from '@material-ui/icons/Close';
+import "../css/Login.scss";
 
-function Copyright() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{"Copyright © "}
-			<Link color="inherit" href="https://github.com/dghg/abao">
-				BABAO
-			</Link>
-			{"  "}
-			{new Date().getFullYear()}
-			{". "}
-		</Typography>
-	);
-}
-
-function ContactUs() {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			CONTACT US | 010-1234-5678 | abc123@gmail.com
-		</Typography>
-	);
-}
-
-function getModalStyle() {
-	const top = 50;
-	const left = 50;
-	return {
-		top: `${top}%`,
-		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`,
-	};
-}
-
-export default function SignInSide() {
+const SignIn: React.FunctionComponent = () => {
 	const [Open, setOpen] = useState(false);
 
 	const handleOpen = () => {
@@ -51,6 +20,16 @@ export default function SignInSide() {
 	};
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const getModalStyle = () => {
+		const top = 50;
+		const left = 50;
+		return {
+			top: `${top}%`,
+			left: `${left}%`,
+			transform: `translate(-${top}%, -${left}%)`,
+		};
 	};
 
 	const body = (
@@ -119,4 +98,6 @@ export default function SignInSide() {
 			</Modal>
 		</div>
 	);
-}
+};
+
+export default SignIn;
