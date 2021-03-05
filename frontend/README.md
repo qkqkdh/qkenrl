@@ -10,3 +10,5 @@
 * components : pages 컴포넌트에서 공통적으로 쓰이는 컴포넌트들 정의
 * css : scss 폴더
 
+### TODO
+- Request 마다 헤더 등으로 location 전달 필요 ( HTTPS ) 

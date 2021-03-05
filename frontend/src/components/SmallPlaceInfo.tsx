@@ -30,16 +30,35 @@ const SmallPlaceInfo : React.FC = () => {
 			</Grid>
 			<Grid className="place-info">
 				<Grid>
-					<p><StarIcon />{obj.star}/5</p>
-					<Button variant="outlined"><CreateIcon />리뷰 작성</Button>
+					<p>
+						<StarIcon />
+						{obj.star}
+						/5
+					</p>
+					<Button variant="outlined">
+						<CreateIcon />
+						리뷰 작성
+					</Button>
 				</Grid>
 				<Grid className="location">
-					<p><strong>주소</strong>{obj.location}</p>
-					<p className="lot-number"><strong>지번</strong>{obj.lotNumber}</p>
+					<p>
+						<strong>주소</strong>
+						{obj.location}
+					</p>
+					<p className="lot-number">
+						<strong>지번</strong>
+						{obj.lotNumber}
+					</p>
 				</Grid>
 				<Grid>
-					<p><strong>영업시간</strong>{obj.time}</p>
-					<p><strong>전화</strong>{obj.phone}</p>
+					<p>
+						<strong>영업시간</strong>
+						{obj.time}
+					</p>
+					<p>
+						<strong>전화</strong>
+						{obj.phone}
+					</p>
 				</Grid>
 			</Grid>
 		</Grid>
