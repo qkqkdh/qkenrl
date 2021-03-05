@@ -18,7 +18,7 @@ interface PlaceModel extends Model<PlaceDocument> {}
 const placeSchema = new Schema({
 	writer: {
 		type: Schema.Types.ObjectId,
-		required: true,
+		required: false,
 	},
 	name: {
 		type: String,
@@ -42,7 +42,7 @@ const placeSchema = new Schema({
 	},
 	phone: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	timeInfo: {
 		type: Schema.Types.Array,
