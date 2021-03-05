@@ -34,18 +34,15 @@
 }
 
 .text-area {
-    font-family: 'Noto Sans KR', sans-serif;
     text-align: center;
     color: #ffffff;
     .title-area {
-        font-size:3rem;
-        font-weight:700;
+        @include font-default("Bold", 3rem);
         margin-bottom:2rem;
     }
     .slogan-area {
         p {
-            font-weight : 300;
-            font-size : 1.5rem;
+            @include font-default("Light", 1.5rem);
             line-height : 2.5rem;
         }
     }
@@ -55,11 +52,9 @@
     margin-top:2rem;
     border-radius: 2rem;
     border-color: #ffffff;
-    font-family: 'Noto Sans KR', sans-serif;
     text-align: center;
     color: #ffffff;
-    font-size: 1.3rem;
-    font-weight: 500;
+    @include font-default("Medium", 1.3rem);
 }
 
 #btn-link:hover {
