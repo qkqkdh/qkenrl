@@ -9,6 +9,7 @@ interface IPlace { // Interface for Place
 	x: string; // string으로 좌표 나타내기
 	y: string;
 	phone: string;
+	desc: string;
 	timeInfo: any[];
 }
 
@@ -41,6 +42,10 @@ const placeSchema = new Schema({
 		required: true,
 	},
 	phone: {
+		type: String,
+		required: false,
+	},
+	desc: {
 		type: String,
 		required: false,
 	},

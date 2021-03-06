@@ -23,7 +23,7 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			"mongodb://localhost:27021", // windows
+			"mongodb://localhost:27020", // windows
 			// "mongodb://mongo/admin",
 			{
 				useNewUrlParser: true,
