@@ -4,23 +4,29 @@ import { Grid, Button } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
 import CreateIcon from '@material-ui/icons/Create';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { usePlaceState } from '../Model/PlaceModel';
 import { PlaceType } from '../Type';
+import { useSelectedPlace, useSetSelectedPlace } from '../ViewModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
-	size : SizeMap[number];
+	size: SizeMap[number];
+	place: PlaceType;
 }
 
-const PlaceInfo = ({ size } : PlaceProps) => {
+const PlaceInfo = ({ size, place }: PlaceProps) => {
 	const places = usePlaceState();
-	const [place, setPlace] = useState<PlaceType | undefined>();
+	const selected = useSelectedPlace();
+	const setSelected = useSetSelectedPlace();
+
+	const [sizeState, setSizeState] = useState<string>(size);
 
 	useEffect(() => {
-		places && places[0] &&
-			setPlace(places[0]);
-	}, [places]);
+		setSizeState(size);
+	}, [size]);
 
 	return (
 		<Grid className="place-component">
@@ -33,6 +39,11 @@ const PlaceInfo = ({ size } : PlaceProps) => {
 							<h6>{place.type}</h6>
 						</Grid>
 						<FavoriteIcon />
+						{sizeState}
+						{
+							sizeState === "sm" ?
+								<ExpandLessIcon onClick={() => setSizeState("lg")} /> : <ExpandMoreIcon onClick={() => setSizeState("sm")} />
+						}
 					</Grid>
 					<Grid className="place-info">
 						<Grid>
