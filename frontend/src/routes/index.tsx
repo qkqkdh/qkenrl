@@ -6,7 +6,7 @@ const Router: React.FunctionComponent = () => (
 	<BrowserRouter>
 		<Switch>
 			<Route exact path="/" component={Introduction} />
-			<Route path="/place/:mapId/:placeId" component={PlacePage} />
+			<Route path="/place/:mapId" component={PlacePage} />
 			<Route path="*" component={NotFound} />
 		</Switch>
 	</BrowserRouter>
