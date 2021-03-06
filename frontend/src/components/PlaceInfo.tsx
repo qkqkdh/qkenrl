@@ -8,7 +8,12 @@ import CreateIcon from '@material-ui/icons/Create';
 import { usePlaceState } from '../Model/PlaceModel';
 import { PlaceType } from '../Type';
 
-const LargePlaceInfo : React.FC = () => {
+type SizeMap = ["sm", "lg"];
+type PlaceProps = {
+	size : SizeMap[number];
+}
+
+const PlaceInfo = ({ size } : PlaceProps) => {
 	const places = usePlaceState();
 	const [place, setPlace] = useState<PlaceType | undefined>();
 
@@ -18,7 +23,7 @@ const LargePlaceInfo : React.FC = () => {
 	}, [places]);
 
 	return (
-		<Grid className="place-component lg">
+		<Grid className="place-component">
 			{
 				place &&
 				<>
@@ -68,4 +73,4 @@ const LargePlaceInfo : React.FC = () => {
 	);
 };
 
-export default LargePlaceInfo;
+export default PlaceInfo;
