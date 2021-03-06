@@ -1,14 +1,21 @@
 import React from 'react';
+import '../css/PlacePage.scss';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 
-import { SmallPlaceInfo } from '../components';
+import { SmallPlaceInfo, LargePlaceInfo } from '../components';
 
 const PlacePage = () => {
 	const a = 1;
 	return (
-		<Grid>
-			<SmallPlaceInfo />
+		<Grid id="place-con">
+			<Paper elevation={4} className="search-con">
+				<SmallPlaceInfo />
+				<LargePlaceInfo />
+			</Paper>
+			<Grid className="map-con">
+				<Grid>map</Grid>
+			</Grid>
 		</Grid>
 	);
 };
