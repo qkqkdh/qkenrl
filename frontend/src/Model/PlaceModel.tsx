@@ -1,9 +1,9 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, Dispatch } from 'react';
 import { PlaceType, childrenObj } from '../Type';
 
 const PlaceState = createContext<Array<PlaceType> | undefined>(undefined);
 
-export const PlaceContextProvider = ({ children } : childrenObj) => {
+export const PlaceContextProvider = ({ children }: childrenObj) => {
 	const obj = [{
 		name: "업체명",
 		type: "업종",
