@@ -1,4 +1,4 @@
-export { default as Login } from "./Login";
+export { default as Introduction } from "./Introduction";
 export { default as SetPet } from "./SetPet";
 export { default as PetCustom } from "./PetCustom";
 export { default as Account } from "./Account";
