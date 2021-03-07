@@ -38,15 +38,6 @@ router.post(
 	}
 );
 
-router.get("/test", async (req: Request, res: Response, next: NextFunction) => {
-	try {
-		const users = await UserModel.find();
-		res.status(200).send(JSON.stringify(users));
-	} catch (err) {
-		res.status(500).send();
-	}
-});
-
 router.get(
 	"/verification/:userid/:secretCode",
 	async (req: Request, res: Response, next: NextFunction) => {
