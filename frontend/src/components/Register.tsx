@@ -14,6 +14,8 @@ import {
 	StepLabel,
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "../css/Login.scss";
 
 type Props = {
@@ -26,11 +28,50 @@ type FormData = {
 	email: string;
 };
 
+const getModalStyle = () => {
+	const top = 50;
+	const left = 50;
+	return {
+		top: `${top}%`,
+		left: `${left}%`,
+		transform: `translate(-${top}%, -${left}%)`,
+	};
+};
+
+const getSteps = () => ['약관동의', '정보입력', '이메일 인증'];
+
+function getStepContent(step:number) {
+	switch (step) {
+	case 0:
+		return 'Select campaign settings...';
+	case 1:
+		return 'What is an ad group anyways?';
+	case 2:
+		return 'This is the bit I really care about!';
+	default:
+		return 'Unknown step';
+	}
+}
+
 const Register: React.FunctionComponent<Props> = ({ children }) => {
 	const { register, handleSubmit, reset } = useForm(); // form 컨트롤 라이브러리 react-hook-form 사용
 	const [login, setLogin] = useState<boolean>(false); // 로그인 중인지 chk 하는 state
 	const [open, setopen] = useState<boolean>(false);
 	const [activeStep, setActiveStep] = React.useState(0);
+	const steps = getSteps();
+
+	const Openhandler = () => {
+		setopen(true);
+	};
+	const Closehandler = () => {
+		setopen(false);
+	};
+	const handleNext = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	};
+	const handleBack = () => {
+		setActiveStep((prevActiveStep) => prevActiveStep - 1);
+	};
 
 	const onSubmit = (data: FormData) => {
 		// 폼 버튼 클릭 시 호출
@@ -59,32 +100,8 @@ const Register: React.FunctionComponent<Props> = ({ children }) => {
 		setLogin(false);
 	};
 
-	const getModalStyle = () => {
-		const top = 50;
-		const left = 50;
-		return {
-			top: `${top}%`,
-			left: `${left}%`,
-			transform: `translate(-${top}%, -${left}%)`,
-		};
-	};
-
-	const steps = ['약관동의', '정보입력', '이메일 인증'];
-
-	const Openhandler = () => {
-		setopen(true);
-	};
-	const Closehandler = () => {
-		setopen(false);
-	};
-	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1);
-	};
-	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1);
-	};
 	const body = (
-		<div className="login-body" style={getModalStyle()}>
+		<div className={`${`login-body`} ${`register-body`}`} style={getModalStyle()}>
 			<div className="right-sort">
 				<IconButton className="close-btn" onClick={Closehandler}>
 					<CloseIcon fontSize="small" />
@@ -100,20 +117,22 @@ const Register: React.FunctionComponent<Props> = ({ children }) => {
 							</Step>
 						))}
 					</Stepper>
-					<TextField name="id" placeholder="ID" inputRef={register} />
-					<TextField
-						name="password"
-						placeholder="PASSWORD"
-						type="password"
-						inputRef={register}
-					/>
-					<TextField
-						name="email"
-						placeholder="EMAIL"
-						type="email"
-						inputRef={register}
-					/>
-					{login ? <CircularProgress /> : <Button type="submit">회원가입</Button>}
+					<Typography>{getStepContent(activeStep)}</Typography>
+					<Grid container className="register-btngroup" spacing={2}>
+						<Grid item className="register-btn">
+							<Button onClick={Closehandler} variant="outlined" fullWidth>취소</Button>
+						</Grid>
+						{activeStep === 0 ? (null) : (<Grid item className="register-btn"><Button onClick={handleBack} variant="outlined" startIcon={<ArrowBackIcon />} fullWidth>이전</Button></Grid>)}
+						{activeStep === steps.length - 1 ? (
+							<Grid item className="register-btn">
+								<Button onClick={Closehandler} variant="outlined" fullWidth>마침</Button>
+							</Grid>
+						) : (
+							<Grid item className="register-btn">
+								<Button onClick={handleNext} variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>다음</Button>
+							</Grid>
+						)}
+					</Grid>
 				</Grid>
 			</form>
 		</div>

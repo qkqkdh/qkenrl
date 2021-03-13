@@ -1,3 +1,6 @@
+.register-body{
+	height: 90%;
+}
 .login-body{
 	position: absolute;
 	width: 100%;
@@ -43,13 +46,23 @@
 			font-weight: 700;
 		}
 		.stepper{
-			width : 75%;
+			width: 100%;
+			padding: 1.5rem 0;
 		}
-
+		.register-btngroup{
+			justify-content: center;
+			padding-top: 1rem;
+		}
+		.register-btn{
+			width: 6rem;
+		}
 	}
 }
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
 	border: solid 1px black !important;
+}
+.MuiButton-outlined {
+	padding: 5px !important;
 }
 .form {
     width: 70%;
@@ -87,6 +100,14 @@
 @media (min-width:769px){ // desktop
 	.login-body{
 		width: 50%;
+		.login-container{
+			.stepper{
+				width: 80%;
+			}
+			.register-btn{
+				width: 7rem;
+			}
+		}
 	}
 	.form{
 		width: 40%;
