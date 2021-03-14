@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Introduction, PlacePage, PlaceInfoPage, NotFound, Main } from "../pages";
+import { Introduction, PlacePage, NotFound } from "../pages";
 
 const Router: React.FunctionComponent = () => (
 	<BrowserRouter>
