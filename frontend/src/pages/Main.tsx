@@ -5,7 +5,7 @@ import Map from '../components/Map';
 import PlaceSelector from '../components/PlaceSelector';
 import { Center, Marker, Place } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
-import { SearchBar } from '../components';
+import { Layout, SearchBar, SearchContent } from '../components';
 
 type Props = {
 
@@ -76,10 +76,17 @@ const Main: React.FunctionComponent = (props) => {
 
 	return (
 		<>
-			<Map />
-			<SearchBar
-				handleSearchResult={handleSearchResult}
-			/>
+			<Layout>
+				<Map />
+				<div className="side-bar">
+					<SearchBar
+						handleSearchResult={handleSearchResult}
+					/>
+					<SearchContent
+						result=" "
+					/>
+				</div>
+			</Layout>
 		</>
 	);
 };
