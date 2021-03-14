@@ -7,7 +7,7 @@
 @import './base/reset';
 
 #wrap{
-  padding: 3em;
+  padding: 0em;
 }
 
 /* header */
@@ -19,10 +19,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 $padding;
+    box-shadow: 0.01rem 0 1rem #000;
     @include desktop {
-      height: 80px;
+      height: 5rem;
+      z-index: 999;
     }
     @include mobile {
+      display:none;
     }
     &>div{
       display: flex;
@@ -31,6 +34,7 @@
     }
     .h-title-con{
       width: 30%;
+      margin-right: 20%;
       flex : 0 0 auto;
       img{
           height: 100%;

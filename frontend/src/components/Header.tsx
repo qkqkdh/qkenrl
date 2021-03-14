@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Grid, Menu, MenuItem } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
-interface Props {}
+interface Props { }
 const Header: React.FunctionComponent<Props> = () => {
 	const name = "홍길동";
 	const [open, setOpen] = useState(false);
@@ -23,20 +23,17 @@ const Header: React.FunctionComponent<Props> = () => {
 		<Grid className="header">
 			<Grid className="h-title-con">
 				<img src="/logo192.png" alt="logo" />
-				<h1>FIT PET</h1>
+				<h1>BDCS</h1>
 			</Grid>
 			<Grid className="nav-con">
 				<span>
-					<Link to="/pets">마이펫</Link>
+					<Link to="/main">지도</Link>
 				</span>
 				<span>
-					<Link to="/search">음식 검색</Link>
+					<Link to="/search">기능 1</Link>
 				</span>
 				<span>
-					<Link to="/pets">메뉴 3</Link>
-				</span>
-				<span>
-					<Link to="/search">메뉴 4</Link>
+					<Link to="/pets">기능 2</Link>
 				</span>
 			</Grid>
 			<Grid className="profile-con">
