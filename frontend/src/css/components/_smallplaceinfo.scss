@@ -1,8 +1,16 @@
+@import '../base';
+
 .place-component{
 	padding: 1rem;
 	border-radius: 1rem;
 	background-color: white;
 	border: 1px solid lightgray;
+
+	@include mobile {
+		position: absolute;
+		bottom: 0;
+		z-index: 10;
+	}
 	.place-header{
 		display: flex;
 		justify-content: space-between;

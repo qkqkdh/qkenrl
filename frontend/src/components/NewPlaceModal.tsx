@@ -21,14 +21,16 @@ const NewPlaceModal: React.FunctionComponent<Props> = ({ open, onClose }) => {
 	};
 	const handleClickResult = (idx: number) => async () => {
 		try {
-			const { place_name, road_address_name, x, y, phone, category_name, } = results[idx];
+			const { place_name, address_name, road_address_name, x, y, phone, category_name, place_url } = results[idx];
 			const result = await axios.post(`http://localhost:3001/place`, {
 				name: place_name,
 				category: category_name,
-				location: road_address_name,
+				location: address_name,
+				roadLocation: road_address_name,
 				x,
 				y,
 				phone,
+				place_url,
 			});
 			if (result.data) {
 				alert(result.data);

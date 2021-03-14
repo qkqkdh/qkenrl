@@ -6,8 +6,12 @@ import { Grid, Button } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
 import CreateIcon from '@material-ui/icons/Create';
+import { Place } from '../utils/types';
 
-const SmallPlaceInfo : React.FC = () => {
+type Props = {
+	place: Place
+}
+const SmallPlaceInfo : React.FC<Props> = ({ place }) => {
 	const obj = {
 		name: "업체명",
 		type: "업종",
@@ -23,8 +27,8 @@ const SmallPlaceInfo : React.FC = () => {
 		<Grid className="place-component">
 			<Grid className="place-header">
 				<Grid>
-					<h4>{obj.name}</h4>
-					<h6>{obj.type}</h6>
+					<h4>{place.name}</h4>
+					<h6>{place.category}</h6>
 				</Grid>
 				<FavoriteIcon />
 			</Grid>
@@ -32,7 +36,8 @@ const SmallPlaceInfo : React.FC = () => {
 				<Grid>
 					<p>
 						<StarIcon />
-						{obj.star}
+						{/* todo */}
+						5
 						/5
 					</p>
 					<Button variant="outlined">
@@ -43,22 +48,23 @@ const SmallPlaceInfo : React.FC = () => {
 				<Grid className="location">
 					<p>
 						<strong>주소</strong>
-						{obj.location}
+						{place.roadLocation}
 					</p>
 					<p className="lot-number">
 						<strong>지번</strong>
-						{obj.lotNumber}
+						{place.location}
 					</p>
 				</Grid>
 				<Grid>
 					<p>
 						<strong>영업시간</strong>
-						{obj.time}
+						{/* TODO */}
 					</p>
+					{place.phone &&
 					<p>
 						<strong>전화</strong>
 						{obj.phone}
-					</p>
+					</p>}
 				</Grid>
 			</Grid>
 		</Grid>

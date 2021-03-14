@@ -33,12 +33,19 @@ export type Place = {
 	name: string;
 	category: string;
 	location: string;
-	x: string;
-	y: string;
+	roadLocation: string;
+	geo: {
+		type: string,
+		coordinates: Number[],
+	};
 	phone: string;
 	timeInfo: any[];
+	reviews: string;
 }
 
 export type Marker = {
-	setMap: (map?: any) => void;
+	marker: {
+		setMap: any;
+	},
+	place: Place,
 }

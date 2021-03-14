@@ -1,16 +1,102 @@
-import React from 'react';
+import '../css/Main.scss';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import Map from '../components/Map';
+import PlaceSelector from '../components/PlaceSelector';
+import { Center, Marker, Place } from '../utils/types';
+import { createMarker, InitializeMap } from '../utils/f';
+import { SearchBar, SmallPlaceInfo } from '../components';
 
-import { Grid } from '@material-ui/core';
+type Props = {
 
-import { SmallPlaceInfo } from '../components';
+}
 
-const PlacePage = () => {
-	const a = 1;
+const { kakao } = window;
+const Main: React.FunctionComponent = (props) => {
+	const [map, setMap] = useState<any>(null); // state for map
+	const [center, setCenter] = useState<Center | null>(null); // state for center loc
+	const [markers, setMarkers] = useState<Marker[]>([]); // state for search result
+	const [selected, setSelected] = useState<number>(-1);
+	const cancelToken = useRef(axios.CancelToken.source());
+
+	useEffect(() => {
+		if (!document || !kakao) return;
+		setMap(InitializeMap());
+	}, []);
+
+	useEffect(() => { // ADD EVENT HANDLER
+		if (!map) return;
+		const handleCenterChange = () => {
+			const { Ma, La } = map.getCenter();
+			cancelToken.current.cancel('이전 요청 취소');
+			console.log(Ma, La);
+			cancelToken.current = axios.CancelToken.source(); // update
+			setCenter({
+				x: Ma,
+				y: La,
+			});
+		};
+		const handleMapClick = () => {
+			setSelected(-1);
+		};
+		kakao.maps.event.addListener(map, 'center_changed', handleCenterChange);
+		kakao.maps.event.addListener(map, 'click', handleMapClick);
+		handleCenterChange();
+		// eslint-disable-next-line consistent-return
+		return () => {
+			kakao.maps.event.removeListener(map, 'center_changed', handleCenterChange);
+			kakao.maps.event.removeListener(map, 'click', handleMapClick);
+		};
+	}, [map]);
+	useEffect(() => {
+		/*
+			1. center 변경시  handleCenterChange 호출
+			2. API 호출해서 주변 place들 가져옴
+			3. Map에 marker 셋팅
+		*/
+		if (!center) return;
+		axios.get(`http://localhost:3001/place?x=${center.x}&y=${center.y}`, {
+			cancelToken: cancelToken.current.token
+		})
+			.then((result) => {
+				const { data } = result;
+				const _ = data.map((place: Place) => createMarker(place));
+				setMarkers(_);
+			})
+			.catch((err) => {
+				if (axios.isCancel(err)) {
+					console.log('요청 취소');
+				} else {
+					console.log(err);
+				}
+			});
+	}, [center]);
+
+	useEffect(() => {
+		// TODO: 기존 마커들 초기화
+		if (!map || !markers.length) return;
+		console.log(markers);
+		markers.forEach((marker, idx) => {
+			marker.marker.setMap(map);
+			kakao.maps.event.addListener(marker.marker, 'click', () => {
+				setSelected(idx);
+			});
+		});
+	}, [map, markers]);
+
+	const handleSearchResult = (places: Place[]) => {
+		setMarkers(places.map((place) => createMarker(place)));
+	};
+
 	return (
-		<Grid>
-			<SmallPlaceInfo />
-		</Grid>
+		<>
+			<Map />
+			<SearchBar
+				handleSearchResult={handleSearchResult}
+			/>
+			{selected > -1 && <SmallPlaceInfo place={markers[selected].place} />}
+		</>
 	);
 };
 
-export default PlacePage;
+export default Main;

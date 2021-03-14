@@ -27,7 +27,7 @@ const Intro: React.FunctionComponent = () => {
 						{slogan()}
 					</Grid>
 				</Grid>
-				<Link id="btn-link" href="# ">
+				<Link id="btn-link" href="/place">
 					<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
 				</Link>
 			</Grid>

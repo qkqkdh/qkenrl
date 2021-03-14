@@ -32,11 +32,14 @@ export const InitializeMap = () => {
 };
 
 export const createMarker = (place: Place) => {
-	const markerPosition = new kakao.maps.LatLng(place.y, place.x);
+	const markerPosition = new kakao.maps.LatLng(place.geo.coordinates[1], place.geo.coordinates[0]);
 	const marker = new kakao.maps.Marker({
 		position: markerPosition,
 		clickable: true,
 	});
 
-	return marker;
+	return {
+		marker,
+		place,
+	};
 };
