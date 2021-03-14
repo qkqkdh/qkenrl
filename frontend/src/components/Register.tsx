@@ -12,6 +12,9 @@ import {
 	Stepper,
 	Step,
 	StepLabel,
+	Paper,
+	Radio,
+	RadioGroup,
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -41,9 +44,27 @@ const getModalStyle = () => {
 const getSteps = () => ['약관동의', '정보입력', '이메일 인증'];
 
 function getStepContent(step:number) {
+	const agreeContent = (
+		<>
+			<p>제 1조. 로렘입숨</p>
+			<p>내용</p>
+			<p>제 2조. 로렘입숨</p>
+			<p>내용</p>
+		</>
+	);
 	switch (step) {
 	case 0:
-		return 'Select campaign settings...';
+		return (
+			<>
+				<Typography>회원 이용 약관</Typography>
+				<Paper variant="outlined">{agreeContent}</Paper>
+				<Typography>동의하십니까?</Typography>
+				<Checkbox />
+				<Typography>개인정보수집동의에 대한 고지사항</Typography>
+				<Paper variant="outlined">{agreeContent}</Paper>
+				<Typography>동의하십니까?</Typography>
+			</>
+		);
 	case 1:
 		return 'What is an ad group anyways?';
 	case 2:
