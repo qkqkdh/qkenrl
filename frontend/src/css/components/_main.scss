@@ -1,0 +1,32 @@
+#map {
+	position: absolute;
+	z-index: 1;
+	@include desktop {
+		width: 100vw;
+		height: calc(100vh - 5rem);
+	}
+	@include mobile {
+		width: 100vw;
+		height: 100vh;	
+	}
+}
+
+.side-bar {
+    background-color: $main-color;
+    box-shadow: 0.01rem 0 1rem #000;
+    @include desktop {
+		width: 25%;
+		height: calc(100vh - 5rem);
+	}
+	@include mobile {
+        left: 0;
+		width: 0;
+		height: 0;
+	}
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 900;
+    justify-content: center;
+}

@@ -1,14 +1,11 @@
-@import './base';
+// Main Page scss
+
+// default scss
+@import './base/base';
+@import './base/materialUI';
+@import './base/mixin';
+@import './base/reset';
+
+// components scss
 @import './components/searchbar';
-#map {
-	position: absolute;
-	z-index: 1;
-	@include desktop {
-		width: 100vw;
-		height: 100vh;
-	}
-	@include mobile {
-		width: 100vw;
-		height: 100vh;	
-	}
-}
+@import './components/main';
