@@ -1,5 +1,6 @@
 import { Response, Request, NextFunction, Router } from "express";
 import axios from 'axios';
+import { isLoggedIn } from "../utils/middleware";
 
 const router = Router();
 
@@ -14,7 +15,7 @@ type SearchResult = {
 	[key: string]: string;
 }
 
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
 	const { keyword } = req.query;
 	if (!keyword) {
 		res.status(400).send();
