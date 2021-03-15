@@ -26,7 +26,8 @@ const SearchBar: React.FunctionComponent<Props> = (props) => {
 	return (
 		<div className="search_bar">
 			<div className="search">
-				<div className="" /> // 원래 SB 써있었는데 무슨 용도...?인지 모르겠어서 일단 흔적을 남김
+				<div className="" />
+				{ /* 원래 SB 써있었는데 무슨 용도...?인지 모르겠어서 일단 흔적을 남김 */}
 				<form onSubmit={handleSubmit(handleFormSubmit)} className="search_form">
 					<MenuIcon id="btn-menu" />
 					<input
