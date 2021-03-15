@@ -1,4 +1,5 @@
 import '../css/Main.scss';
+import '../css/PlacePage.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Map from '../components/Map';
