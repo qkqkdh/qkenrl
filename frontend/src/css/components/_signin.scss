@@ -1,5 +1,6 @@
 .register-body{
 	height: 90%;
+	overflow: auto;
 }
 .login-body{
 	position: absolute;
@@ -68,7 +69,7 @@
     width: 70%;
     margin: 1rem;
 	
-	.login-inputs{
+	.login-inputs {
 		margin: 0.5rem 0;
 		border-radius: 0.5rem;
 		box-shadow: 1px 1px 2px gray;
@@ -96,8 +97,38 @@
 		}
 	}
 }
+.stepzero-grid {
+	justify-content: flex-start;
+}
+.register-subhead {
+	font-weight: bold !important;
+}
+.agree-content {
+	max-height: 4rem;
+	font-size: 0.9rem;
+	overflow: auto;
+	padding: 0.9rem;
+}
+.radio-content {
+	font-size: 0.9rem;
+	width: 100%;
+	margin-top: 0.3rem !important;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row !important;
+}
+.radio-group {
+	flex-direction: row !important;
+	margin-left: 1rem;
+}
+.MuiRadio-root {
+	padding: 4px !important;
+}
 
 @media (min-width:769px){ // desktop
+	.register-body{
+		height: 42rem;
+	}
 	.login-body{
 		width: 50%;
 		.login-container{
@@ -111,5 +142,11 @@
 	}
 	.form{
 		width: 40%;
+	}
+	.stepzero-grid {
+		padding: 0 1.5rem;
+	}
+	.agree-content {
+		max-height: 7rem;
 	}
 }
