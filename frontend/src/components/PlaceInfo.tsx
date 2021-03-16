@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { Grid, Button } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import StarIcon from '@material-ui/icons/Star';
-import CreateIcon from '@material-ui/icons/Create';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Grid, Button } from "@material-ui/core";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import StarIcon from "@material-ui/icons/Star";
+import CreateIcon from "@material-ui/icons/Create";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { usePlaceState } from '../Model/PlaceModel';
-import { PlaceType } from '../Type';
-import { useSelectedPlace, useSetSelectedPlace } from '../ViewModel';
+import { usePlaceState } from "../Model/PlaceModel";
+import { PlaceType } from "../Type";
+import { useSelectedPlace, useSetSelectedPlace } from "../ViewModel";
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
