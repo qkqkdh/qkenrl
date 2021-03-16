@@ -1,15 +1,13 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Introduction, PlacePage, NotFound } from "../pages";
-
+import { Introduction, PlacePage, NotFound, Main } from "../pages";
 
 const Router: React.FunctionComponent = () => (
 	<BrowserRouter>
 		<Switch>
-      <Route exact path="/" component={Introduction} />
+			<Route exact path="/" component={Introduction} />
 			<Route path="/main" component={Main} />
-			<Route path="/place" component={PlacePage} />
-			<Route path="/place/:id" component={PlaceInfoPage} />
+			<Route path="/place/:mapId" component={PlacePage} />
 			<Route path="*" component={NotFound} />
 		</Switch>
 	</BrowserRouter>
