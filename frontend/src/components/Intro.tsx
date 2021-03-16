@@ -3,11 +3,11 @@ import { Grid, Link, Button, Avatar } from '@material-ui/core';
 import PetsIcon from "@material-ui/icons/Pets";
 
 const Intro: React.FunctionComponent = () => {
-	const title = "BDKS";
+	const title = "BDCS";
 	const slogan = () => (
 		<>
 			<p>반려견과 함께하는 행복한 일상을 더 편리하게 :)</p>
-			<p>슬로건슬로건슬로건슬로건</p>
+			<p>Better Dog Community Service</p>
 		</>
 	);
 	return (
@@ -27,7 +27,7 @@ const Intro: React.FunctionComponent = () => {
 						{slogan()}
 					</Grid>
 				</Grid>
-				<Link id="btn-link" href="# ">
+				<Link id="btn-link" href="/main">
 					<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
 				</Link>
 			</Grid>
