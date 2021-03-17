@@ -1,6 +1,13 @@
 @import '../base';
 
 .place-component{
+	@include mobile {
+		margin:0;
+		width: calc(100% - 2rem);
+		border-radius: 0;
+		height: auto;
+	}
+    margin: 1rem;
 	padding: 1rem;
 	border-radius: 1rem;
 	background-color: white;

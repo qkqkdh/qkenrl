@@ -1,12 +1,12 @@
-<<<<<<< HEAD
 import '../css/Main.scss';
+import '../css/PlacePage.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Map from '../components/Map';
 import PlaceSelector from '../components/PlaceSelector';
 import { Center, Marker, Place } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
-import { SearchBar, SmallPlaceInfo } from '../components';
+import { Layout, SearchBar, SearchContent } from '../components';
 
 type Props = {
 
@@ -17,37 +17,27 @@ const Main: React.FunctionComponent = (props) => {
 	const [map, setMap] = useState<any>(null); // state for map
 	const [center, setCenter] = useState<Center | null>(null); // state for center loc
 	const [markers, setMarkers] = useState<Marker[]>([]); // state for search result
-	const [selected, setSelected] = useState<number>(-1);
 	const cancelToken = useRef(axios.CancelToken.source());
 
 	useEffect(() => {
 		if (!document || !kakao) return;
 		setMap(InitializeMap());
 	}, []);
-
 	useEffect(() => { // ADD EVENT HANDLER
 		if (!map) return;
 		const handleCenterChange = () => {
 			const { Ma, La } = map.getCenter();
 			cancelToken.current.cancel('이전 요청 취소');
-			console.log(Ma, La);
 			cancelToken.current = axios.CancelToken.source(); // update
 			setCenter({
 				x: Ma,
 				y: La,
 			});
 		};
-		const handleMapClick = () => {
-			setSelected(-1);
-		};
+
 		kakao.maps.event.addListener(map, 'center_changed', handleCenterChange);
-		kakao.maps.event.addListener(map, 'click', handleMapClick);
-		handleCenterChange();
 		// eslint-disable-next-line consistent-return
-		return () => {
-			kakao.maps.event.removeListener(map, 'center_changed', handleCenterChange);
-			kakao.maps.event.removeListener(map, 'click', handleMapClick);
-		};
+		return () => kakao.maps.event.removeListener(map, 'center_changed', handleCenterChange);
 	}, [map]);
 	useEffect(() => {
 		/*
@@ -74,15 +64,11 @@ const Main: React.FunctionComponent = (props) => {
 	}, [center]);
 
 	useEffect(() => {
-		// TODO: 기존 마커들 초기화
 		if (!map || !markers.length) return;
 		console.log(markers);
-		markers.forEach((marker, idx) => {
-			marker.marker.setMap(map);
-			kakao.maps.event.addListener(marker.marker, 'click', () => {
-				setSelected(idx);
-			});
-		});
+		markers.forEach((marker) => {
+			marker.setMap(map);
+		});// marker state 위치 고민해
 	}, [map, markers]);
 
 	const handleSearchResult = (places: Place[]) => {
@@ -91,11 +77,17 @@ const Main: React.FunctionComponent = (props) => {
 
 	return (
 		<>
-			<Map />
-			<SearchBar
-				handleSearchResult={handleSearchResult}
-			/>
-			{selected > -1 && <SmallPlaceInfo place={markers[selected].place} />}
+			<Layout>
+				<Map />
+				<div className="side-bar">
+					<SearchBar
+						handleSearchResult={handleSearchResult}
+					/>
+					<SearchContent
+						result=" "
+					/>
+				</div>
+			</Layout>
 		</>
 	);
 };

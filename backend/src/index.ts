@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import express, { NextFunction, urlencoded } from "express";
+import express from "express";
 import cors from "cors";
 import * as bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -53,8 +53,7 @@ class App {
 	}
 
 	private route() {
-		this.app.use("/", api);
-		this.app.use(express.static('build'));
+		this.app.use("/api", api);
 	}
 }
 

@@ -9,29 +9,17 @@
     @content;
   }
 }
-
-@mixin font-default($weight:"Light", $size:1rem) {
+/*
+  font-weight
+  Thin : 100
+  Light : 300
+  Regular : 400
+  Medium : 500
+  Bold : 700
+  Black : 900
+*/
+@mixin font-default($weight:300, $size:1rem) {
   font-family: "Noto Sans KR", sans-serif;
   font-size: $size;
-  @if $weight == "Thin" {
-    font-weight: 100;
-  }
-  @else if $weight == "Light" {
-    font-weight: 300;
-  }
-  @else if $weight == "Regular" {
-    font-weight: 400;
-  }
-  @else if $weight == "Medium" {
-    font-weight: 500;
-  }
-  @else if $weight == "Bold" {
-    font-weight: 700;
-  }
-  @else if $weight == "Black" {
-    font-weight: 900;
-  }
-  @else {
-    font-weight: 300; // default weight
-  }
+  font-weight: $weight;
 }

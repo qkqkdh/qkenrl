@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, ErrorRequestHandler, RequestHandler } from 'express';
 import passport from 'passport';
 
 export const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {

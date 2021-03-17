@@ -1,7 +1,4 @@
 import React from 'react';
-
-import '../css/components/_smallplaceinfo.scss';
-
 import { Grid, Button } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';

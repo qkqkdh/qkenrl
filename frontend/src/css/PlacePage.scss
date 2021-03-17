@@ -1,0 +1,25 @@
+// Place Page scss
+
+// default scss
+@import './base/base';
+@import './base/materialUI';
+@import './base/mixin';
+@import './base/reset';
+
+// component scss
+@import './components/placeinfo';
+
+#place-con{
+	display: flex;
+	.search-con{
+		flex-shrink: 0;
+		width: 400px;
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		overflow-y: scroll;
+	}
+	.map-con{
+		flex-shrink : 1;
+	}
+}
