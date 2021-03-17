@@ -1,12 +1,35 @@
 import { Response, Request, NextFunction, Router } from "express";
+import passport from "passport";
+import jwt from 'jsonwebtoken';
 import UserModel from "../model/User";
 import SecretCodeModel from "../model/Secretcode";
+import { isLoggedIn } from "../utils/middleware";
 
 const router = Router();
 
-router.post("/login"); // IF Status is pending then need to deny the login
-
-router.get("/logout");
+router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
+	passport.authenticate('local', { session: false }, (err, user, info) => {
+		if (err || !user || user.status === 'pending') {
+			res.status(401).send();
+		} else {
+			req.logIn(user, { session: false }, (err) => {
+				if (err) {
+					res.status(500).send();
+				} else {
+					const { username } = user;
+					const token = jwt.sign({
+						username,
+					}, process.env.JWT_SECRET as string, { expiresIn: 1000 * 60 * 30 });
+					res.status(200).json({ token });
+				}
+			});
+		}
+	})(req, res, next);
+});
+router.get("/logout", isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+	req.logout();
+	res.status(200).send();
+});
 
 router.post(
 	"/signup",
@@ -60,4 +83,11 @@ router.get(
 		}
 	}
 );
+
+router.get('/verification', async (req: Request, res: Response, next: NextFunction) => {
+	const { id, email } = req.query;
+	if (!id && !email) {
+		res.status(400).send();
+	}
+});
 export default router;

@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 import { Response, Request, NextFunction, Router } from "express";
 import PlaceModel from '../model/Place';
+import { isLoggedIn } from '../utils/middleware';
 
 const router = Router();
 
-router.post('/', async (req: Request, res: Response, next: NextFunction) => { // todo : authentication
-	const { writer, name, category, location, x, y, phone, timeInfo, desc, place_url } = req.body;
+router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // todo : authentication
+	const { writer, name, category, location, x, y, phone, timeInfo, desc, place_url, roadLocation } = req.body;
 	// todo : data validation
 	try {
 		console.log(place_url); // 크롤링?
@@ -14,8 +15,11 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => { //
 			name,
 			category,
 			location,
-			x,
-			y,
+			roadLocation,
+			geo: {
+				type: "Point",
+				coordinates: [x, y],
+			},
 			phone,
 			desc,
 			timeInfo: [],
@@ -36,18 +40,43 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		res.status(400).send();
 	}
 	if (x && y) { // case 1 with location
-		const places = await PlaceModel.find();
+		const places = await PlaceModel.find({
+			geo: {
+				$geoWithin: {
+					$centerSphere: [[y, x], 5 / 6378.1]
+				}
+			}
+		});
 		res.status(200).json(places);
 	} else if (keyword) { // case 2 with keyword
-		// regex 적용안됨?
-		const places = await PlaceModel.find({ name: { $regex: /keyword/ } });
-		console.log(places);
+		// regex 적용안됨 -> keyword type
+		keyword as string;
+		const places = await PlaceModel.find({ name: { $regex: new RegExp(keyword as string), $options: 'i' } });
 		res.status(200).json(places);
 	}
 });
 
-router.get('/my', (req: Request, res: Response, next: NextFunction) => {
+router.get('/my', isLoggedIn, (req: Request, res: Response, next: NextFunction) => {
 	res.send('TODO: AUTHENTICATION');
+});
+
+router.post('/review', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
+	const { placeId, star, desc } = req.body;
+	// todo : Data validation
+	try {
+		const place = await PlaceModel.findOne({ _id: placeId });
+		if (!place) {
+			res.status(404).send();
+		}
+		place.reviews.push({
+			star,
+			desc,
+		});
+		await place.save();
+		res.status(201).send(place.reviews[place.reviews.length - 1]);
+	} catch (err) {
+		res.status(500).send();
+	}
 });
 
 export default router;

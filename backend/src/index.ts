@@ -1,7 +1,10 @@
-import express, { urlencoded } from "express";
+/* eslint-disable no-restricted-syntax */
+import express from "express";
 import cors from "cors";
 import * as bodyParser from "body-parser";
 import mongoose from "mongoose";
+import passport from 'passport';
+import passportConfig from './utils/passport';
 import api from "./api";
 import { API_PORT } from "./utils/constants";
 
@@ -23,8 +26,7 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			"mongodb://localhost:27020", // windows
-			// "mongodb://mongo/admin",
+			process.env.MONGO_URI as string,
 			{
 				useNewUrlParser: true,
 				dbName: "abaotest"
@@ -46,10 +48,12 @@ class App {
 			swaggerUi.serve,
 			swaggerUi.setup(swaggerDocument)
 		);
+		this.app.use(passport.initialize());
+		passportConfig(passport);
 	}
 
 	private route() {
-		this.app.use("/", api);
+		this.app.use("/api", api);
 	}
 }
 
