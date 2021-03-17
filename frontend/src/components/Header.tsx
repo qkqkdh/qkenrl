@@ -26,15 +26,15 @@ const Header: React.FunctionComponent<Props> = () => {
 				<h1>BDCS</h1>
 			</Grid>
 			<Grid className="nav-con">
-				<span>
+				<div>
 					<Link to="/main">지도</Link>
-				</span>
-				<span>
+				</div>
+				<div>
 					<Link to="/search">기능 1</Link>
-				</span>
-				<span>
+				</div>
+				<div>
 					<Link to="/pets">기능 2</Link>
-				</span>
+				</div>
 			</Grid>
 			<Grid className="profile-con">
 				<p>
