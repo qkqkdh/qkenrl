@@ -8,8 +8,14 @@ export type PlaceType = {
 	lotNumber: string,
 	star: number,
 	time: string,
-	phone: string
+	phone: string,
+	review: Array<ReviewType>
 };
+
+export type ReviewType = {
+	star: number
+	contents: string
+}
 
 export type childrenObj = {
 	children: React.ReactNode;

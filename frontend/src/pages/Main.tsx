@@ -6,7 +6,7 @@ import Map from '../components/Map';
 import PlaceSelector from '../components/PlaceSelector';
 import { Center, Marker, Place } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
-import { Layout, SearchBar, SearchContent } from '../components';
+import { Layout, SearchBar, SearchContent, SideBar } from '../components';
 
 type Props = {
 
@@ -14,6 +14,7 @@ type Props = {
 
 const { kakao } = window;
 const Main: React.FunctionComponent = (props) => {
+	const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
 	const [map, setMap] = useState<any>(null); // state for map
 	const [center, setCenter] = useState<Center | null>(null); // state for center loc
 	const [markers, setMarkers] = useState<Marker[]>([]); // state for search result
@@ -75,13 +76,22 @@ const Main: React.FunctionComponent = (props) => {
 		setMarkers(places.map((place) => createMarker(place)));
 	};
 
+	const handleSideBarOpen = () => {
+		setSideBarOpen(true);
+	};
+
+	const handleSideBarClose = () => {
+		setSideBarOpen(false);
+	};
+
 	return (
 		<>
-			<Layout>
+			<Layout open={sideBarOpen} handleSideBarClose={handleSideBarClose}>
 				<Map />
-				<div className="side-bar">
+				<div className="place-side-bar">
 					<SearchBar
 						handleSearchResult={handleSearchResult}
+						handleSideBarOpen={handleSideBarOpen}
 					/>
 					<SearchContent
 						result=" "

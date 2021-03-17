@@ -7,7 +7,6 @@ import CreateIcon from "@material-ui/icons/Create";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { usePlaceState } from "../Model/PlaceModel";
 import { PlaceType } from "../Type";
 import { useSelectedPlace, useSetSelectedPlace } from "../ViewModel";
 
@@ -18,10 +17,6 @@ type PlaceProps = {
 }
 
 const PlaceInfo = ({ size, place }: PlaceProps) => {
-	const places = usePlaceState();
-	const selected = useSelectedPlace();
-	const setSelected = useSetSelectedPlace();
-
 	const [sizeState, setSizeState] = useState<string>(size);
 
 	useEffect(() => {
@@ -47,37 +42,62 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 					</Grid>
 					<Grid className="place-info">
 						<Grid>
-							<p>
+							<div>
 								<StarIcon />
-								{place.star}
-								/5
-							</p>
+								<p>
+									{place.star}
+									/5
+								</p>
+							</div>
 							<Button variant="outlined">
 								<CreateIcon />
-								리뷰 작성
+								<p>리뷰 작성</p>
 							</Button>
 						</Grid>
 						<Grid className="location">
-							<p>
+							<div>
 								<strong>주소</strong>
-								{place.location}
-							</p>
-							<p className="lot-number">
+								<p>{place.location}</p>
+							</div>
+							<div className="lot-number">
 								<strong>지번</strong>
-								{place.lotNumber}
-							</p>
+								<p>{place.lotNumber}</p>
+							</div>
 						</Grid>
-						<Grid>
-							<p>
+						<Grid className="time-call">
+							<div>
 								<strong>영업시간</strong>
-								{place.time}
-							</p>
-							<p>
+								<div>
+									<p>{place.time}</p>
+									<p>{place.time}</p>
+								</div>
+							</div>
+							<div>
 								<strong>전화</strong>
-								{place.phone}
-							</p>
+								<p>{place.phone}</p>
+							</div>
 						</Grid>
 					</Grid>
+					{
+						sizeState === "lg" &&
+						<Grid className="review-con">
+							<Grid className="review-title">
+								<p>방문자 한줄평</p>
+							</Grid>
+							{
+								place.review.map((review) => {
+									let starString = "";
+									for (let i = 0; i < review.star; i += 1) starString += "★";
+									return (
+										<Grid className="review-card">
+											<Grid>{starString}</Grid>
+											<Grid>{review.contents}</Grid>
+										</Grid>
+									);
+								})
+							}
+						</Grid>
+					}
 				</>
 			}
 		</Grid>
