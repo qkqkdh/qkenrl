@@ -28,6 +28,10 @@ const SearchContent: React.FunctionComponent<Props> = ({ result }) => {
 		<Paper elevation={4} className="search-con">
 			{
 				places &&
+				<PlaceInfo size="lg" place={places[0]} />
+			}
+			{
+				places &&
 				places.map((place) => <PlaceInfo size="sm" place={place} />)
 			}
 		</Paper>

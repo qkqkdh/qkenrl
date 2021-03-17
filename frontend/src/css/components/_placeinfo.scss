@@ -43,13 +43,14 @@
 		}
 	}
 	.place-info{
-		div{
+		&>div{
 			display: flex;
 			margin-bottom: 1rem;
-			p{
+			&>div{
 				display: flex;
 				align-items: center;
 				margin-right: 1rem;
+				margin-bottom: 0.5rem;
 				strong{
 					font-weight: 600;
 					margin-right: 0.5rem;
@@ -60,18 +61,33 @@
 			}
 			&.location{
 				flex-direction: column;
-				p{
-					margin-bottom: 1rem;
-					&.lot-number{
-						strong{
-							padding: 5px;
-							background-color: #858585;
-							color: white;
-							font-weight: 300;
-							border-radius: 5px;
-						}
+				&.lot-number{
+					strong{
+						padding: 5px;
+						background-color: #858585;
+						color: white;
+						font-weight: 300;
+						border-radius: 5px;
 					}
 				}
+			}
+			&.time-call{
+				strong, p{
+					flex-shrink: 0;
+				}
+			}
+		}
+	}
+	.review-con{
+		padding-top : 1rem;
+		border-top : 1px solid lightgray;
+		.review-title p{
+			font-weight: 600;
+		}
+		.review-card{
+			padding: 0.3rem 0;
+			&>div{
+				margin-bottom: 0.5rem;
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-// Place Page scss
+// Main Page scss
 
 // default scss
 @import './base/base';
@@ -6,7 +6,10 @@
 @import './base/mixin';
 @import './base/reset';
 
-// component scss
+// components scss
+@import './components/sidebar';
+@import './components/searchbar';
+@import './components/main';
 @import './components/placeinfo';
 
 #place-con{

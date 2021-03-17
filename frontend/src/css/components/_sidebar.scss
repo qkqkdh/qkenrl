@@ -1,0 +1,39 @@
+.side-bar{
+	display: none;
+	@include mobile{
+		display: flex;
+	}
+	.header{
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		width: auto;
+		box-shadow: none;
+		&>div{
+			height: auto;
+			width: 100%;
+		}
+		.h-title-con{
+			width: 100%;
+			margin-right: 0;
+			display: flex;
+			justify-content: center;
+			margin: 1rem 0;
+			img{
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+		}
+		.nav-con{
+			order: 2;
+			display: flex;
+			flex-direction: column;
+			div{
+				width : 100%;
+			}
+		}
+		.profile-con{
+			order: 1;
+		}
+	}
+}
