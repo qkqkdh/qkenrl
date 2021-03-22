@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Modal, Grid, Paper, Button, TextField, Select } from '@material-ui/core';
+import { Star } from '.';
 
 type Props = {
 	open: boolean;
@@ -9,6 +10,8 @@ type Props = {
 
 const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
 	const name = "업체명";
+	const [star, setStar] = useState<number>(3);
+
 	return (
 		<Modal
 			open={open}
@@ -26,9 +29,10 @@ const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
 					<Grid className="modal-card-con">
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">별점</Grid>
-							{
-								// 별점 하기 => 더블 슬래시 참고
-							}
+							<Star
+								star={star}
+								setStar={setStar}
+							/>
 						</Grid>
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">한줄평 작성</Grid>

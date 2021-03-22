@@ -30,7 +30,7 @@ const ModifyModal: React.FC<Props> = ({ children, open, handleClose }) => {
 					</Grid>
 					<Grid className="modal-btn-con">
 						<Button className="modal-btn" variant="contained" color="primary">확인</Button>
-						<Button className="modal-btn" variant="outlined">취소</Button>
+						<Button className="modal-btn" variant="outlined" onClick={handleClose}>취소</Button>
 					</Grid>
 				</Paper>
 			</Grid>

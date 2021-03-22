@@ -21,6 +21,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
 	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
 	const name = "버금이";
+	const star = 4;
 
 	useEffect(() => {
 		setSizeState(size);
