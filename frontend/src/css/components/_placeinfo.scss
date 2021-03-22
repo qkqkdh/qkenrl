@@ -58,10 +58,11 @@
 			}
 			button{
 				border-radius: 13px;
+				flex-shrink: 0;
 			}
 			&.location{
 				flex-direction: column;
-				&.lot-number{
+				.lot-number{
 					strong{
 						padding: 5px;
 						background-color: #858585;

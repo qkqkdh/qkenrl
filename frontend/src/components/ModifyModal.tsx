@@ -7,7 +7,7 @@ type Props = {
 	handleClose: () => void;
 }
 
-const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
+const ModifyModal: React.FC<Props> = ({ children, open, handleClose }) => {
 	const name = "업체명";
 	return (
 		<Modal
@@ -17,26 +17,20 @@ const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
 			<Grid className="modal-con review-modal">
 				<Paper>
 					<Grid>
-						<Grid className="modal-title">후기 등록하기</Grid>
+						<Grid className="modal-title">해당 장소 정보에 관하여 운영진에게 수정을 요청하시겠습니까?</Grid>
 					</Grid>
 					<Button className="x-btn" onClick={handleClose}>X</Button>
-					<Grid className="review-shop-name">
-						{`${name}의 후기 작성하기`}
-					</Grid>
 					<Grid className="modal-card-con">
 						<Grid className="modal-card">
-							<Grid className="modal-card-title">별점</Grid>
-							{
-								// 별점 하기 => 더블 슬래시 참고
-							}
-						</Grid>
-						<Grid className="modal-card">
-							<Grid className="modal-card-title">한줄평 작성</Grid>
 							<TextField
 								variant="outlined"
-								placeholder="한줄평을 남겨주세요."
+								placeholder="수정요청사항을 적어주세요."
 							/>
 						</Grid>
+					</Grid>
+					<Grid className="modal-btn-con">
+						<Button className="modal-btn" variant="contained" color="primary">확인</Button>
+						<Button className="modal-btn" variant="outlined">취소</Button>
 					</Grid>
 				</Paper>
 			</Grid>
@@ -44,4 +38,4 @@ const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
 	);
 };
 
-export default ReviewModal;
+export default ModifyModal;

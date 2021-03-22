@@ -8,7 +8,7 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { PlaceType } from "../Type";
-import { useSelectedPlace, useSetSelectedPlace } from "../ViewModel";
+import { ReviewModal, ModifyModal } from ".";
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
@@ -18,10 +18,16 @@ type PlaceProps = {
 
 const PlaceInfo = ({ size, place }: PlaceProps) => {
 	const [sizeState, setSizeState] = useState<string>(size);
+	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
+	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
+	const name = "버금이";
 
 	useEffect(() => {
 		setSizeState(size);
 	}, [size]);
+
+	const handleReviewClose = () => setReviewOpen(false);
+	const handleModifyClose = () => setModifyOpen(false);
 
 	return (
 		<Grid className="place-component">
@@ -42,6 +48,10 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 					</Grid>
 					<Grid className="place-info">
 						<Grid>
+							<ReviewModal
+								open={reviewOpen}
+								handleClose={handleReviewClose}
+							/>
 							<div>
 								<StarIcon />
 								<p>
@@ -49,12 +59,29 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 									/5
 								</p>
 							</div>
-							<Button variant="outlined">
+							<Button variant="outlined" onClick={() => setReviewOpen(true)}>
 								<CreateIcon />
 								<p>리뷰 작성</p>
 							</Button>
 						</Grid>
 						<Grid className="location">
+							<ModifyModal
+								open={modifyOpen}
+								handleClose={handleModifyClose}
+							/>
+							{
+								sizeState === "lg" &&
+								<div>
+									<strong>정보</strong>
+									<p>
+										<strong>{name}</strong>
+										님께서 등록하신 장소입니다.
+									</p>
+									<Button onClick={() => setModifyOpen(true)}>
+										정보수정 요청
+									</Button>
+								</div>
+							}
 							<div>
 								<strong>주소</strong>
 								<p>{place.location}</p>

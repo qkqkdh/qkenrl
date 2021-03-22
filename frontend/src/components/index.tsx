@@ -10,4 +10,4 @@ export { default as PlaceInfo } from "./PlaceInfo";
 export { default as Intro } from "./Intro";
 export { default as SideBar } from "./SideBar";
 export { default as ReviewModal } from "./ReviewModal";
-export { default as SmallPlaceInfo } from "./SmallPlaceInfo";
+export { default as ModifyModal } from "./ModifyModal";
