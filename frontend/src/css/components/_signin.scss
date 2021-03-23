@@ -1,6 +1,5 @@
 .register-body{
 	height: 90%;
-	overflow: auto;
 }
 .login-body{
 	position: absolute;
@@ -46,9 +45,16 @@
 			color: black;
 			font-weight: 700;
 		}
+		.step-grid{
+			height: 70vh;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			flex-wrap: nowrap;
+		}
 		.stepper{
 			width: 100%;
-			padding: 1.5rem 0;
+			padding: 0.5rem 0;
 		}
 		.register-btngroup{
 			justify-content: center;
@@ -99,9 +105,34 @@
 }
 .stepzero-grid {
 	justify-content: flex-start;
+	height: 50vh;
+}
+.stepfinal-grid {
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: 50vh;
+	.mail-icon {
+		display:none;
+	}
+	.stepfinal-head {
+		font-size: 1.1rem;
+		font-weight: 550;
+		margin-bottom: 1rem;
+	}
 }
 .register-subhead {
 	font-weight: bold !important;
+}
+.final-content {
+	white-space: pre-wrap;
+	text-align: center;
+}
+.stepfinal-ps {
+	width: 100%;
+	text-align: center;
+	background-color: lighten(gray, 30%) !important;
+	padding: 0.5rem 0;
 }
 .agree-content {
 	max-height: 4rem;
@@ -134,6 +165,7 @@
 		.login-container{
 			.stepper{
 				width: 80%;
+				padding: 1rem 0;
 			}
 			.register-btn{
 				width: 7rem;
@@ -145,6 +177,24 @@
 	}
 	.stepzero-grid {
 		padding: 0 1.5rem;
+		height: 55vh;
+	}
+	.stepfinal-grid {
+		padding: 0 1.5rem;
+		height: 55vh;
+		.mail-icon {
+			display: inline;
+			font-size: 7rem;
+		}
+		.stepfinal-head {
+			font-size: 1.3rem;
+			font-weight: 550;
+			margin-bottom: 1rem;
+		}
+	}
+	.stepfinal-ps {
+		padding: 1rem 0.5rem;
+		width: 80%;
 	}
 	.agree-content {
 		max-height: 7rem;
