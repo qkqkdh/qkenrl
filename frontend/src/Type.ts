@@ -1,6 +1,7 @@
 import React from 'react';
 
 export type PlaceType = {
+	id: number,
 	name: string,
 	type: string,
 	isMyPlace: boolean,
@@ -9,7 +10,8 @@ export type PlaceType = {
 	star: number,
 	time: string,
 	phone: string,
-	review: Array<ReviewType>
+	review: Array<ReviewType>,
+	setMember: string // 정보 등록한 사람
 };
 
 export type ReviewType = {
@@ -19,4 +21,9 @@ export type ReviewType = {
 
 export type childrenObj = {
 	children: React.ReactNode;
+}
+
+export type UserType = {
+	name: string,
+	mail: string
 }

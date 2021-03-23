@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Grid, Button } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StarIcon from "@material-ui/icons/Star";
 import CreateIcon from "@material-ui/icons/Create";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -9,6 +10,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { PlaceType } from "../Type";
 import { ReviewModal, ModifyModal } from ".";
+import { useUpdatePlace } from '../ViewModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
@@ -20,31 +22,51 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 	const [sizeState, setSizeState] = useState<string>(size);
 	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
 	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
-	const name = "버금이";
-	const star = 4;
+	const [reviewNumber, setReviewNumber] = useState<number>(2); // 보이는 review 갯수
+	const updatePlace = useUpdatePlace();
 
 	useEffect(() => {
 		setSizeState(size);
 	}, [size]);
 
+	useEffect(() => {
+		setReviewNumber(2); // 컴포넌트를 접으면 review 갯수 초기화
+	}, [sizeState]);
+
 	const handleReviewClose = () => setReviewOpen(false);
 	const handleModifyClose = () => setModifyOpen(false);
+
+	const switchMyPlace = () => {
+		place.isMyPlace = !place.isMyPlace;
+		updatePlace(place);
+	};
+
+	const moreReview = () => setReviewNumber(reviewNumber + 2); // 2개씩 더 보여주기
 
 	return (
 		<Grid className="place-component">
 			{
 				place &&
 				<>
+					<Grid className="place-arrow">
+						{
+							sizeState === "sm" ?
+								<ExpandMoreIcon onClick={() => setSizeState("lg")} /> : <ExpandLessIcon onClick={() => setSizeState("sm")} />
+						}
+					</Grid>
 					<Grid className="place-header">
 						<Grid>
 							<h4>{place.name}</h4>
 							<h6>{place.type}</h6>
 						</Grid>
-						<FavoriteIcon />
-						{sizeState}
 						{
-							sizeState === "sm" ?
-								<ExpandLessIcon onClick={() => setSizeState("lg")} /> : <ExpandMoreIcon onClick={() => setSizeState("sm")} />
+							place.isMyPlace ?
+								<FavoriteIcon
+									onClick={switchMyPlace}
+								/> :
+								<FavoriteBorderIcon
+									onClick={switchMyPlace}
+								/>
 						}
 					</Grid>
 					<Grid className="place-info">
@@ -75,7 +97,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 								<div>
 									<strong>정보</strong>
 									<p>
-										<strong>{name}</strong>
+										<strong>{place.setMember}</strong>
 										님께서 등록하신 장소입니다.
 									</p>
 									<Button onClick={() => setModifyOpen(true)}>
@@ -113,7 +135,11 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 								<p>방문자 한줄평</p>
 							</Grid>
 							{
-								place.review.map((review) => {
+								place.review.map((review, index) => {
+									if (index >= reviewNumber) {
+										return null;
+									}
+
 									let starString = "";
 									for (let i = 0; i < review.star; i += 1) starString += "★";
 									return (
@@ -123,6 +149,10 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 										</Grid>
 									);
 								})
+							}
+							{
+								place.review.length > reviewNumber &&
+								<Button onClick={moreReview}>더보기</Button>
 							}
 						</Grid>
 					}

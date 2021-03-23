@@ -3,8 +3,7 @@ import React from "react";
 import { Grid, Paper } from '@material-ui/core';
 
 import { PlaceInfo } from ".";
-import { usePlaceState } from '../Model/PlaceModel';
-import { PlaceType } from '../Type';
+import { usePlaceState, useSelectedPlaceState } from '../Model/PlaceModel';
 
 interface Props {
 	result: any; // TODO : Type Definition
@@ -24,15 +23,25 @@ interface Props {
 
 const SearchContent: React.FunctionComponent<Props> = ({ result }) => {
 	const places = usePlaceState();
+	const selected = useSelectedPlaceState();
+	// result => places model로 대체하면 안될까요?-? (희은)
+
 	return (
 		<Paper elevation={4} className="search-con">
 			{
-				places &&
-				<PlaceInfo size="lg" place={places[0]} />
+				places && selected !== -1 &&
+				<PlaceInfo size="lg" place={places[selected]} />
 			}
 			{
 				places &&
-				places.map((place) => <PlaceInfo size="sm" place={place} />)
+				places.map((place, index) => {
+					if (index === selected) {
+						return null;
+					}
+					return (
+						<PlaceInfo key={place.id} size="sm" place={place} />
+					);
+				})
 			}
 		</Paper>
 	);
