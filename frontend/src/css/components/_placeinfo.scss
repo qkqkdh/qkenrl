@@ -12,11 +12,29 @@
 	border-radius: 1rem;
 	background-color: white;
 	border: 1px solid lightgray;
+	display: flex;
+	flex-direction: column;
 
 	@include mobile {
 		position: absolute;
 		bottom: 0;
 		z-index: 10;
+		&>div{
+			order: 1;
+		}
+	}
+
+	.place-arrow{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		svg{
+			cursor: pointer;
+			width: 100%;
+		}
+		@include mobile{
+			order: 3; // 끝으로 보내기
+		}
 	}
 	.place-header{
 		display: flex;
@@ -58,10 +76,11 @@
 			}
 			button{
 				border-radius: 13px;
+				flex-shrink: 0;
 			}
 			&.location{
 				flex-direction: column;
-				&.lot-number{
+				.lot-number{
 					strong{
 						padding: 5px;
 						background-color: #858585;

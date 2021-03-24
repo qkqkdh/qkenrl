@@ -5,12 +5,14 @@
 @import './base/materialUI';
 @import './base/mixin';
 @import './base/reset';
+@import './base/common';
 
 // components scss
 @import './components/sidebar';
 @import './components/searchbar';
 @import './components/main';
 @import './components/placeinfo';
+@import './components/reviewmodal';
 
 #place-con{
 	display: flex;

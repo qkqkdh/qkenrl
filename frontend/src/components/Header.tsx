@@ -8,7 +8,8 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 interface Props { }
 const Header: React.FunctionComponent<Props> = () => {
 	const name = "홍길동";
-	const [open, setOpen] = useState(false);
+	const [isLogined, setIsLogined] = useState<boolean>(false);
+	const [open, setOpen] = useState<boolean>(false);
 	const [anchorEl, setAnchorEl] = React.useState<(EventTarget & Element) | null>(null);
 
 	const handleClick = (event: React.SyntheticEvent) => {
@@ -37,33 +38,40 @@ const Header: React.FunctionComponent<Props> = () => {
 				</div>
 			</Grid>
 			<Grid className="profile-con">
-				<p>
-					<strong>{name}</strong>
-					님, 환영합니다!
-				</p>
-				<button
-					className="menu-btn"
-					type="button"
-					onClick={(e) => handleClick(e)}
-				>
-					<KeyboardArrowDownIcon />
-				</button>
-				<Menu
-					id="simple-menu"
-					anchorEl={anchorEl}
-					getContentAnchorEl={null}
-					anchorOrigin={{
-						vertical: 'bottom',
-						horizontal: 'center',
-					}}
-					keepMounted
-					open={Boolean(anchorEl)}
-					onClose={handleClose}
-				>
-					<MenuItem onClick={handleClose}>Profile</MenuItem>
-					<MenuItem onClick={handleClose}>My account</MenuItem>
-					<MenuItem onClick={handleClose}>Logout</MenuItem>
-				</Menu>
+				{
+					isLogined ?
+						<p>
+							<strong>{name}</strong>
+							님, 환영합니다!
+						</p> : <a href="/#">로그인해주세요.</a>
+				}
+				{
+					/*
+					<button
+						className="menu-btn"
+						type="button"
+						onClick={(e) => handleClick(e)}
+					>
+						<KeyboardArrowDownIcon />
+					</button>
+					<Menu
+						id="simple-menu"
+						anchorEl={anchorEl}
+						getContentAnchorEl={null}
+						anchorOrigin={{
+							vertical: 'bottom',
+							horizontal: 'center',
+						}}
+						keepMounted
+						open={Boolean(anchorEl)}
+						onClose={handleClose}
+					>
+						<MenuItem onClick={handleClose}>Profile</MenuItem>
+						<MenuItem onClick={handleClose}>My account</MenuItem>
+						<MenuItem onClick={handleClose}>Logout</MenuItem>
+					</Menu>
+					*/
+				}
 			</Grid>
 		</Grid>
 	);
