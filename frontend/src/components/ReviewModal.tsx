@@ -41,6 +41,9 @@ const ReviewModal: React.FC<Props> = ({ children, open, handleClose }) => {
 								placeholder="한줄평을 남겨주세요."
 							/>
 						</Grid>
+						<Grid className="modal-btn-con">
+							<Button className="modal-btn" variant="outlined">등록하기</Button>
+						</Grid>
 					</Grid>
 				</Paper>
 			</Grid>
