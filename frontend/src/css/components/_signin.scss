@@ -120,6 +120,11 @@
 		font-weight: 550;
 		margin-bottom: 1rem;
 	}
+	.mail-img {
+		display: none;
+		margin-bottom: 1rem;
+		box-shadow: 5px 5px 5px #D9D9D9;
+	}
 }
 .register-subhead {
 	font-weight: bold !important;
@@ -133,6 +138,7 @@
 	text-align: center;
 	background-color: lighten(gray, 30%) !important;
 	padding: 0.5rem 0;
+	margin-top: 1rem;
 }
 .agree-content {
 	max-height: 4rem;
@@ -190,6 +196,9 @@
 			font-size: 1.3rem;
 			font-weight: 550;
 			margin-bottom: 1rem;
+		}
+		.mail-img {
+			display: inline;
 		}
 	}
 	.stepfinal-ps {

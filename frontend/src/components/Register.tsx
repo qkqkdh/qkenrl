@@ -19,9 +19,9 @@ import {
 	FormControlLabel,
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import MailImg from '../assets/email.png';
 import "../css/Login.scss";
 
 type Props = {
@@ -76,6 +76,13 @@ function getStepContent(step:number) {
 			</Typography>
 		</div>
 	);
+	const finalPs = (
+		<Typography variant="body2">
+			1. 인증메일은 발송 시점으로부터 24시간 동안만 유효하며, 재발송 시 기존 인증코드는 만료됩니다. 반드시 마지막에 수신된 메일을 확인 바랍니다.
+			<br />
+			2. 메일이 도착하지 않았다면, 스팸함을 확인해주시기 바랍니다.
+		</Typography>
+	);
 	switch (step) {
 	case 0:
 		return (
@@ -109,11 +116,13 @@ function getStepContent(step:number) {
 	case 2:
 		return (
 			<Grid container className="stepfinal-grid">
-				<MailOutlineIcon className="mail-icon" />
+				<img src={MailImg} alt="mailimg" className="mail-img" />
 				<Typography className="stepfinal-head">인증 메일이 발송되었습니다.</Typography>
 				{finalContent}
 				<Paper className="stepfinal-ps" elevation={0} square>
 					<Typography className="register-subhead">유의사항</Typography>
+					{finalPs}
+					<Button variant="contained">인증 메일 재발송</Button>
 				</Paper>
 			</Grid>
 		);
