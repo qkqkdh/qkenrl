@@ -111,6 +111,26 @@ function getStepContent(step:number) {
 		return (
 			<Grid container className="stepzero-grid">
 				<Typography className="register-subhead">정보입력</Typography>
+				<Grid container className="stepfirst-grid">
+					<Grid item xs={2} className="grid-left">이름</Grid>
+					<Grid item xs={10}>input</Grid>
+				</Grid>
+				<Grid container className="stepfirst-grid">
+					<Grid item xs={2} className="grid-left">아이디</Grid>
+					<Grid item xs={10}>input</Grid>
+				</Grid>
+				<Grid container className="stepfirst-grid">
+					<Grid item xs={2} className="grid-left">비밀번호</Grid>
+					<Grid item xs={10}>input</Grid>
+				</Grid>
+				<Grid container className="stepfirst-grid">
+					<Grid item xs={2} className="grid-left">비밀번호 확인</Grid>
+					<Grid item xs={10}>input</Grid>
+				</Grid>
+				<Grid container className="stepfirst-grid">
+					<Grid item xs={2} className="grid-left">이메일</Grid>
+					<Grid item xs={10}>input</Grid>
+				</Grid>
 			</Grid>
 		);
 	case 2:

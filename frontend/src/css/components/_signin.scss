@@ -107,6 +107,9 @@
 	justify-content: flex-start;
 	height: 50vh;
 }
+.stepfirst-grid {
+	border: 1px solid gray;
+}
 .stepfinal-grid {
 	flex-direction: column;
 	align-items: center;
@@ -128,6 +131,12 @@
 }
 .register-subhead {
 	font-weight: bold !important;
+}
+.grid-left {
+	display: flex;
+	background-color: gray;
+	justify-content: center;
+	align-items: center;
 }
 .final-content {
 	white-space: pre-wrap;
