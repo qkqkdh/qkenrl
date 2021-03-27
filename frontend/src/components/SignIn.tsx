@@ -10,6 +10,7 @@ import { Avatar,
 } from "@material-ui/core";
 import PetsIcon from "@material-ui/icons/Pets";
 import CloseIcon from '@material-ui/icons/Close';
+import { Register } from ".";
 import "../css/Login.scss";
 
 const SignIn: React.FunctionComponent = () => {
@@ -76,7 +77,7 @@ const SignIn: React.FunctionComponent = () => {
 				</form>
 				<Grid container className="register-grid">
 					<Grid item>
-						<Link href="# " className="link">회원가입</Link>
+						<Register />
 					</Grid>
 					<Grid item>|</Grid>
 					<Grid item>
