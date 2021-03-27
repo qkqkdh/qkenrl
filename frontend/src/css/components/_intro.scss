@@ -37,12 +37,12 @@
     text-align: center;
     color: #ffffff;
     .title-area {
-        @include font-default("Bold", 3rem);
+        @include font-default(700, 3rem);
         margin-bottom:2rem;
     }
     .slogan-area {
         p {
-            @include font-default("Light", 1.5rem);
+            @include font-default(300, 1.5rem);
             line-height : 2.5rem;
         }
     }
@@ -54,7 +54,7 @@
     border-color: #ffffff;
     text-align: center;
     color: #ffffff;
-    @include font-default("Medium", 1.3rem);
+    @include font-default(500, 1.3rem);
 }
 
 #btn-link:hover {

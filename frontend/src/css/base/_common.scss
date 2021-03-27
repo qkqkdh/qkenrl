@@ -1,0 +1,58 @@
+/* Modal */
+.modal-con{
+    display: flex;
+    align-items: center;
+    width: 800px;
+    height: 500px;
+    justify-content: center;
+    margin: 17vh auto;
+	&>div{
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 2rem 1rem;
+	}
+	.modal-title{
+		font-size: 1.3rem;
+		font-weight: 600;
+	}
+	.x-btn{
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		width: 30px;
+		min-width: auto;
+		height: 30px;
+		border-radius: 1rem;
+		background-color: $light-gray;
+	}
+	.modal-card-con{
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+		margin: 1rem 0;
+		.modal-card{
+			margin-bottom: 1rem;
+		}
+		.modal-card-title{
+			font-weight: 600;
+			margin-bottom: 0.5rem;
+		}
+		.MuiFormControl-root{
+			width: 100%;
+		}
+	}
+	.modal-btn-con{
+		display: flex;
+		justify-content: space-between;
+		.modal-btn{
+			width: 100px;
+			margin-right: 1rem;
+			&:last-of-type{
+				margin-right: 0;
+			}
+		}
+	}
+}

@@ -4,23 +4,53 @@
   flex-direction: column;
   background-color: #fff;
   @include desktop {
+    width: 80%;
+    height: 3rem;
+    margin: 2rem;
+
   }
   @include mobile {
     position: absolute;
     top: 3vw;
-    left: 3vw;
+    left: calc(3vw - 4px);
     z-index: 990;
     width: 94vw;
+    height: 3rem;
   }
+}
+
+.search {
+  height:100%;
 }
 
 .search_form {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  height:100%;
+  @include desktop {
+    #btn-menu {
+      display: none;
+    }
+  }
+  #btn-submit {
+    border-left: 2px solid #000;
+    border-radius: 0;
+    background-color: $light-gray;
+    padding: 1rem 0 1rem 0;
+    height: 100%;
+    @include font-default(700, 1rem);
+  }
 }
 
 .search_form input {
-  height: 100%;
+  width: calc(100% - 4px - 2rem);
+  height: calc(100% - 4px - 2rem);
+  padding: 1rem;
+  border: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .new_place_modal {

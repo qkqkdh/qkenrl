@@ -1,11 +1,6 @@
 import React from "react";
-import Router from "./routes";
+import Provider from './Provider';
 
-const App: React.FunctionComponent = () => (
-	<>
-		{/* TODO PROVIDER */}
-		<Router />
-	</>
-);
+const App: React.FunctionComponent = () => <Provider />;
 
 export default App;
