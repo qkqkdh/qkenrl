@@ -3,17 +3,17 @@ import { Button, Modal, Icon } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { Place } from "../utils/types";
+import { Place, PlaceInfo } from "../utils/types";
 import NewPlaceModal from './NewPlaceModal';
 
 interface Props {
-	handleSearchResult: (place: Place[]) => void;
+	handleSearchResult: (place: PlaceInfo[]) => void;
 	handleSideBarOpen: () => void;
 }
 
 const SearchBar: React.FunctionComponent<Props> = ({ handleSearchResult, handleSideBarOpen }) => {
 	const { handleSubmit, register } = useForm();
-	const [results, setResults] = useState<Place[] | null>(null);
+	const [results, setResults] = useState<PlaceInfo[] | null>(null);
 	const [toggle, setToggle] = useState<boolean>(false); // state for popup
 	const handleFormSubmit = async (data: any) => {
 		try {

@@ -39,7 +39,7 @@ const SearchContent: React.FunctionComponent<Props> = ({ result }) => {
 						return null;
 					}
 					return (
-						<PlaceInfo key={place.id} size="sm" place={place} />
+						<PlaceInfo key={place.info._id} size="sm" place={place} />
 					);
 				})
 			}
