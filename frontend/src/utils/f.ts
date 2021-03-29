@@ -1,4 +1,4 @@
-import { MapOptions, Place } from "./types";
+import { MapOptions, Place, PlaceInfo } from "./types";
 
 const { kakao } = window;
 const INIT__LAT = '37.5952687';
@@ -31,7 +31,7 @@ export const InitializeMap = () => {
 	});
 };
 
-export const createMarker = (place: Place) => {
+export const createMarker = (place: PlaceInfo) => {
 	const markerPosition = new kakao.maps.LatLng(place.geo.coordinates[1], place.geo.coordinates[0]);
 	const marker = new kakao.maps.Marker({
 		position: markerPosition,
@@ -40,6 +40,6 @@ export const createMarker = (place: Place) => {
 
 	return {
 		marker,
-		place,
+		info: place,
 	};
 };
