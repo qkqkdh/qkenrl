@@ -11,7 +11,7 @@
 	}
 }
 
-.side-bar {
+.place-side-bar {
     background-color: $main-color;
     box-shadow: 0.01rem 0 1rem #000;
     @include desktop {
@@ -19,9 +19,11 @@
 		height: calc(100vh - 5rem);
 	}
 	@include mobile {
+		/*
         left: 0;
 		width: 0;
 		height: 0;
+		*/
 	}
     display: flex;
 	flex-direction: column;

@@ -8,16 +8,17 @@ import NewPlaceModal from './NewPlaceModal';
 
 interface Props {
 	handleSearchResult: (place: Place[]) => void;
+	handleSideBarOpen: () => void;
 }
 
-const SearchBar: React.FunctionComponent<Props> = (props) => {
+const SearchBar: React.FunctionComponent<Props> = ({ handleSearchResult, handleSideBarOpen }) => {
 	const { handleSubmit, register } = useForm();
 	const [results, setResults] = useState<Place[] | null>(null);
 	const [toggle, setToggle] = useState<boolean>(false); // state for popup
 	const handleFormSubmit = async (data: any) => {
 		try {
 			const result = await axios.get(`http://localhost:3001/place?keyword=${data.query}`);
-			props.handleSearchResult(result.data); // map 에 marker 셋팅
+			handleSearchResult(result.data); // map 에 marker 셋팅
 			setResults(result.data); // 검색결과 표시 ?
 		} catch (err) {
 			console.log(err);
@@ -29,7 +30,7 @@ const SearchBar: React.FunctionComponent<Props> = (props) => {
 				<div className="" />
 				{ /* 원래 SB 써있었는데 무슨 용도...?인지 모르겠어서 일단 흔적을 남김 */}
 				<form onSubmit={handleSubmit(handleFormSubmit)} className="search_form">
-					<MenuIcon id="btn-menu" />
+					<MenuIcon id="btn-menu" onClick={handleSideBarOpen} />
 					<input
 						required
 						name="query"

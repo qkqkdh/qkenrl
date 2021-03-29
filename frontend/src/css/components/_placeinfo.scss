@@ -12,11 +12,29 @@
 	border-radius: 1rem;
 	background-color: white;
 	border: 1px solid lightgray;
+	display: flex;
+	flex-direction: column;
 
 	@include mobile {
 		position: absolute;
 		bottom: 0;
 		z-index: 10;
+		&>div{
+			order: 1;
+		}
+	}
+
+	.place-arrow{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		svg{
+			cursor: pointer;
+			width: 100%;
+		}
+		@include mobile{
+			order: 3; // 끝으로 보내기
+		}
 	}
 	.place-header{
 		display: flex;
@@ -43,13 +61,14 @@
 		}
 	}
 	.place-info{
-		div{
+		&>div{
 			display: flex;
 			margin-bottom: 1rem;
-			p{
+			&>div{
 				display: flex;
 				align-items: center;
 				margin-right: 1rem;
+				margin-bottom: 0.5rem;
 				strong{
 					font-weight: 600;
 					margin-right: 0.5rem;
@@ -57,21 +76,37 @@
 			}
 			button{
 				border-radius: 13px;
+				flex-shrink: 0;
 			}
 			&.location{
 				flex-direction: column;
-				p{
-					margin-bottom: 1rem;
-					&.lot-number{
-						strong{
-							padding: 5px;
-							background-color: #858585;
-							color: white;
-							font-weight: 300;
-							border-radius: 5px;
-						}
+				.lot-number{
+					strong{
+						padding: 5px;
+						background-color: #858585;
+						color: white;
+						font-weight: 300;
+						border-radius: 5px;
 					}
 				}
+			}
+			&.time-call{
+				strong, p{
+					flex-shrink: 0;
+				}
+			}
+		}
+	}
+	.review-con{
+		padding-top : 1rem;
+		border-top : 1px solid lightgray;
+		.review-title p{
+			font-weight: 600;
+		}
+		.review-card{
+			padding: 0.3rem 0;
+			&>div{
+				margin-bottom: 0.5rem;
 			}
 		}
 	}
