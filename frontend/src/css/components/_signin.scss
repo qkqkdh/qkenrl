@@ -64,6 +64,18 @@
 			width: 6rem;
 		}
 	}
+	@include desktop {
+		width: 50%;
+		.login-container{
+			.stepper{
+				width: 80%;
+				padding: 1rem 0;
+			}
+			.register-btn{
+				width: 7rem;
+			}
+		}
+	}
 }
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
 	border: solid 1px black !important;
@@ -87,6 +99,9 @@
 		border-radius: 0.5rem;
 		font-size: 0.8rem;
 	}
+	@include desktop {
+		width: 40%;
+	}
 }
 .register-grid{
 	margin: 1rem 0;
@@ -107,11 +122,18 @@
 	justify-content: flex-start;
 	overflow: auto;
 	scrollbar-width: none;
+	-ms-overflow-style:none;
+	
+	@include desktop {
+		padding: 0 1.5rem;
+		height: 55vh;
+	}
 }
 .stepfirst-grid {
 	border: 1px solid gray;
 	overflow: auto;
 	scrollbar-width: none;
+	-ms-overflow-style:none;
 }
 .stepfinal-grid {
 	flex-direction: column;
@@ -119,6 +141,8 @@
 	justify-content: flex-start;
 	flex-wrap: nowrap !important;
 	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style:none;
 	.mail-icon {
 		display:none;
 	}
@@ -132,8 +156,25 @@
 		margin-bottom: 1rem;
 		box-shadow: 5px 5px 5px #D9D9D9;
 	}
+
+	@include desktop {
+		padding: 0 1.5rem;
+		height: 55vh;
+		.mail-icon {
+			display: inline;
+			font-size: 7rem;
+		}
+		.stepfinal-head {
+			font-size: 1.3rem;
+			font-weight: 550;
+			margin-bottom: 1rem;
+		}
+		.mail-img {
+			display: inline;
+		}
+	}
 }
-.stepzero-grid::-webkit-scrollbar .stepfirst-grid::-webkit-scrollbar .stepfinal-grid::-webkit-scrollbar{ display:none; }
+.stepzero-grid::-webkit-scrollbar, .stepfirst-grid::-webkit-scrollbar, .stepfinal-grid::-webkit-scrollbar { display:none; }
 .register-subhead {
 	font-weight: bold !important;
 }
@@ -153,12 +194,21 @@
 	background-color: lighten(gray, 30%) !important;
 	padding: 0.5rem 0;
 	margin-top: 1rem;
+
+	@include desktop {
+		padding: 1rem 0.5rem;
+		width: 80%;
+	}
 }
 .agree-content {
 	max-height: 4rem;
 	font-size: 0.9rem;
 	overflow: auto;
 	padding: 0.9rem;
+
+	@include desktop {
+		max-height: 7rem;
+	}
 }
 .radio-content {
 	font-size: 0.9rem;
@@ -174,52 +224,4 @@
 }
 .MuiRadio-root {
 	padding: 4px !important;
-}
-
-@media (min-width:769px){ // desktop
-	.register-body{
-		height: 42rem;
-	}
-	.login-body{
-		width: 50%;
-		.login-container{
-			.stepper{
-				width: 80%;
-				padding: 1rem 0;
-			}
-			.register-btn{
-				width: 7rem;
-			}
-		}
-	}
-	.form{
-		width: 40%;
-	}
-	.stepzero-grid {
-		padding: 0 1.5rem;
-		height: 55vh;
-	}
-	.stepfinal-grid {
-		padding: 0 1.5rem;
-		height: 55vh;
-		.mail-icon {
-			display: inline;
-			font-size: 7rem;
-		}
-		.stepfinal-head {
-			font-size: 1.3rem;
-			font-weight: 550;
-			margin-bottom: 1rem;
-		}
-		.mail-img {
-			display: inline;
-		}
-	}
-	.stepfinal-ps {
-		padding: 1rem 0.5rem;
-		width: 80%;
-	}
-	.agree-content {
-		max-height: 7rem;
-	}
 }
