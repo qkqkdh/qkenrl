@@ -62,9 +62,11 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 						{
 							place.isMyPlace ?
 								<FavoriteIcon
+									className="myPlace"
 									onClick={switchMyPlace}
 								/> :
 								<FavoriteBorderIcon
+									className="notMyPlace"
 									onClick={switchMyPlace}
 								/>
 						}

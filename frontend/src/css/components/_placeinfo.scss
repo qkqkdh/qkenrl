@@ -59,9 +59,14 @@
 		svg{
 			padding: 5px;
 			border-radius: 1rem;
-			background-color: #585858;
+			background-color: $sub-color;
 			fill: white;
 			cursor: pointer;
+		}
+		.notMyPlace{
+			background-color: white;
+			fill: gray;
+			border: 1px solid gray;
 		}
 	}
 	.place-info{
