@@ -14,6 +14,10 @@
 	border: 1px solid lightgray;
 	display: flex;
 	flex-direction: column;
+	&:hover{
+		box-shadow: 0 0 0.8rem gray;
+		border-color: $sub-color;
+	}
 
 	@include mobile {
 		position: absolute;
