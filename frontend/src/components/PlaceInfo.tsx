@@ -5,6 +5,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StarIcon from "@material-ui/icons/Star";
 import CreateIcon from "@material-ui/icons/Create";
+import ShareIcon from '@material-ui/icons/Share';
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -82,10 +83,13 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 									/5
 								</p>
 							</div>
-							<Button variant="outlined" onClick={() => setReviewOpen(true)}>
-								<CreateIcon />
-								<p>리뷰 작성</p>
-							</Button>
+							{
+								sizeState === "sm" &&
+								<Button variant="outlined" onClick={() => setReviewOpen(true)}>
+									<CreateIcon />
+									<p>리뷰 작성</p>
+								</Button>
+							}
 						</Grid>
 						<Grid className="location">
 							<ModifyModal
@@ -94,16 +98,39 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 							/>
 							{
 								sizeState === "lg" &&
-								<div>
-									<strong>정보</strong>
-									<p>
-										<strong>{place.setMember}</strong>
-										님께서 등록하신 장소입니다.
-									</p>
-									<Button onClick={() => setModifyOpen(true)}>
-										정보수정 요청
-									</Button>
-								</div>
+								<>
+									<div className="button-group">
+										<Button variant="outlined" onClick={() => setReviewOpen(true)}>
+											<div>
+												<CreateIcon fontSize="large" />
+												<br />
+												<p>리뷰 작성</p>
+											</div>
+										</Button>
+										<Button variant="outlined">
+											<div>
+												<FavoriteIcon fontSize="large" />
+												<p>내 장소 등록</p>
+											</div>
+										</Button>
+										<Button variant="outlined">
+											<div>
+												<ShareIcon fontSize="large" />
+												<p>공유하기</p>
+											</div>
+										</Button>
+									</div>
+									<div>
+										<strong>정보</strong>
+										<p>
+											<strong>{place.setMember}</strong>
+											님께서 등록하신 장소입니다.
+										</p>
+										<Button onClick={() => setModifyOpen(true)}>
+											정보수정 요청
+										</Button>
+									</div>
+								</>
 							}
 							<div>
 								<strong>주소</strong>

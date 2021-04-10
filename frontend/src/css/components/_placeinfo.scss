@@ -14,6 +14,7 @@
 	border: 1px solid lightgray;
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 
 	@include mobile {
 		position: absolute;
@@ -93,6 +94,21 @@
 			&.time-call{
 				strong, p{
 					flex-shrink: 0;
+				}
+			}
+		}
+		.button-group {
+			justify-content: center;
+			margin-right: 0;
+			button {
+				border-radius: 50%;
+				width: 4.5rem;
+				padding: 0.5rem;
+				font-size: 0.5rem;
+				margin-left: 0.6rem;
+				margin-right: 0.6rem;
+				span {
+					white-space: nowrap;
 				}
 			}
 		}
