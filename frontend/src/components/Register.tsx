@@ -25,22 +25,13 @@ import "../css/Login.scss";
 
 type Props = {
 	// Props 정의
+	loginClose: () => void
 };
 
 type FormData = {
 	id: string;
 	password: string;
 	email: string;
-};
-
-const getModalStyle = () => {
-	const top = 50;
-	const left = 50;
-	return {
-		top: `${top}%`,
-		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`,
-	};
 };
 
 const getSteps = () => ['약관동의', '정보입력', '이메일 인증'];
@@ -150,18 +141,19 @@ function getStepContent(step:number) {
 	}
 }
 
-const Register: React.FunctionComponent<Props> = ({ children }) => {
+const Register: React.FunctionComponent<Props> = ({ loginClose }) => {
 	const { register, handleSubmit, reset } = useForm(); // form 컨트롤 라이브러리 react-hook-form 사용
 	const [login, setLogin] = useState<boolean>(false); // 로그인 중인지 chk 하는 state
-	const [open, setopen] = useState<boolean>(false);
+	const [ropen, setrOpen] = useState<boolean>(false);
 	const [activeStep, setActiveStep] = React.useState(0);
 	const steps = getSteps();
 
 	const Openhandler = () => {
-		setopen(true);
+		// loginClose();
+		setrOpen(true);
 	};
 	const Closehandler = () => {
-		setopen(false);
+		setrOpen(false);
 	};
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -196,53 +188,53 @@ const Register: React.FunctionComponent<Props> = ({ children }) => {
 			});
 		setLogin(false);
 	};
-
-	const body = (
-		<div className={`${`login-body`} ${`register-body`}`} style={getModalStyle()}>
-			<div className="right-sort">
-				<IconButton className="close-btn" onClick={Closehandler}>
-					<CloseIcon fontSize="small" />
-				</IconButton>
-			</div>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Grid container className="login-container">
-					<Typography className="register-title">회원가입</Typography>
-					<Stepper activeStep={activeStep} alternativeLabel className="stepper">
-						{steps.map((label) => (
-							<Step key={label}>
-								<StepLabel>{label}</StepLabel>
-							</Step>
-						))}
-					</Stepper>
-					{getStepContent(activeStep)}
-					<Grid container className="register-btngroup" spacing={2}>
-						{activeStep === 0 ? (
-							<Grid item className="register-btn">
-								<Button onClick={Closehandler} variant="outlined" fullWidth>취소</Button>
-							</Grid>
-						) : (
-							<Grid item className="register-btn">
-								<Button onClick={handleBack} variant="outlined" startIcon={<ArrowBackIcon />} fullWidth>이전</Button>
-							</Grid>
-						)}
-						{activeStep === steps.length - 1 ? (
-							<Grid item className="register-btn">
-								<Button onClick={Closehandler} variant="outlined" fullWidth>마침</Button>
-							</Grid>
-						) : (
-							<Grid item className="register-btn">
-								<Button onClick={handleNext} variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>다음</Button>
-							</Grid>
-						)}
-					</Grid>
-				</Grid>
-			</form>
-		</div>
-	);
 	return (
 		<>
 			<Button onClick={Openhandler}>Register</Button>
-			<Modal open={open} onClose={Closehandler}>{body}</Modal>
+			<Modal open={ropen} onClose={Closehandler}>
+				<Grid className="register-body">
+					<Paper>
+						<Grid className="right-sort">
+							<IconButton className="close-btn" onClick={Closehandler}>
+								<CloseIcon fontSize="small" />
+							</IconButton>
+						</Grid>
+						<form onSubmit={handleSubmit(onSubmit)}>
+							<Grid container className="login-container">
+								<Typography className="register-title">회원가입</Typography>
+								<Stepper activeStep={activeStep} alternativeLabel className="stepper">
+									{steps.map((label) => (
+										<Step key={label}>
+											<StepLabel>{label}</StepLabel>
+										</Step>
+									))}
+								</Stepper>
+								{getStepContent(activeStep)}
+								<Grid container className="register-btngroup" spacing={2}>
+									{activeStep === 0 ? (
+										<Grid item className="register-btn">
+											<Button onClick={Closehandler} variant="outlined" fullWidth>취소</Button>
+										</Grid>
+									) : (
+										<Grid item className="register-btn">
+											<Button onClick={handleBack} variant="outlined" startIcon={<ArrowBackIcon />} fullWidth>이전</Button>
+										</Grid>
+									)}
+									{activeStep === steps.length - 1 ? (
+										<Grid item className="register-btn">
+											<Button onClick={Closehandler} variant="outlined" fullWidth>마침</Button>
+										</Grid>
+									) : (
+										<Grid item className="register-btn">
+											<Button onClick={handleNext} variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>다음</Button>
+										</Grid>
+									)}
+								</Grid>
+							</Grid>
+						</form>
+					</Paper>
+				</Grid>
+			</Modal>
 		</>
 	);
 };

@@ -1,0 +1,152 @@
+.register-body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80vw;
+	margin:17vh auto;
+
+	&>div{
+		width: 100%;
+		height: 100%;
+	}
+	.register-title{
+		font-size: 1.5rem;
+		color: black;
+		font-weight: 700;
+	}
+}
+.step-grid{
+	height: 70vh;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+.stepper{
+	width: 100%;
+	padding: 0.5rem 0;
+}
+.register-btngroup{
+	justify-content: center;
+	padding-top: 1rem;
+}
+.register-btn{
+	width: 6rem;
+}
+
+@include desktop{
+	.stepper{
+		width: 80%;
+		padding: 1rem 0;
+	}
+	.register-btn{
+		width: 7rem;
+	}
+}
+.stepzero-grid {
+	justify-content: flex-start;
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style:none;
+	
+	@include desktop {
+		padding: 0 1.5rem;
+		height: 55vh;
+	}
+}
+.stepfirst-grid {
+	border: 1px solid gray;
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style:none;
+}
+.stepfinal-grid {
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: nowrap !important;
+	overflow: auto;
+	scrollbar-width: none;
+	-ms-overflow-style:none;
+	.mail-icon {
+		display:none;
+	}
+	.stepfinal-head {
+		font-size: 1.1rem;
+		font-weight: 550;
+		margin-bottom: 1rem;
+	}
+	.mail-img {
+		display: none;
+		margin-bottom: 1rem;
+		box-shadow: 5px 5px 5px #D9D9D9;
+	}
+
+	@include desktop {
+		padding: 0 1.5rem;
+		height: 55vh;
+		.mail-icon {
+			display: inline;
+			font-size: 7rem;
+		}
+		.stepfinal-head {
+			font-size: 1.3rem;
+			font-weight: 550;
+			margin-bottom: 1rem;
+		}
+		.mail-img {
+			display: inline;
+		}
+	}
+}
+.stepzero-grid::-webkit-scrollbar, .stepfirst-grid::-webkit-scrollbar, .stepfinal-grid::-webkit-scrollbar { display:none; }
+.register-subhead {
+	font-weight: bold !important;
+}
+.grid-left {
+	display: flex;
+	background-color: gray;
+	justify-content: center;
+	align-items: center;
+}
+.final-content {
+	white-space: pre-wrap;
+	text-align: center;
+}
+.stepfinal-ps {
+	width: 100%;
+	text-align: center;
+	background-color: lighten(gray, 30%) !important;
+	padding: 0.5rem 0;
+	margin-top: 1rem;
+
+	@include desktop {
+		padding: 1rem 0.5rem;
+		width: 80%;
+	}
+}
+.agree-content {
+	max-height: 4rem;
+	font-size: 0.9rem;
+	overflow: auto;
+	padding: 0.9rem;
+
+	@include desktop {
+		max-height: 7rem;
+	}
+}
+.radio-content {
+	font-size: 0.9rem;
+	width: 100%;
+	margin-top: 0.3rem !important;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row !important;
+}
+.radio-group {
+	flex-direction: row !important;
+	margin-left: 1rem;
+}
+.MuiRadio-root {
+	padding: 4px !important;
+}
