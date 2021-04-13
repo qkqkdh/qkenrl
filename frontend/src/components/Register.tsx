@@ -21,7 +21,6 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import MailImg from '../assets/email.png';
 import "../css/Login.scss";
 
 type Props = {
@@ -136,7 +135,7 @@ function getStepContent(step:number) {
 	case 2:
 		return (
 			<Grid container className="stepfinal-grid">
-				<img src={MailImg} alt="mailimg" className="mail-img" />
+				<img src="/img/email.png" alt="mailimg" className="mail-img" />
 				<Typography className="stepfinal-head">인증 메일이 발송되었습니다.</Typography>
 				{finalContent}
 				<Paper className="stepfinal-ps" elevation={0} square>
