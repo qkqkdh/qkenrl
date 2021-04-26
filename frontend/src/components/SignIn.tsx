@@ -17,12 +17,20 @@ import "../css/Login.scss";
 
 const SignIn: React.FunctionComponent = () => {
 	const [Open, setOpen] = useState(false);
+	const [ropen, setRopen] = useState(false);
 
 	const handleOpen = () => {
 		setOpen(true);
 	};
 	const handleClose = () => {
 		setOpen(false);
+	};
+	const RegisterOpen = () => {
+		handleClose();
+		setRopen(true);
+	};
+	const RegisterClose = () => {
+		setRopen(false);
 	};
 	return (
 		<>
@@ -75,7 +83,7 @@ const SignIn: React.FunctionComponent = () => {
 							</form>
 							<Grid container className="sub-grid">
 								<Grid item>
-									<Register loginClose={handleClose} />
+									<Button onClick={RegisterOpen}>Register</Button>
 								</Grid>
 								<Grid item>|</Grid>
 								<Grid item>
@@ -86,6 +94,7 @@ const SignIn: React.FunctionComponent = () => {
 					</Paper>
 				</Grid>
 			</Modal>
+			<Register ropen={ropen} closeHandler={RegisterClose} />
 		</>
 	);
 };

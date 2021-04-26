@@ -25,7 +25,8 @@ import "../css/Login.scss";
 
 type Props = {
 	// Props 정의
-	loginClose: () => void
+	ropen: boolean
+	closeHandler: () => void
 };
 
 type FormData = {
@@ -76,7 +77,7 @@ function getStepContent(step:number) {
 	switch (step) {
 	case 0:
 		return (
-			<Grid container className="stepzero-grid">
+			<>
 				<Typography className="register-subhead">회원 이용 약관</Typography>
 				<Paper variant="outlined" className="agree-content">{agreeContent}</Paper>
 				<FormControl className="radio-content">
@@ -95,11 +96,11 @@ function getStepContent(step:number) {
 						<FormControlLabel value="disagree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">아니오</Typography>} />
 					</RadioGroup>
 				</FormControl>
-			</Grid>
+			</>
 		);
 	case 1:
 		return (
-			<Grid container className="stepzero-grid">
+			<>
 				<Typography className="register-subhead">정보입력</Typography>
 				<Grid container className="stepfirst-grid">
 					<Grid item xs={2} className="grid-left">이름</Grid>
@@ -121,11 +122,11 @@ function getStepContent(step:number) {
 					<Grid item xs={2} className="grid-left">이메일</Grid>
 					<Grid item xs={10}>input</Grid>
 				</Grid>
-			</Grid>
+			</>
 		);
 	case 2:
 		return (
-			<Grid container className="stepfinal-grid">
+			<>
 				<img src="/img/email.png" alt="mailimg" className="mail-img" />
 				<Typography className="stepfinal-head">인증 메일이 발송되었습니다.</Typography>
 				{finalContent}
@@ -134,104 +135,66 @@ function getStepContent(step:number) {
 					{finalPs}
 					<Button variant="contained">인증 메일 재발송</Button>
 				</Paper>
-			</Grid>
+			</>
 		);
 	default:
 		return 'Unknown step';
 	}
 }
 
-const Register: React.FunctionComponent<Props> = ({ loginClose }) => {
-	const { register, handleSubmit, reset } = useForm(); // form 컨트롤 라이브러리 react-hook-form 사용
-	const [login, setLogin] = useState<boolean>(false); // 로그인 중인지 chk 하는 state
-	const [ropen, setrOpen] = useState<boolean>(false);
+const Register: React.FunctionComponent<Props> = ({ ropen, closeHandler }) => {
 	const [activeStep, setActiveStep] = React.useState(0);
 	const steps = getSteps();
 
-	const Openhandler = () => {
-		// loginClose();
-		setrOpen(true);
-	};
-	const Closehandler = () => {
-		setrOpen(false);
-	};
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	};
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
-
-	const onSubmit = (data: FormData) => {
-		// 폼 버튼 클릭 시 호출
-		setLogin(true);
-		const { id, password, email } = data;
-		axios
-			.post("/api/auth/signup", { id, password, email }) // /api/register API 에 데이터 전달 및 호출, 비밀번호는 암호화 해서 보내야 함  !
-			.then((response) => {
-				if (response.status === 200) {
-					// 요청 성공 시
-					alert("회원가입 성공했습니다.");
-					reset();
-				}
-			})
-			.catch((err) => {
-				// 요청 실패 시.
-				if (err.response) {
-					const { status } = err.response;
-					if (status === 400) {
-						alert("이미 존재하는 아이디가 있습니다.");
-					} else {
-						alert("잠시 후 다시 시도해주세요.");
-					}
-				}
-			});
-		setLogin(false);
-	};
 	return (
 		<>
-			<Button onClick={Openhandler}>Register</Button>
-			<Modal open={ropen} onClose={Closehandler}>
+			<Modal open={ropen} onClose={closeHandler}>
 				<Grid className="register-body">
-					<Paper>
+					<Paper className="register-paper">
 						<Grid className="right-sort">
-							<IconButton className="close-btn" onClick={Closehandler}>
+							<IconButton className="close-btn" onClick={closeHandler}>
 								<CloseIcon fontSize="small" />
 							</IconButton>
 						</Grid>
-						<form onSubmit={handleSubmit(onSubmit)}>
-							<Grid container className="login-container">
-								<Typography className="register-title">회원가입</Typography>
-								<Stepper activeStep={activeStep} alternativeLabel className="stepper">
-									{steps.map((label) => (
-										<Step key={label}>
-											<StepLabel>{label}</StepLabel>
-										</Step>
-									))}
-								</Stepper>
+						<Grid className="register-content">
+							<Typography className="register-title">회원가입</Typography>
+							<Stepper activeStep={activeStep} alternativeLabel className="stepper">
+								{steps.map((label) => (
+									<Step key={label}>
+										<StepLabel>{label}</StepLabel>
+									</Step>
+								))}
+							</Stepper>
+							<Grid className="step-grid">
 								{getStepContent(activeStep)}
-								<Grid container className="register-btngroup" spacing={2}>
-									{activeStep === 0 ? (
-										<Grid item className="register-btn">
-											<Button onClick={Closehandler} variant="outlined" fullWidth>취소</Button>
-										</Grid>
-									) : (
-										<Grid item className="register-btn">
-											<Button onClick={handleBack} variant="outlined" startIcon={<ArrowBackIcon />} fullWidth>이전</Button>
-										</Grid>
-									)}
-									{activeStep === steps.length - 1 ? (
-										<Grid item className="register-btn">
-											<Button onClick={Closehandler} variant="outlined" fullWidth>마침</Button>
-										</Grid>
-									) : (
-										<Grid item className="register-btn">
-											<Button onClick={handleNext} variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>다음</Button>
-										</Grid>
-									)}
-								</Grid>
 							</Grid>
-						</form>
+						</Grid>
+						<Grid container className="register-btngroup" spacing={2}>
+							{activeStep === 0 ? (
+								<Grid item className="register-btn">
+									<Button onClick={closeHandler} variant="outlined" fullWidth>취소</Button>
+								</Grid>
+							) : (
+								<Grid item className="register-btn">
+									<Button onClick={handleBack} variant="outlined" startIcon={<ArrowBackIcon />} fullWidth>이전</Button>
+								</Grid>
+							)}
+							{activeStep === steps.length - 1 ? (
+								<Grid item className="register-btn">
+									<Button onClick={closeHandler} variant="outlined" fullWidth>마침</Button>
+								</Grid>
+							) : (
+								<Grid item className="register-btn">
+									<Button onClick={handleNext} variant="outlined" endIcon={<ArrowForwardIcon />} fullWidth>다음</Button>
+								</Grid>
+							)}
+						</Grid>
 					</Paper>
 				</Grid>
 			</Modal>
