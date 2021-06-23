@@ -4,16 +4,9 @@ import { isLoggedIn } from "../utils/middleware";
 
 const router = Router();
 
-type SearchResult = {
-	address: string;
-	category: string;
-	phone: string;
-	placeName: string;
-	placeUrl: string;
-	x: string;
-	y: string;
-	[key: string]: string;
-}
+const headers = {
+	Authorization: `KakaoAK ${process.env.KAKAO_REST_KEY}`
+};
 
 router.get('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
 	const { keyword } = req.query;
@@ -23,12 +16,25 @@ router.get('/', isLoggedIn, async (req: Request, res: Response, next: NextFuncti
 
 	try {
 		const API_URI = encodeURI(`https://dapi.kakao.com/v2/local/search/keyword.json?query=${keyword}`);
-		const { data } = await axios.get(API_URI, { headers: {
-			Authorization: `KakaoAK bcc31d762710145a6dce5259469d537f`,
-		} });
+		const { data } = await axios.get(API_URI, { headers });
 		res.send(data);
 	} catch (err) {
 		console.log(err); // todo error 처리
+	}
+});
+
+router.get('/address', async (req: Request, res: Response, next: NextFunction) => {
+	const { keyword } = req.query;
+	if (!keyword) {
+		res.status(400).send();
+	}
+
+	try {
+		const API_URI = encodeURI(`https://dapi.kakao.com/v2/local/search/address.json?query=${keyword}`);
+		const { data } = await axios.get(API_URI, { headers });
+		res.send(data);
+	} catch (err) {
+		res.status(err.response.status).send();
 	}
 });
 

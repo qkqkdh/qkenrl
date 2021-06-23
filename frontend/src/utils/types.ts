@@ -1,3 +1,5 @@
+import React from "react"
+
 declare global {
 	interface Window {
 		kakao: {
@@ -13,7 +15,6 @@ declare global {
 		}
 	}
 }
-
 type Map = {
 	getMap: () => {};
 }
@@ -23,12 +24,19 @@ export type MapOptions = {
 	level: number;
 }
 
+
 export type Center = {
 	x: string;
 	y: string;
 }
 
-export type Place = {
+export type Review = {
+	star: number;
+	desc: string;
+}
+
+export type PlaceInfo = {
+	_id: string;
 	writer: string; // todo
 	name: string;
 	category: string;
@@ -40,12 +48,22 @@ export type Place = {
 	};
 	phone: string;
 	timeInfo: any[];
-	reviews: string;
+	reviews: Review[];
+	isMyPlace?: boolean;
 }
 
-export type Marker = {
+export type Place = {
 	marker: {
 		setMap: any;
-	},
-	place: Place,
+	};
+	info: PlaceInfo;
+}
+
+export type childrenObj = {
+	children: React.ReactNode;
+}
+
+export type User = {
+	username: string;
+	email: string;
 }
