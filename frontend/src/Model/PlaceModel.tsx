@@ -8,7 +8,7 @@ const SelectedPlaceDispatch = createContext<Dispatch<number>>(() => { });
 
 export const PlaceContextProvider = ({ children }: childrenObj) => {
 	const [places, setPlaces] = useState<Place[]>([]);
-	const [selected, setSelected] = useState<number>(1);
+	const [selected, setSelected] = useState<number>(0);
 
 	return (
 		<PlaceState.Provider value={places}>
