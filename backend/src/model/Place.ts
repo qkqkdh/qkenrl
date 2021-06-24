@@ -19,7 +19,7 @@ interface IPlace { // Interface for Place
 	};
 	phone: string;
 	desc: string;
-	timeInfo: any[];
+	timeInfo: String;//any[];
 	reviews: Review[];
 }
 
@@ -67,7 +67,8 @@ const placeSchema = new Schema<PlaceDocument, PlaceModel>({
 		required: false,
 	},
 	timeInfo: {
-		type: Schema.Types.Array,
+		type: String,
+		// type: Schema.Types.Array,
 		required: false,
 	},
 	reviews: {
