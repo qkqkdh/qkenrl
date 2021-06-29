@@ -5,7 +5,7 @@ import "../css/Introduction.scss";
 
 const Introduction: React.FunctionComponent = () => (
 	<>
-		<SignIn />
+		<Intro />
 	</>
 );
 
