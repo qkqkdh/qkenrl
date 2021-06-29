@@ -78,64 +78,88 @@ function getStepContent(step:number) {
 	case 0:
 		return (
 			<>
-				<Typography className="register-subhead">회원 이용 약관</Typography>
-				<Paper variant="outlined" className="agree-content">{agreeContent}</Paper>
-				<FormControl className="radio-content">
-					<Typography variant="body2">동의하십니까?</Typography>
-					<RadioGroup value={value} onChange={valueHandle} className="radio-group">
-						<FormControlLabel value="agree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">예</Typography>} />
-						<FormControlLabel value="disagree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">아니오</Typography>} />
-					</RadioGroup>
-				</FormControl>
-				<Typography className="register-subhead">개인정보수집동의에 대한 고지사항</Typography>
-				<Paper variant="outlined" className="agree-content">{agreeContent}</Paper>
-				<FormControl className="radio-content">
-					<Typography variant="body2">동의하십니까?</Typography>
-					<RadioGroup value={value2} onChange={value2Handle} className="radio-group">
-						<FormControlLabel value="agree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">예</Typography>} />
-						<FormControlLabel value="disagree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">아니오</Typography>} />
-					</RadioGroup>
-				</FormControl>
+				<Grid className="agree-grid">
+					<Typography className="register-subhead">회원 이용 약관</Typography>
+					<Paper variant="outlined" className="agree-content">{agreeContent}</Paper>
+					<FormControl className="radio-content">
+						<Typography variant="body2">동의하십니까?</Typography>
+						<RadioGroup value={value} onChange={valueHandle} className="radio-group">
+							<FormControlLabel value="agree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">예</Typography>} />
+							<FormControlLabel value="disagree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">아니오</Typography>} />
+						</RadioGroup>
+					</FormControl>
+				</Grid>
+				<Grid className="agree-grid">
+					<Typography className="register-subhead">개인정보수집동의에 대한 고지사항</Typography>
+					<Paper variant="outlined" className="agree-content">{agreeContent}</Paper>
+					<FormControl className="radio-content">
+						<Typography variant="body2">동의하십니까?</Typography>
+						<RadioGroup value={value2} onChange={value2Handle} className="radio-group">
+							<FormControlLabel value="agree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">예</Typography>} />
+							<FormControlLabel value="disagree" control={<Radio color="default" size="small" />} label={<Typography variant="body2">아니오</Typography>} />
+						</RadioGroup>
+					</FormControl>
+				</Grid>
 			</>
 		);
 	case 1:
 		return (
 			<>
 				<Typography className="register-subhead">정보입력</Typography>
-				<Grid container className="stepfirst-grid">
-					<Grid item xs={2} className="grid-left">이름</Grid>
-					<Grid item xs={10}>input</Grid>
-				</Grid>
-				<Grid container className="stepfirst-grid">
-					<Grid item xs={2} className="grid-left">아이디</Grid>
-					<Grid item xs={10}>input</Grid>
-				</Grid>
-				<Grid container className="stepfirst-grid">
-					<Grid item xs={2} className="grid-left">비밀번호</Grid>
-					<Grid item xs={10}>input</Grid>
-				</Grid>
-				<Grid container className="stepfirst-grid">
-					<Grid item xs={2} className="grid-left">비밀번호 확인</Grid>
-					<Grid item xs={10}>input</Grid>
-				</Grid>
-				<Grid container className="stepfirst-grid">
-					<Grid item xs={2} className="grid-left">이메일</Grid>
-					<Grid item xs={10}>input</Grid>
+				<Grid className="stepfirst-grid-con">
+					<Grid className="stepfirst-grid">
+						<Grid className="grid-left">이름</Grid>
+						<Grid className="grid-right">
+							<TextField variant="outlined" style={{ width: '70%' }} />
+						</Grid>
+					</Grid>
+					<Grid className="stepfirst-grid">
+						<Grid className="grid-left">아이디</Grid>
+						<Grid className="grid-right">
+							<TextField variant="outlined" style={{ width: '70%' }} />
+							<Button
+								variant="contained"
+								style={{ padding: '2px 10px', background: 'green', color: 'white', marginLeft: 10, borderRadius: 30, boxShadow: 'none' }}
+							>
+								중복확인
+							</Button>
+						</Grid>
+					</Grid>
+					<Grid className="stepfirst-grid">
+						<Grid className="grid-left">비밀번호</Grid>
+						<Grid className="grid-right">
+							<TextField variant="outlined" style={{ width: '70%' }} />
+						</Grid>
+					</Grid>
+					<Grid className="stepfirst-grid">
+						<Grid className="grid-left">비밀번호 확인</Grid>
+						<Grid className="grid-right">
+							<TextField variant="outlined" style={{ width: '70%' }} />
+						</Grid>
+					</Grid>
+					<Grid className="stepfirst-grid">
+						<Grid className="grid-left">이메일</Grid>
+						<Grid className="grid-right">
+							<TextField variant="outlined" style={{ width: '70%' }} />
+						</Grid>
+					</Grid>
 				</Grid>
 			</>
 		);
 	case 2:
 		return (
-			<>
-				<img src="/img/email.png" alt="mailimg" className="mail-img" />
-				<Typography className="stepfinal-head">인증 메일이 발송되었습니다.</Typography>
+			<Grid className="stepfinal-grid">
+				<Grid className="stepfinal-head-con">
+					<img src="/img/email.png" alt="mailimg" className="mail-img" />
+					<Typography className="stepfinal-head">인증 메일이 발송되었습니다.</Typography>
+				</Grid>
 				{finalContent}
 				<Paper className="stepfinal-ps" elevation={0} square>
 					<Typography className="register-subhead">유의사항</Typography>
 					{finalPs}
 					<Button variant="contained">인증 메일 재발송</Button>
 				</Paper>
-			</>
+			</Grid>
 		);
 	default:
 		return 'Unknown step';
