@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Grid, Menu, MenuItem } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import { SignIn } from ".";
 
 interface Props { }
 const Header: React.FunctionComponent<Props> = () => {
@@ -43,7 +44,7 @@ const Header: React.FunctionComponent<Props> = () => {
 						<p>
 							<strong>{name}</strong>
 							님, 환영합니다!
-						</p> : <a href="/#">로그인해주세요.</a>
+						</p> : <SignIn />
 				}
 				{
 					/*

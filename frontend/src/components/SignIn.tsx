@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Avatar,
+import {
+	Avatar,
 	Button,
 	TextField,
 	Link,
@@ -7,13 +8,16 @@ import { Avatar,
 	Typography,
 	Modal,
 	IconButton,
+	Paper
 } from "@material-ui/core";
 import PetsIcon from "@material-ui/icons/Pets";
 import CloseIcon from '@material-ui/icons/Close';
+import { Register } from ".";
 import "../css/Login.scss";
 
 const SignIn: React.FunctionComponent = () => {
 	const [Open, setOpen] = useState(false);
+	const [ropen, setRopen] = useState(false);
 
 	const handleOpen = () => {
 		setOpen(true);
@@ -21,82 +25,77 @@ const SignIn: React.FunctionComponent = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
-
-	const getModalStyle = () => {
-		const top = 50;
-		const left = 50;
-		return {
-			top: `${top}%`,
-			left: `${left}%`,
-			transform: `translate(-${top}%, -${left}%)`,
-		};
+	const RegisterOpen = () => {
+		handleClose();
+		setRopen(true);
 	};
-
-	const body = (
-		<div className="login-body" style={getModalStyle()}>
-			<div className="right-sort">
-				<IconButton className="close-btn" onClick={handleClose}>
-					<CloseIcon fontSize="small" />
-				</IconButton>
-			</div>
-			<Grid container className="login-container">
-				<Avatar className="avatar">
-					<PetsIcon fontSize="large" />
-				</Avatar>
-				<Typography className="title">BDCS</Typography>
-				<form className="form" noValidate>
-					<TextField
-						variant="outlined"
-						fullWidth
-						size="small"
-						required
-						className="login-inputs"
-						placeholder="ID"
-						autoFocus
-					/>
-					<TextField
-						variant="outlined"
-						fullWidth
-						size="small"
-						required
-						type="password"
-						className="login-inputs"
-						placeholder="PASSWORD"
-						autoFocus
-					/>
-					<Button
-						type="submit"
-						variant="contained"
-						size="large"
-						fullWidth
-						className="submit"
-					>
-						LOGIN
-					</Button>
-				</form>
-				<Grid container className="register-grid">
-					<Grid item>
-						<Link href="# " className="link">회원가입</Link>
-					</Grid>
-					<Grid item>|</Grid>
-					<Grid item>
-						<Link href="# " className="link">비밀번호 찾기</Link>
-					</Grid>
-				</Grid>
-			</Grid>
-		</div>
-	);
+	const RegisterClose = () => {
+		setRopen(false);
+	};
 	return (
-		<div>
+		<>
 			<Button onClick={handleOpen}>Login</Button>
 			<Modal
 				open={Open}
 				onClose={handleClose}
-				aria-labelledby="login-title"
 			>
-				{body}
+				<Grid className="login-body">
+					<Paper>
+						<Grid className="right-sort">
+							<IconButton className="close-btn" onClick={handleClose}>
+								<CloseIcon fontSize="small" />
+							</IconButton>
+						</Grid>
+						<Grid container className="login-container">
+							<Avatar className="avatar">
+								<PetsIcon fontSize="large" />
+							</Avatar>
+							<Typography className="title">BDCS</Typography>
+							<form className="form" noValidate>
+								<TextField
+									variant="outlined"
+									fullWidth
+									size="small"
+									required
+									className="login-inputs"
+									placeholder="ID"
+									autoFocus
+								/>
+								<TextField
+									variant="outlined"
+									fullWidth
+									size="small"
+									required
+									type="password"
+									className="login-inputs"
+									placeholder="PASSWORD"
+									autoFocus
+								/>
+								<Button
+									type="submit"
+									variant="contained"
+									size="large"
+									fullWidth
+									className="submit"
+								>
+									LOGIN
+								</Button>
+							</form>
+							<Grid container className="sub-grid">
+								<Grid item>
+									<Button onClick={RegisterOpen}>Register</Button>
+								</Grid>
+								<Grid item>|</Grid>
+								<Grid item>
+									<Link href="# " className="link">비밀번호 찾기</Link>
+								</Grid>
+							</Grid>
+						</Grid>
+					</Paper>
+				</Grid>
 			</Modal>
-		</div>
+			<Register ropen={ropen} closeHandler={RegisterClose} />
+		</>
 	);
 };
 

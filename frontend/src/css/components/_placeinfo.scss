@@ -99,6 +99,21 @@
 				}
 			}
 		}
+		.button-group {
+			justify-content: center;
+			margin-right: 0;
+			button {
+				border-radius: 50%;
+				width: 4.5rem;
+				padding: 0.5rem;
+				font-size: 0.5rem;
+				margin-left: 0.6rem;
+				margin-right: 0.6rem;
+				span {
+					white-space: nowrap;
+				}
+			}
+		}
 	}
 	.review-con{
 		padding-top : 1rem;
