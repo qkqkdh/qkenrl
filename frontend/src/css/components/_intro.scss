@@ -1,4 +1,3 @@
-
 .intro-root {
     height:100vh;
 }
@@ -17,8 +16,9 @@
     margin-bottom: 2rem;
     width: 6rem;
     height: 6rem;
-    background-color: #ffffff;
+    background-color: $main-color;
     color: #000;
+    animation: fadeIn 0.8s linear 0s both;
 }
 
 .intro-container {
@@ -35,28 +35,76 @@
 
 .text-area {
     text-align: center;
-    color: #ffffff;
+    color: $main-color;
     .title-area {
         @include font-default(700, 3rem);
         margin-bottom:2rem;
+        animation: fadeIn 0.8s linear 0s both;
     }
     .slogan-area {
         p {
             @include font-default(300, 1.5rem);
             line-height : 2.5rem;
         }
+        animation: fadeIn 0.8s linear 0.8s both;
     }
 }
 
 #btn-go-service {
     margin-top:2rem;
+    border: 3px solid #80CBC4;
     border-radius: 2rem;
-    border-color: #ffffff;
     text-align: center;
-    color: #ffffff;
+    color: $main-color;
     @include font-default(500, 1.3rem);
+    animation: fadeIn 0.8s linear 1.6s both;
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+	cursor: pointer;
+	user-select: none;
+    &:before, &:after {
+        width: 0;
+        height: 100%;
+        border-radius: 2rem;
+        content: '';
+        position: absolute;	
+        transition: inherit;
+        z-index: -1;
+    }
+    &:before {
+        right: 0;
+        border-left: 0;
+        border-right: 0;
+    }
+    &:after {
+        left: 0;
+    }
+    &:hover {
+        color: #000;
+        transition-delay: .5s;
+        &:before {
+            transition-delay: 0s;
+        }
+        &:after {
+            background-color: $main-color;
+            transition-delay: .35s;
+        }
+        &:before, &:after {
+            width: 100%;
+        }
+    }
 }
 
 #btn-link:hover {
     text-decoration: none;
+}
+
+/* animation */
+@keyframes fadeIn {
+    from {
+        opacity : 0;
+    }
+    to {
+        transform: translateY(-0.5rem);
+        opacity : 1;
+    }
 }

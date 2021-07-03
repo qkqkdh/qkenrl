@@ -13,7 +13,7 @@ const Intro: React.FunctionComponent = () => {
 	return (
 		<Grid className="intro-root">
 			<div className="back-ground">
-				<img src="https://images.unsplash.com/photo-1534161308652-fdfcf10f62c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2174&q=80" alt="background" />
+				<img src="https://user-images.githubusercontent.com/42960217/113842158-5d0aa280-97cd-11eb-9494-e2d064f3602b.png" alt="background" />
 			</div>
 			<Grid className="intro-container">
 				<Avatar id="logo">
