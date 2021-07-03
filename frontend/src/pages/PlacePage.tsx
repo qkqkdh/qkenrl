@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Map from '../components/Map';
 
-import { Center, Marker, Place } from '../utils/types';
+import { Center, Place, PlaceInfo } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
 import { Layout, SearchBar, SearchContent, SideBar } from '../components';
+import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
 
 type Props = {
 
@@ -16,7 +17,8 @@ const Main: React.FunctionComponent = (props) => {
 	const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
 	const [map, setMap] = useState<any>(null); // state for map
 	const [center, setCenter] = useState<Center | null>(null); // state for center loc
-	const [markers, setMarkers] = useState<Marker[]>([]); // state for search result
+	const places = usePlaceState();
+	const setPlaces = usePlaceDispatch();
 	const [selected, setSelected] = useState<number>(-1);
 	const cancelToken = useRef(axios.CancelToken.source());
 
@@ -37,6 +39,7 @@ const Main: React.FunctionComponent = (props) => {
 				y: La,
 			});
 		};
+		// 화면 움직일 시 center 값 초기화, 이전 API 호출들 취소 // TODO lodash
 		const handleMapClick = () => {
 			setSelected(-1);
 		};
@@ -61,8 +64,9 @@ const Main: React.FunctionComponent = (props) => {
 		})
 			.then((result) => {
 				const { data } = result;
-				const _ = data.map((place: Place) => createMarker(place));
-				setMarkers(_);
+				const _ = data.map((place: PlaceInfo) => createMarker(place));
+				console.log(_);
+				setPlaces(_);
 			})
 			.catch((err) => {
 				if (axios.isCancel(err)) {
@@ -75,18 +79,18 @@ const Main: React.FunctionComponent = (props) => {
 
 	useEffect(() => {
 		// TODO: 기존 마커들 초기화
-		if (!map || !markers.length) return;
-		console.log(markers);
-		markers.forEach((marker, idx) => {
-			marker.marker.setMap(map);
-			kakao.maps.event.addListener(marker.marker, 'click', () => {
+		if (!map || !places.length) return;
+		console.log(places);
+		places.forEach((place, idx) => {
+			place.marker.setMap(map);
+			kakao.maps.event.addListener(place.marker, 'click', () => {
 				setSelected(idx);
 			});
 		});
-	}, [map, markers]);
+	}, [map, places]);
 
-	const handleSearchResult = (places: Place[]) => {
-		setMarkers(places.map((place) => createMarker(place)));
+	const handleSearchResult = (places: PlaceInfo[]) => {
+		setPlaces(places.map((place) => createMarker(place)));
 	};
 
 	const handleSideBarOpen = () => {

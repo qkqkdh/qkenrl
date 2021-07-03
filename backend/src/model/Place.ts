@@ -2,6 +2,7 @@ import { Schema, model, Document, Model, Query } from "mongoose";
 import { UserDocument } from "./User";
 
 interface Review {
+	writer: UserDocument["_id"];
 	star: number;
 	desc: string;
 }

@@ -6,7 +6,9 @@ import jwtStrategy from './jwt';
 
 declare global {
 	namespace Express {
-		interface User extends IUser {}
+		interface User extends IUser {
+			id: any;
+		}
 	}
 }
 

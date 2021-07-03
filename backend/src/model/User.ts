@@ -1,10 +1,12 @@
 import { Schema, model, Document, Model, Query } from "mongoose";
+import { PlaceDocument } from "./Place";
 
 export interface IUser {
 	username: string;
 	password: string;
 	email: string;
 	status: string; // To authentication status (default: "pending")
+	places: PlaceDocument["_id"][];
 }
 
 export interface UserDocument extends IUser, Document {
@@ -29,7 +31,7 @@ const userSchema = new Schema({
 	status: {
 		type: String,
 		default: "pending"
-	}
+	},
 });
 
 // MODEL : Responsible for CRUD

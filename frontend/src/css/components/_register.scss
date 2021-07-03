@@ -1,0 +1,133 @@
+.register-body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	width: 50vw;
+	height: 90vh;
+	margin:5vh auto;
+
+	.register-paper{
+		width:100%;
+		height:100%;
+		padding: 1rem 3rem 2rem 3rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.register-title{
+		font-size: 1.5rem;
+		color: black;
+		font-weight: 700;
+		text-align: center;
+	}
+	.register-content{
+		height:100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+	.register-btngroup{
+		justify-content: center;
+		padding-top: 1rem;
+	}
+	.register-btn{
+		width: 6rem;
+	}
+}
+.stepper{
+	width: 100%;
+	padding: 0.5rem 0;
+}
+.step-grid{
+	justify-content: flex-start;
+	height: 50vh;
+	width: 100%;
+}
+.agree-grid {
+	height: 50%;
+	.agree-content {
+		max-height: 60%;
+		font-size: 0.9rem;
+		overflow: auto;
+		padding: 0.9rem;
+	
+	}
+}
+.stepfirst-grid-con{
+	height: 95%;
+	.stepfirst-grid {
+		height: 20%;
+		display:flex;
+		flex-direction: row;
+	}
+
+	.grid-left {
+		min-width: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: gray;
+	}
+	.grid-right {
+		width: 70%;
+		display: flex;
+		align-items: center;
+		margin-left: 5px;
+
+		.MuiOutlinedInput-input{
+			padding: 5px !important;
+		}
+	}
+}
+.stepfinal-grid {
+	.stepfinal-head-con {
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+	}
+	.stepfinal-head {
+		font-size: 1.1rem;
+		font-weight: 550;
+		margin-bottom: 1rem;
+	}
+	.mail-img {
+		margin-bottom: 1rem;
+		box-shadow: 5px 5px 5px #D9D9D9;
+	}
+}
+
+.stepzero-grid::-webkit-scrollbar, .stepfirst-grid::-webkit-scrollbar, .stepfinal-grid::-webkit-scrollbar { display:none; }
+
+.register-subhead {
+	font-weight: bold !important;
+	margin-bottom: 5px !important;
+}
+.final-content {
+	white-space: pre-wrap;
+	text-align: center;
+}
+.stepfinal-ps {
+	width: 100%;
+	text-align: center;
+	background-color: lighten(gray, 30%) !important;
+	padding: 0.5rem 0;
+	margin-top: 1rem;
+
+}
+.radio-content {
+	font-size: 0.9rem;
+	width: 100%;
+	margin-top: 0.3rem !important;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: row !important;
+}
+.radio-group {
+	flex-direction: row !important;
+	margin-left: 1rem;
+}
+.MuiRadio-root {
+	padding: 4px !important;
+}

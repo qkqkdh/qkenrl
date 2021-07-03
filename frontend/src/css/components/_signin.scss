@@ -1,24 +1,16 @@
 .login-body{
-	position: absolute;
-	width: 100%;
-	background-color: #ffffff !important;
-	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 80vw;
+	margin:17vh auto;
 
-	.right-sort{
-		display: flex;
-		justify-content: flex-end;
-
-		.close-btn{
-			color: #000 !important;
-			background-color: rgb(202, 202, 202) !important;
-			width: 1rem;
-			height: 1rem;
-			margin: 1rem 1rem 0 1rem;
-		}
+	&>div{
+		width: 100%;
+		height: 100%;
 	}
 
 	.login-container{
-		padding: 0 5% 5% 5%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -38,15 +30,34 @@
 			font-weight: 700;
 		}
 	}
+	@include desktop {
+		width: 50%;
+	}
 }
+.right-sort{
+	display: flex;
+	justify-content: flex-end;
+
+	.close-btn{
+		color: #000 !important;
+		background-color: rgb(202, 202, 202) !important;
+		width: 1rem;
+		height: 1rem;
+		margin: 1rem 1rem 0 1rem;
+	}
+}
+
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
 	border: solid 1px black !important;
+}
+.MuiButton-outlined {
+	padding: 5px !important;
 }
 .form {
     width: 70%;
     margin: 1rem;
 	
-	.login-inputs{
+	.login-inputs {
 		margin: 0.5rem 0;
 		border-radius: 0.5rem;
 		box-shadow: 1px 1px 2px gray;
@@ -58,9 +69,12 @@
 		border-radius: 0.5rem;
 		font-size: 0.8rem;
 	}
+	@include desktop {
+		width: 40%;
+	}
 }
-.register-grid{
-	margin: 1rem 0;
+.sub-grid{
+	margin: 0 0 2rem 0;
 	justify-content: center;
 
 	.link{
@@ -74,12 +88,6 @@
 		}
 	}
 }
-
-@media (min-width:769px){ // desktop
-	.login-body{
-		width: 50%;
-	}
-	.form{
-		width: 40%;
-	}
+.MuiButton-text {
+	padding: 0 8px !important;
 }

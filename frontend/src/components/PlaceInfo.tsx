@@ -9,14 +9,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { PlaceType } from "../Type";
+import { Place } from "../utils/types";
 import { ReviewModal, ModifyModal } from ".";
 import { useUpdatePlace } from '../ViewModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
 	size: SizeMap[number];
-	place: PlaceType;
+	place: Place;
 }
 
 const PlaceInfo = ({ size, place }: PlaceProps) => {
@@ -36,11 +36,13 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 
 	const handleReviewClose = () => setReviewOpen(false);
 	const handleModifyClose = () => setModifyOpen(false);
-
+	const handleClickMyPlace = () => {};
+	/*
 	const switchMyPlace = () => {
-		place.isMyPlace = !place.isMyPlace;
+		place.info.isMyPlace = !place.info.isMyPlace;
 		updatePlace(place);
 	};
+	*/
 
 	const moreReview = () => setReviewNumber(reviewNumber + 2); // 2개씩 더 보여주기
 
@@ -57,16 +59,16 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 					</Grid>
 					<Grid className="place-header">
 						<Grid>
-							<h4>{place.name}</h4>
-							<h6>{place.type}</h6>
+							<h4>{place.info.name}</h4>
+							<h6>{place.info.category}</h6>
 						</Grid>
 						{
-							place.isMyPlace ?
+							place.info.isMyPlace ?
 								<FavoriteIcon
-									onClick={switchMyPlace}
+									onClick={handleClickMyPlace}
 								/> :
 								<FavoriteBorderIcon
-									onClick={switchMyPlace}
+									onClick={handleClickMyPlace}
 								/>
 						}
 					</Grid>
@@ -79,7 +81,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 							<div>
 								<StarIcon />
 								<p>
-									{place.star}
+									{place.info.reviews.length ? place.info.reviews.map((review) => review.star).reduce((acc, cur) => acc + cur) / place.info.reviews.length : 0}
 									/5
 								</p>
 							</div>
@@ -134,24 +136,23 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 							}
 							<div>
 								<strong>주소</strong>
-								<p>{place.location}</p>
+								<p>{place.info.roadLocation}</p>
 							</div>
 							<div className="lot-number">
 								<strong>지번</strong>
-								<p>{place.lotNumber}</p>
+								<p>{place.info.location}</p>
 							</div>
 						</Grid>
 						<Grid className="time-call">
 							<div>
 								<strong>영업시간</strong>
 								<div>
-									<p>{place.time}</p>
-									<p>{place.time}</p>
+									{place.info.timeInfo.map((info) => <p>{info}</p>)}
 								</div>
 							</div>
 							<div>
 								<strong>전화</strong>
-								<p>{place.phone}</p>
+								<p>{place.info.phone}</p>
 							</div>
 						</Grid>
 					</Grid>
@@ -162,7 +163,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 								<p>방문자 한줄평</p>
 							</Grid>
 							{
-								place.review.map((review, index) => {
+								place.info.reviews.map((review, index) => {
 									if (index >= reviewNumber) {
 										return null;
 									}
@@ -172,13 +173,13 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 									return (
 										<Grid className="review-card">
 											<Grid>{starString}</Grid>
-											<Grid>{review.contents}</Grid>
+											<Grid>{review.desc}</Grid>
 										</Grid>
 									);
 								})
 							}
 							{
-								place.review.length > reviewNumber &&
+								place.info.reviews.length > reviewNumber &&
 								<Button onClick={moreReview}>더보기</Button>
 							}
 						</Grid>

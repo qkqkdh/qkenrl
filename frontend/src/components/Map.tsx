@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { InitializeMap, createMarker } from "../utils/f";
-import { Center, Marker, Place } from "../utils/types";
+import { Center, Place } from "../utils/types";
 
 // Map 코드 작성
 type Props = {
