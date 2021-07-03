@@ -1,34 +1,27 @@
 import React, { createContext, useContext } from 'react';
-import { PlaceType, childrenObj } from './Type';
+import { Place, childrenObj } from './utils/types';
 import { usePlaceState, usePlaceDispatch } from './Model/PlaceModel';
 
-const updatePlaceContext = createContext<(place: PlaceType) => void>(() => { });
+const updatePlaceContext = createContext<(place: Place) => void>(() => { });
 
 export const PlaceLogicProvider = ({ children }: childrenObj) => {
 	const setPlaces = usePlaceDispatch();
 	const places = usePlaceState();
 
-	const updatePlace = (place: PlaceType) => {
+	const updatePlace = (place: Place) => {
 		if (!places) {
 			return;
 		}
 
 		// id에 해당하는 idx 추출
-		let idx = -1;
-		places.forEach((p, index) => {
-			if (p.id !== place.id) {
-				return;
-			}
-			idx = index;
-		});
-
+		const idx = places.findIndex((p) => p.info._id === place.info._id);
 		// place가 없으면 그냥 return
 		if (idx === -1) {
 			return;
 		}
 
 		// 바꾸기
-		const tmpPlace: Array<PlaceType> = places.slice(0);
+		const tmpPlace: Array<Place> = places.slice(0);
 		tmpPlace[idx] = place;
 		setPlaces(tmpPlace);
 	};

@@ -1,2 +1,3 @@
 MONGO_URI : 몽고DB URI
 JWT_SECRET : secret key
+KAKAO_REST_KEY : 카카오 REST API KEY 

@@ -53,7 +53,7 @@ class App {
 	}
 
 	private route() {
-		this.app.use("/api", api);
+		this.app.use("/", api);
 	}
 }
 

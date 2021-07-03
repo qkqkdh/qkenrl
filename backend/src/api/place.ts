@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { Response, Request, NextFunction, Router } from "express";
 import PlaceModel from '../model/Place';
+import User from "../model/User";
 import { isLoggedIn } from '../utils/middleware';
 
 const router = Router();
@@ -56,8 +57,27 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 	}
 });
 
-router.get('/my', isLoggedIn, (req: Request, res: Response, next: NextFunction) => {
-	res.send('TODO: AUTHENTICATION');
+router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 추가
+	const { placeId } = req.body;
+	try {
+		const user = User.findOne({ username: req.user && req.user.username });
+		const place = await PlaceModel.findOne({_id: placeId});
+		if (!place) {
+			res.status(400).send();
+		} else {
+			user.places.push(place.id);
+		}
+	} catch (err) {
+		console.log("TODO ERROR RESPONSE");
+	}
+});
+
+router.get('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 가져오기
+	try {
+		//TODO 
+	} catch (err) {
+		console.log("TODO ERROR RESPONSE");
+	}
 });
 
 router.post('/review', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {
@@ -69,6 +89,7 @@ router.post('/review', isLoggedIn, async (req: Request, res: Response, next: Nex
 			res.status(404).send();
 		}
 		place.reviews.push({
+		//	writer: req.user,
 			star,
 			desc,
 		});
