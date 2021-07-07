@@ -61,7 +61,7 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 	const { placeId } = req.body;
 	try {
 		const user = User.findOne({ username: req.user && req.user.username });
-		const place = await PlaceModel.findOne({_id: placeId});
+		const place = await PlaceModel.findOne({ _id: placeId });
 		if (!place) {
 			res.status(400).send();
 		} else {
@@ -74,7 +74,7 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 
 router.get('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 가져오기
 	try {
-		//TODO 
+		// TODO
 	} catch (err) {
 		console.log("TODO ERROR RESPONSE");
 	}

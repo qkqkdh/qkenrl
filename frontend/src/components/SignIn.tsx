@@ -34,7 +34,7 @@ const SignIn: React.FunctionComponent = () => {
 	};
 	return (
 		<>
-			<Button onClick={handleOpen}>Login</Button>
+			<Button onClick={handleOpen} className="login-btn">Login</Button>
 			<Modal
 				open={Open}
 				onClose={handleClose}

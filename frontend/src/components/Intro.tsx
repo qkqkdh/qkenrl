@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Link, Button, Avatar } from '@material-ui/core';
 import PetsIcon from "@material-ui/icons/Pets";
+import { PlaceSuggestModal } from '.';
 
 const Intro: React.FunctionComponent = () => {
 	const title = "BDCS";
@@ -11,27 +12,30 @@ const Intro: React.FunctionComponent = () => {
 		</>
 	);
 	return (
-		<Grid className="intro-root">
-			<div className="back-ground">
-				<img src="https://user-images.githubusercontent.com/42960217/113842158-5d0aa280-97cd-11eb-9494-e2d064f3602b.png" alt="background" />
-			</div>
-			<Grid className="intro-container">
-				<Avatar id="logo">
-					<PetsIcon fontSize="large" />
-				</Avatar>
-				<Grid className="text-area">
-					<Grid className="title-area">
-						{title}
+		<>
+			<Grid className="intro-root">
+				<div className="back-ground">
+					<img src="https://user-images.githubusercontent.com/42960217/113842158-5d0aa280-97cd-11eb-9494-e2d064f3602b.png" alt="background" />
+				</div>
+				<Grid className="intro-container">
+					<Avatar id="logo">
+						<PetsIcon fontSize="large" />
+					</Avatar>
+					<Grid className="text-area">
+						<Grid className="title-area">
+							{title}
+						</Grid>
+						<Grid className="slogan-area">
+							{slogan()}
+						</Grid>
 					</Grid>
-					<Grid className="slogan-area">
-						{slogan()}
-					</Grid>
+					<Link id="btn-link" href="/place">
+						<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
+					</Link>
 				</Grid>
-				<Link id="btn-link" href="/place">
-					<Button id="btn-go-service" variant="outlined">서비스 이용하러 가기→</Button>
-				</Link>
 			</Grid>
-		</Grid>
+			<PlaceSuggestModal open={true} handleClose={() => null} />
+		</>
 	);
 };
 

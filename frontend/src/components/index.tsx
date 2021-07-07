@@ -12,3 +12,4 @@ export { default as SideBar } from "./SideBar";
 export { default as ReviewModal } from "./ReviewModal";
 export { default as ModifyModal } from "./ModifyModal";
 export { default as Star } from "./Star";
+export { default as PlaceSuggestModal } from './PlaceSuggestModal';
