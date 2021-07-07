@@ -29,7 +29,7 @@ const Header: React.FunctionComponent<Props> = () => {
 			</Grid>
 			<Grid className="nav-con">
 				<div>
-					<Link to="/main">지도</Link>
+					<Link to="/place">지도</Link>
 				</div>
 				<div>
 					<Link to="/search">기능 1</Link>

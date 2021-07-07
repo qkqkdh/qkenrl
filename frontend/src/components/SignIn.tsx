@@ -83,7 +83,7 @@ const SignIn: React.FunctionComponent = () => {
 							</form>
 							<Grid container className="sub-grid">
 								<Grid item>
-									<Button onClick={RegisterOpen}>Register</Button>
+									<Button onClick={RegisterOpen} style={{ fontWeight: 400 }}>Register</Button>
 								</Grid>
 								<Grid item>|</Grid>
 								<Grid item>
