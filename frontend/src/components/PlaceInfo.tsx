@@ -131,7 +131,7 @@ const PlaceInfo = ({ size, place, index }: PlaceProps) => {
 									<div>
 										<strong>정보</strong>
 										<p>
-											<strong>{place.setMember}</strong>
+											<strong>{place.info.writer}</strong>
 											님께서 등록하신 장소입니다.
 										</p>
 										<Button onClick={() => setModifyOpen(true)}>
