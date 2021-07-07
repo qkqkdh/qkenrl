@@ -53,7 +53,7 @@ const PlaceFilter: React.FunctionComponent<FilterProps> = ({ category, active, s
 const PlaceFilterList: React.FunctionComponent<Props> = () => {
 	const [tag, setTag] = useState<string>("전체");
 	useEffect(() => {
-		console.log("현재 태그 : ".concat(tag)); // eslint에서 왜 +로 concat 못해유 ㅠㅠㅠ
+		console.log(`현재 태그 : ${tag}`);
 	}, [tag]);
 	return (
 		<Grid className="place-filter-container">
