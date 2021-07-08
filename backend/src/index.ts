@@ -7,6 +7,7 @@ import passport from 'passport';
 import passportConfig from './utils/passport';
 import api from "./api";
 import { API_PORT } from "./utils/constants";
+import getInfo from './utils/crawling/crawling';
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
@@ -19,6 +20,7 @@ class App {
 		this.config();
 		this.middleware();
 		this.route();
+		// getInfo(); //=> 처음 DB 데이터 불러올 때 사용
 	}
 
 	private config() {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Grid, Paper } from '@material-ui/core';
 
@@ -24,24 +24,19 @@ interface Props {
 const SearchContent: React.FunctionComponent<Props> = ({ result }) => {
 	const places = usePlaceState();
 	const selected = useSelectedPlaceState();
-	// result => places model로 대체하면 안될까요?-? (희은)
+
+	useEffect(() => {
+		const searchCon = document.getElementsByClassName('search-con')[0];
+		searchCon.scrollTo(0, 450 * selected);
+	}, [selected]);
 
 	return (
 		<Paper elevation={4} className="search-con">
 			{
-				places && selected !== -1 &&
-				<PlaceInfo size="lg" place={places[selected]} />
-			}
-			{
 				places &&
-				places.map((place, index) => {
-					if (index === selected) {
-						return null;
-					}
-					return (
-						<PlaceInfo key={place.info._id} size="sm" place={place} />
-					);
-				})
+				places.map((place, index) => (
+					<PlaceInfo key={place.info._id} size={index === selected ? "lg" : "sm"} place={place} index={index} />
+				))
 			}
 		</Paper>
 	);
