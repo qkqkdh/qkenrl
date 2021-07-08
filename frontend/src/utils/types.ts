@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 declare global {
 	interface Window {
@@ -23,7 +23,6 @@ export type MapOptions = {
 	center: any;
 	level: number;
 }
-
 
 export type Center = {
 	x: string;

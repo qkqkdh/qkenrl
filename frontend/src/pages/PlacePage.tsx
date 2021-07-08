@@ -5,7 +5,7 @@ import Map from '../components/Map';
 
 import { Center, Place, PlaceInfo } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
-import { Layout, SearchBar, SearchContent, SideBar } from '../components';
+import { Layout, PlaceFilterList, SearchBar, SearchContent, SideBar } from '../components';
 import { usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
 
 type Props = {
@@ -115,6 +115,7 @@ const Main: React.FunctionComponent = (props) => {
 		<>
 			<Layout open={sideBarOpen} handleSideBarClose={handleSideBarClose}>
 				<Map />
+				<PlaceFilterList />
 				<div className="place-side-bar">
 					<SearchBar
 						handleSearchResult={handleSearchResult}
