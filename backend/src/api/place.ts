@@ -60,7 +60,14 @@ router.get('/category', async (req: Request, res: Response, next: NextFunction) 
 	if (!x || !y || !category) {
 		res.status(400).send();
 	}
-	const reg = category==="전체"?".":`\\${category}\+`;
+
+	let reg = `\\${category}\+`;
+	if(category === "전체"){
+		reg = ".";
+	}else if(category === "식당"){
+		reg = `\\${"음식점"}\+`;
+	}
+
 	const places = await PlaceModel.find({
 		geo: {
 			$geoWithin: {

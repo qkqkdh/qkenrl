@@ -1,4 +1,5 @@
 import { MapOptions, Place, PlaceInfo } from "./types";
+import { usePlaceState } from "../Model/PlaceModel";
 
 const { kakao } = window;
 const INIT__LAT = '37.5952687';
@@ -54,4 +55,10 @@ export const debounce = (func: Function, wait: number) => {
 
 		timeout = setTimeout(later, wait);
 	};
+};
+
+export const clearMarker = (places : Place[]) => {
+	places.forEach((place : Place) => {
+		place.marker.setMap(null);
+	});
 };

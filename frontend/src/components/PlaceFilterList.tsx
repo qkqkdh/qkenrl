@@ -3,8 +3,8 @@ import { Grid, Button } from "@material-ui/core";
 import { LocalCafe, Restaurant, Apartment, School, LocalHospital, LocalFlorist } from "@material-ui/icons";
 import axios from 'axios';
 import { Center, PlaceInfo } from '../utils/types';
-import { createMarker } from '../utils/f';
-import { usePlaceDispatch } from '../Model/PlaceModel';
+import { clearMarker, createMarker } from '../utils/f';
+import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
 
 type Props = {
 	center : Center
@@ -56,17 +56,19 @@ const PlaceFilter: React.FunctionComponent<FilterProps> = ({ category, active, s
 };
 
 const PlaceFilterList: React.FunctionComponent<Props> = ({ center }) => {
+	const places = usePlaceState();
 	const setPlaces = usePlaceDispatch();
+
 	const [tag, setTag] = useState<string>("전체");
 	const fetchPlace = async () => {
 		const result = await axios.get(`http://localhost:3001/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
 		const { data } = result;
 		const _ = data.map((place: PlaceInfo) => createMarker(place));
-		console.log(_);
 		setPlaces(_);
 	};
 	useEffect(() => {
 		console.log(`현재 태그 : ${tag}`);
+		clearMarker(places);
 		fetchPlace();
 	}, [tag]);
 	return (

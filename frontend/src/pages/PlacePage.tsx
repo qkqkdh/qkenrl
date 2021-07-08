@@ -4,7 +4,7 @@ import axios from 'axios';
 import Map from '../components/Map';
 
 import { Center, Place, PlaceInfo } from '../utils/types';
-import { createMarker, InitializeMap, debounce } from '../utils/f';
+import { createMarker, InitializeMap, debounce, clearMarker } from '../utils/f';
 import { Layout, PlaceFilterList, SearchBar, SearchContent, SideBar } from '../components';
 import { usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
 
@@ -61,36 +61,8 @@ const Main: React.FunctionComponent = (props) => {
 		};
 	}, [map]);
 
-	/** 희은 : map을 움직였을 때 주변 place 받아오기 없앰(회의 결과) */
-	// useEffect(() => {
-	// 	/*
-	// 		1. center 변경시  handleCenterChange 호출
-	// 		2. API 호출해서 주변 place들 가져옴
-	// 		3. Map에 marker 셋팅
-	// 	*/
-	// 	if (!center) return;
-	// 	axios.get(`http://localhost:3001/place?x=${center.x}&y=${center.y}`, {
-	// 		cancelToken: cancelToken.current.token
-	// 	})
-	// 		.then((result) => {
-	// 			const { data } = result;
-	// 			const _ = data.map((place: PlaceInfo) => createMarker(place));
-	// 			console.log(_);
-	// 			setPlaces(_);
-	// 		})
-	// 		.catch((err) => {
-	// 			if (axios.isCancel(err)) {
-	// 				console.log('요청 취소');
-	// 			} else {
-	// 				console.log(err);
-	// 			}
-	// 		});
-	// }, [center]);
-
 	useEffect(() => {
-		// TODO: 기존 마커들 초기화
 		if (!map || !places.length) return;
-		console.log(places);
 		places.forEach((place, idx) => {
 			place.marker.setMap(map);
 			kakao.maps.event.addListener(place.marker, 'click', () => {
