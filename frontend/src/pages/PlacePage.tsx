@@ -4,7 +4,7 @@ import axios from 'axios';
 import Map from '../components/Map';
 
 import { Center, Place, PlaceInfo } from '../utils/types';
-import { createMarker, InitializeMap } from '../utils/f';
+import { createMarker, InitializeMap, debounce } from '../utils/f';
 import { Layout, PlaceFilterList, SearchBar, SearchContent, SideBar } from '../components';
 import { usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
 
@@ -39,8 +39,8 @@ const Main: React.FunctionComponent = (props) => {
 		if (!map) return;
 		const handleCenterChange = () => {
 			const { Ma, La } = map.getCenter();
-			cancelToken.current.cancel('이전 요청 취소');
 			console.log(Ma, La);
+			cancelToken.current.cancel('이전 요청 취소');
 			cancelToken.current = axios.CancelToken.source(); // update
 			setCenter({
 				x: Ma,
@@ -51,7 +51,7 @@ const Main: React.FunctionComponent = (props) => {
 		const handleMapClick = () => {
 			setSelected(-1);
 		};
-		kakao.maps.event.addListener(map, 'center_changed', handleCenterChange);
+		kakao.maps.event.addListener(map, 'center_changed', debounce(handleCenterChange, 500)); // center가 바뀐 후 0.5초 내에 또 바뀌면 이전 요청 취소
 		kakao.maps.event.addListener(map, 'click', handleMapClick);
 		handleCenterChange();
 		// eslint-disable-next-line consistent-return
@@ -115,7 +115,10 @@ const Main: React.FunctionComponent = (props) => {
 		<>
 			<Layout open={sideBarOpen} handleSideBarClose={handleSideBarClose}>
 				<Map />
-				<PlaceFilterList />
+				{
+					center &&
+					<PlaceFilterList center={center} />
+				}
 				<div className="place-side-bar">
 					<SearchBar
 						handleSearchResult={handleSearchResult}

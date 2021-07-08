@@ -43,3 +43,15 @@ export const createMarker = (place: PlaceInfo) => {
 		info: place,
 	};
 };
+
+export const debounce = (func: Function, wait: number) => {
+	let timeout: ReturnType<typeof setTimeout>;
+	return (args?: any) => {
+		const later = () => {
+			func(args);
+		};
+		clearTimeout(timeout);
+
+		timeout = setTimeout(later, wait);
+	};
+};

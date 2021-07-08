@@ -33,8 +33,6 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 });
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
-	// TODO : x,y 좌표 기준으로 주변값들 가져오기
-	//
 	const { x, y, keyword } = req.query;
 	if (!x && !y && !keyword) {
 		res.status(400).send();
@@ -54,6 +52,25 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 		const places = await PlaceModel.find({ name: { $regex: new RegExp(keyword as string), $options: 'i' } });
 		res.status(200).json(places);
 	}
+});
+
+router.get('/category', async (req: Request, res: Response, next: NextFunction) => {
+	// x, y 좌표 기준 현재 카테고리 별 검색
+	const { x, y, category } = req.query;
+	if (!x || !y || !category) {
+		res.status(400).send();
+	}
+	const reg = category==="전체"?".":`\\${category}\+`;
+	const places = await PlaceModel.find({
+		geo: {
+			$geoWithin: {
+				$centerSphere: [[y, x], 5 / 6378.1] // TODO : 5가 아니라 현재 보고 있는 zoom 반영
+			}
+		},
+		category : { $regex: reg , $options : 'i'}
+	});
+	
+	res.status(200).json(places);
 });
 
 router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 추가
