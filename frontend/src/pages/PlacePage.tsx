@@ -6,7 +6,7 @@ import Map from '../components/Map';
 import { Center, Place, PlaceInfo } from '../utils/types';
 import { createMarker, InitializeMap } from '../utils/f';
 import { Layout, SearchBar, SearchContent, SideBar } from '../components';
-import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
+import { usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
 
 type Props = {
 
@@ -19,13 +19,21 @@ const Main: React.FunctionComponent = (props) => {
 	const [center, setCenter] = useState<Center | null>(null); // state for center loc
 	const places = usePlaceState();
 	const setPlaces = usePlaceDispatch();
-	const [selected, setSelected] = useState<number>(-1);
+	const selected = useSelectedPlaceState();
+	const setSelected = useSelectedPlaceDispatch();
 	const cancelToken = useRef(axios.CancelToken.source());
 
 	useEffect(() => {
 		if (!document || !kakao) return;
 		setMap(InitializeMap());
 	}, []);
+
+	useEffect(() => {
+		// 선택된 마커가 바뀌면 map을 해당 위치로 변환
+		if (!map || !places || !places[selected] || !places[selected].info) return;
+		console.log(places[selected]);
+		map.setCenter(new kakao.maps.LatLng(places[selected].info.geo.coordinates[1], places[selected].info.geo.coordinates[0]));
+	}, [selected]);
 
 	useEffect(() => { // ADD EVENT HANDLER
 		if (!map) return;
@@ -52,30 +60,32 @@ const Main: React.FunctionComponent = (props) => {
 			kakao.maps.event.removeListener(map, 'click', handleMapClick);
 		};
 	}, [map]);
-	useEffect(() => {
-		/*
-			1. center 변경시  handleCenterChange 호출
-			2. API 호출해서 주변 place들 가져옴
-			3. Map에 marker 셋팅
-		*/
-		if (!center) return;
-		axios.get(`http://localhost:3001/place?x=${center.x}&y=${center.y}`, {
-			cancelToken: cancelToken.current.token
-		})
-			.then((result) => {
-				const { data } = result;
-				const _ = data.map((place: PlaceInfo) => createMarker(place));
-				console.log(_);
-				setPlaces(_);
-			})
-			.catch((err) => {
-				if (axios.isCancel(err)) {
-					console.log('요청 취소');
-				} else {
-					console.log(err);
-				}
-			});
-	}, [center]);
+
+	/** 희은 : map을 움직였을 때 주변 place 받아오기 없앰(회의 결과) */
+	// useEffect(() => {
+	// 	/*
+	// 		1. center 변경시  handleCenterChange 호출
+	// 		2. API 호출해서 주변 place들 가져옴
+	// 		3. Map에 marker 셋팅
+	// 	*/
+	// 	if (!center) return;
+	// 	axios.get(`http://localhost:3001/place?x=${center.x}&y=${center.y}`, {
+	// 		cancelToken: cancelToken.current.token
+	// 	})
+	// 		.then((result) => {
+	// 			const { data } = result;
+	// 			const _ = data.map((place: PlaceInfo) => createMarker(place));
+	// 			console.log(_);
+	// 			setPlaces(_);
+	// 		})
+	// 		.catch((err) => {
+	// 			if (axios.isCancel(err)) {
+	// 				console.log('요청 취소');
+	// 			} else {
+	// 				console.log(err);
+	// 			}
+	// 		});
+	// }, [center]);
 
 	useEffect(() => {
 		// TODO: 기존 마커들 초기화
