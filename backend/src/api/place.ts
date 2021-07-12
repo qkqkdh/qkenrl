@@ -10,7 +10,6 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 	const { writer, name, category, location, x, y, phone, timeInfo, desc, place_url, roadLocation } = req.body;
 	// todo : data validation
 	try {
-		console.log(place_url); // 크롤링?
 		const result = await PlaceModel.create({
 			writer,
 			name,
@@ -23,7 +22,7 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 			},
 			phone,
 			desc,
-			timeInfo: [],
+			timeInfo
 		});
 
 		res.status(201).json(result);

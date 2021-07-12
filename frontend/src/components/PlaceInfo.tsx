@@ -11,20 +11,22 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Place } from "../utils/types";
 import { ReviewModal, ModifyModal } from ".";
-import { useUpdatePlace } from '../ViewModel';
+import { useSelectedPlaceDispatch } from '../Model/PlaceModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
 	size: SizeMap[number];
 	place: Place;
+	index : number;
 }
 
-const PlaceInfo = ({ size, place }: PlaceProps) => {
+const PlaceInfo = ({ size, place, index }: PlaceProps) => {
+	const setSelected = useSelectedPlaceDispatch();
+
 	const [sizeState, setSizeState] = useState<string>(size);
 	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
 	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
 	const [reviewNumber, setReviewNumber] = useState<number>(2); // 보이는 review 갯수
-	const updatePlace = useUpdatePlace();
 
 	useEffect(() => {
 		setSizeState(size);
@@ -36,7 +38,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 
 	const handleReviewClose = () => setReviewOpen(false);
 	const handleModifyClose = () => setModifyOpen(false);
-	const handleClickMyPlace = () => {};
+	const handleClickMyPlace = () => { };
 	/*
 	const switchMyPlace = () => {
 		place.info.isMyPlace = !place.info.isMyPlace;
@@ -44,10 +46,14 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 	};
 	*/
 
+	const changeSelectedPlace = () => {
+		setSelected(index);
+	};
+
 	const moreReview = () => setReviewNumber(reviewNumber + 2); // 2개씩 더 보여주기
 
 	return (
-		<Grid className="place-component">
+		<Grid className="place-component" onClick={changeSelectedPlace}>
 			{
 				place &&
 				<>
@@ -125,7 +131,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 									<div>
 										<strong>정보</strong>
 										<p>
-											<strong>{place.setMember}</strong>
+											<strong>{place.info.writer}</strong>
 											님께서 등록하신 장소입니다.
 										</p>
 										<Button onClick={() => setModifyOpen(true)}>
@@ -146,9 +152,7 @@ const PlaceInfo = ({ size, place }: PlaceProps) => {
 						<Grid className="time-call">
 							<div>
 								<strong>영업시간</strong>
-								<div>
-									{place.info.timeInfo.map((info) => <p>{info}</p>)}
-								</div>
+								<div>{place.info.timeInfo}</div>
 							</div>
 							<div>
 								<strong>전화</strong>

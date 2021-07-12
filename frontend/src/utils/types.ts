@@ -36,7 +36,7 @@ export type Review = {
 
 export type PlaceInfo = {
 	_id: string;
-	writer: string; // todo
+	writer?: string; // todo
 	name: string;
 	category: string;
 	location: string;
@@ -46,7 +46,8 @@ export type PlaceInfo = {
 		coordinates: Number[],
 	};
 	phone: string;
-	timeInfo: any[];
+	desc: string;
+	timeInfo: string;
 	reviews: Review[];
 	isMyPlace?: boolean;
 }

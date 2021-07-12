@@ -39,6 +39,7 @@ jobs:
       - name: Run Dependecy Installation
         run: |
           npm install
+        working-directory: .
         
       # Runs a set of commands using the runners shell
       - name: Run Dependecy Installation

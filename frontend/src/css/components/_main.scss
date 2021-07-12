@@ -19,11 +19,10 @@
 		height: calc(100vh - 5rem);
 	}
 	@include mobile {
-		/*
-        left: 0;
-		width: 0;
-		height: 0;
-		*/
+		position: relative;
+		height: 100vh;
+		background-color: transparent;
+		justify-content: space-between;
 	}
     display: flex;
 	flex-direction: column;
@@ -38,11 +37,13 @@
 	margin-bottom: auto;
 	width: 100%;
 	@include mobile {
-		position: absolute;
-		top: calc(100vh - 17rem);
-		left: 0;
 		width: 100vw;
-		overflow: hidden;
+		height: auto;
+		margin-bottom: 0;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		background-color: transparent!important;
 	}
 	display: flex;
 	flex-direction: column;
