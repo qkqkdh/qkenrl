@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, Link, Button, Avatar } from '@material-ui/core';
 import PetsIcon from "@material-ui/icons/Pets";
-import { PlaceSuggestModal } from '.';
 
 const Intro: React.FunctionComponent = () => {
 	const title = "BDCS";
@@ -34,7 +33,6 @@ const Intro: React.FunctionComponent = () => {
 					</Link>
 				</Grid>
 			</Grid>
-			<PlaceSuggestModal open={true} handleClose={() => null} />
 		</>
 	);
 };

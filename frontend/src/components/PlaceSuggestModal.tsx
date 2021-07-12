@@ -10,6 +10,7 @@ import {
 	IconButton,
 	Paper
 } from "@material-ui/core";
+import "../css/components/_suggestmodal.scss";
 
 type Props = {
 	open: boolean;
@@ -32,17 +33,30 @@ const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 					</Grid>
 					<Grid className="modal-card-con">
 						<Grid className="modal-card">
-							<Grid className="modal-card-title">별점</Grid>
+							<Grid className="modal-card-title">주소 검색</Grid>
+							<Grid className="modal-search-con">
+								<TextField
+									variant="outlined"
+									placeholder="반려견 동반 가능 장소 검색"
+								/>
+								<Button className="modal-btn" variant="outlined">검색</Button>
+							</Grid>
 						</Grid>
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">한줄평 작성</Grid>
 							<TextField
 								variant="outlined"
+								multiline
 								placeholder="한줄평을 남겨주세요."
+								inputProps={{ style: { height: '10vh', overflow: 'auto' } }}
 							/>
 						</Grid>
+						<Grid className="modal-title-des2">
+							<p>장소를 제안해주셔서 감사합니다 :)</p>
+						</Grid>
 						<Grid className="modal-btn-con">
-							<Button className="modal-btn" variant="outlined">등록하기</Button>
+							<Button className="modal-btn" variant="outlined" onClick={handleClose}>취소</Button>
+							<Button className="modal-btn" variant="outlined">제출</Button>
 						</Grid>
 					</Grid>
 				</Paper>
