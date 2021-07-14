@@ -50,8 +50,7 @@
 			.suc-box-left, .suc-box-right {
 				display: flex;
 				flex-direction: column;
-				height: 100px;
-				justify-content: space-between;
+				line-height: 2.7rem;
 				white-space: nowrap;
 			}
 			.suc-box-left {
@@ -60,13 +59,14 @@
 		}
 
 		.suc-btn-con {
-			margin-top: 1.5rem;
+			margin: 2.5rem 0;
 
 			.btn {
 				background-color: green; // color
 				color: white;
 				box-shadow: none;
-				padding: 5px 40px;
+				padding: 8px 48px;
+				text-decoration: none;
 			}
 		}
 	}

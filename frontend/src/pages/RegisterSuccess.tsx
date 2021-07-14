@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
-import { Intro, Layout, SignIn } from "../components";
+import { Layout } from "../components";
 import "../css/Login.scss";
 
 const RegisterSuccess: React.FunctionComponent = () => (
@@ -33,7 +33,7 @@ const RegisterSuccess: React.FunctionComponent = () => (
 					</Grid>
 				</Grid>
 				<Grid className="suc-btn-con">
-					<Button variant="contained" className="btn">완료</Button>
+					<a href="/place" className="btn">완료</a>
 				</Grid>
 			</Grid>
 		</Grid>
