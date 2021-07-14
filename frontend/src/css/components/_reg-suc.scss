@@ -1,0 +1,73 @@
+.suc-con {
+	padding: 1rem;
+
+	.suc-head {
+		font-size: 1.6rem;
+		font-weight: bold;
+		margin-top: 2.5rem;
+		margin-left: 2.5rem;
+		border-left: 5px solid black; // color
+		padding-left: 1rem;
+	}
+	.suc-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: 1rem;
+
+		.suc-logo {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			.dog-img {
+				width: 100px;
+				height: 100px;
+			}
+		}
+	
+		.suc-sub-head {
+			font-weight: bold;
+			font-size: 1.4rem;
+			margin-top: 10px;
+		}
+		.suc-sub-body {
+			margin: 1rem 0;
+			text-align: center;
+		}
+
+		.suc-box {
+			width: 450px;
+			display: flex;
+			border: 1px solid gray; // color
+			padding: 50px 60px;
+			overflow: auto;
+			@include mobile {
+				width: 250px;
+				padding: 30px 20px;
+			}
+
+			.suc-box-left, .suc-box-right {
+				display: flex;
+				flex-direction: column;
+				line-height: 2.7rem;
+				white-space: nowrap;
+			}
+			.suc-box-left {
+				margin-right: 20%;
+			}
+		}
+
+		.suc-btn-con {
+			margin: 2.5rem 0;
+
+			.btn {
+				background-color: green; // color
+				color: white;
+				box-shadow: none;
+				padding: 8px 48px;
+				text-decoration: none;
+			}
+		}
+	}
+}
