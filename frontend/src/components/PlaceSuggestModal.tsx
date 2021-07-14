@@ -19,6 +19,10 @@ type Props = {
 
 const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 	const [name, setName] = useState("");
+	const submitHandler = (e: any) => {
+		e.preventDefault();
+		console.log('hi');
+	};
 	return (
 		<Modal open={open} onClose={handleClose}>
 			<Grid className="modal-con">
@@ -34,13 +38,15 @@ const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 					<Grid className="modal-card-con">
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">주소 검색</Grid>
-							<Grid className="modal-search-con">
-								<TextField
-									variant="outlined"
-									placeholder="반려견 동반 가능 장소 검색"
-								/>
-								<Button className="modal-btn" variant="outlined">검색</Button>
-							</Grid>
+							<form onSubmit={submitHandler}>
+								<Grid className="modal-search-con">
+									<TextField
+										variant="outlined"
+										placeholder="반려견 동반 가능 장소 검색"
+									/>
+									<Button className="modal-btn" variant="outlined" type="submit">검색</Button>
+								</Grid>
+							</form>
 						</Grid>
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">한줄평 작성</Grid>
