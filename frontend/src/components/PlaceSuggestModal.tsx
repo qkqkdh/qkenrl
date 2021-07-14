@@ -24,7 +24,7 @@ const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 		console.log('hi');
 	};
 	return (
-		<Modal open={open} onClose={handleClose}>
+		<Modal open={open} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 			<Grid className="modal-con">
 				<Paper>
 					<Grid>
