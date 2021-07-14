@@ -34,7 +34,7 @@ const SignIn: React.FunctionComponent = () => {
 	};
 	return (
 		<>
-			<Button onClick={handleOpen}>Login</Button>
+			<Button onClick={handleOpen} className="login-btn">Login</Button>
 			<Modal
 				open={Open}
 				onClose={handleClose}
@@ -83,7 +83,7 @@ const SignIn: React.FunctionComponent = () => {
 							</form>
 							<Grid container className="sub-grid">
 								<Grid item>
-									<Button onClick={RegisterOpen}>Register</Button>
+									<Button onClick={RegisterOpen} style={{ fontWeight: 400 }}>Register</Button>
 								</Grid>
 								<Grid item>|</Grid>
 								<Grid item>
