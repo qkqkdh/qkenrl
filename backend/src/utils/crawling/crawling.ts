@@ -107,7 +107,7 @@ const putInfo = async (result : ResultType) => { // DB에 넣기
 }
 
 const getInfo = async () => {
-	for(let i=1; i<50; i++){ // 1000까지 있음
+	for(let i=1; i<500; i++){ // 1000까지 있음
 		await crawlingModule(i);
 	}
 }

@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { LocalCafe, Restaurant, Apartment, School, LocalHospital, LocalFlorist } from "@material-ui/icons";
+import axios from 'axios';
+import { Center, PlaceInfo } from '../utils/types';
+import { clearMarker, createMarker } from '../utils/f';
+import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
 
 type Props = {
+	center : Center
 }
 
 type FilterProps = {
@@ -50,14 +55,26 @@ const PlaceFilter: React.FunctionComponent<FilterProps> = ({ category, active, s
 	);
 };
 
-const PlaceFilterList: React.FunctionComponent<Props> = () => {
+const PlaceFilterList: React.FunctionComponent<Props> = ({ center }) => {
+	const places = usePlaceState();
+	const setPlaces = usePlaceDispatch();
+
 	const [tag, setTag] = useState<string>("전체");
+	const fetchPlace = async () => {
+		const result = await axios.get(`http://localhost:3001/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
+		const { data } = result;
+		const _ = data.map((place: PlaceInfo) => createMarker(place));
+		setPlaces(_);
+	};
 	useEffect(() => {
 		console.log(`현재 태그 : ${tag}`);
+		clearMarker(places);
+		fetchPlace();
 	}, [tag]);
 	return (
 		<Grid className="place-filter-container">
 			<PlaceFilter category="카페" active={tag === "카페"} setTag={setTag} />
+			<PlaceFilter category="애견카페" active={tag === "애견카페"} setTag={setTag} />
 			<PlaceFilter category="식당" active={tag === "식당"} setTag={setTag} />
 			<PlaceFilter category="호텔" active={tag === "호텔"} setTag={setTag} />
 			<PlaceFilter category="유치원" active={tag === "유치원"} setTag={setTag} />

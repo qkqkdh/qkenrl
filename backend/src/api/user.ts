@@ -8,6 +8,7 @@ import { isLoggedIn } from "../utils/middleware";
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
+	console.log(req);
 	passport.authenticate('local', { session: false }, (err, user, info) => {
 		if (err || !user || user.status === 'pending') {
 			res.status(401).send();
@@ -19,7 +20,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
 					const { username } = user;
 					const token = jwt.sign({
 						username,
-					}, process.env.JWT_SECRET as string, { expiresIn: 1000 * 60 * 30 });
+					}, "process.env.JWT_SECRET as string", { expiresIn: 1000 * 60 * 30 });
 					res.status(200).json({ token });
 				}
 			});

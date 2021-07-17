@@ -32,6 +32,10 @@ const userSchema = new Schema({
 		type: String,
 		default: "pending"
 	},
+	places: {
+		type: [Schema.Types.ObjectId],
+		required: false
+	},
 });
 
 // MODEL : Responsible for CRUD
