@@ -5,7 +5,7 @@ import { isLoggedIn } from "../utils/middleware";
 const router = Router();
 
 const headers = {
-	Authorization: `KakaoAK ${process.env.KAKAO_REST_KEY}`
+	Authorization: `KakaoAK 1b5f617c590c54a1f6b831bcc731704a`
 };
 
 router.get('/', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => {

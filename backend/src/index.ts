@@ -28,9 +28,10 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			process.env.MONGO_URI as string,
+			"mongodb://localhost:27017/admin",
 			{
 				useNewUrlParser: true,
+				useUnifiedTopology: true,
 				dbName: "abaotest"
 			},
 			() => {

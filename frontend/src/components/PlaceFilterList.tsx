@@ -74,6 +74,7 @@ const PlaceFilterList: React.FunctionComponent<Props> = ({ center }) => {
 	return (
 		<Grid className="place-filter-container">
 			<PlaceFilter category="카페" active={tag === "카페"} setTag={setTag} />
+			<PlaceFilter category="애견카페" active={tag === "애견카페"} setTag={setTag} />
 			<PlaceFilter category="식당" active={tag === "식당"} setTag={setTag} />
 			<PlaceFilter category="호텔" active={tag === "호텔"} setTag={setTag} />
 			<PlaceFilter category="유치원" active={tag === "유치원"} setTag={setTag} />
