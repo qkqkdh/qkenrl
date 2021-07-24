@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     margin-left: calc(25% + 2rem);
-    z-index: 900;
+    z-index: 910;
     @include mobile {
         position: absolute;
         top: calc(3vw + 3rem);
@@ -17,37 +17,45 @@
 	}
     .MuiButton-root {
         border-radius: 20px;
-        background-color: #ffffff;
+        background-color: $sub-color;
     }
     .place-filter-selected {
-        background-color: #777777;
-        color: white;
+        background-color: $subsub-color;
+        color: $sub-color;
     }
     :nth-child(1),
     :nth-child(2) {
         .MuiButton-root {
-            border: 2px solid #ff6600;
+            border: 2px solid $em-color-1;
         }
         .MuiSvgIcon-root {
-            color: #ff6600;
+            color: $em-color-1;
         }
     }
     :nth-child(3),
     :nth-child(4),
     :nth-child(5) {
         .MuiButton-root {
-            border: 2px solid #ffc300;
+            border: 2px solid $em-color-2;
         }
         .MuiSvgIcon-root {
-            color: #ffc300;
+            color: $em-color-2;
         }
     }
     :nth-child(6) {
         .MuiButton-root {
-            border: 2px solid #00b2ff;
+            border: 2px solid $em-color-3;
         }
         .MuiSvgIcon-root {
-            color: #00b2ff;
+            color: $em-color-3;
+        }
+    }
+    :nth-child(7) {
+        .MuiButton-root {
+            border: 2px solid $em-color-3;
+        }
+        .MuiSvgIcon-root {
+            color: $em-color-3;
         }
     }
 }

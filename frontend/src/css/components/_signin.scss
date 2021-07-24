@@ -1,5 +1,5 @@
 .login-btn:hover {
-	background-color: rgba(0, 0, 0, 0) !important;
+	background-color: $transparent-color !important;
 }
 .login-body{
 	display: flex;
@@ -23,13 +23,13 @@
 			margin: 1rem;
 			width: 6rem;
 			height: 6rem;
-			background-color: #ffffff;
+			background-color: $sub-color;
 			color: #000;
-			border: solid 1px black;
+			border: solid 1px $text-color;
 		}
 		.title{
 			font-size: 2.5rem;
-			color: darken(gray,20%);
+			color: darken($subsub-color,20%);
 			font-weight: 700;
 		}
 	}
@@ -42,35 +42,51 @@
 	justify-content: flex-end;
 
 	.close-btn{
-		color: #000 !important;
-		background-color: rgb(202, 202, 202) !important;
+		color: $text-color !important;
+		background-color: $subsub-light-color !important;
 		width: 1rem;
 		height: 1rem;
 		margin: 1rem 1rem 0 1rem;
 	}
 }
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-	border: solid 1px black !important;
-}
+.register-btn
 .MuiButton-outlined {
-	padding: 5px !important;
+	padding: 5px;
 }
 .form {
     width: 70%;
     margin: 1rem;
 	
 	.login-inputs {
-		margin: 0.5rem 0;
-		border-radius: 0.5rem;
-		box-shadow: 1px 1px 2px gray;
+		border: none;
+		.MuiOutlinedInput-root {
+			input {
+				border: 2px solid $main-color;
+				margin: 0.5rem 0;
+				border-radius: 0.5rem;
+				box-shadow: 1px 1px 2px $subsub-light-color;
+				&:hover {
+					border-color: $main-dark-color;
+				}
+				&:focus {
+					border-color: $main-dark-color;
+				}
+			}
+		}
+		.PrivateNotchedOutline-root-1 {
+			border: none;
+		}
 	}
 	.submit {
 		margin: 0.5rem 0;
-		background-color: #777777 !important;
-		color: white;
+		background-color: $main-color;
+		color: $sub-color;
 		border-radius: 0.5rem;
-		font-size: 0.8rem;
+		@include font-default(300, 0.8rem);
+		&:hover {
+			background-color: $main-deep-dark-color;
+		}
 	}
 	@include desktop {
 		width: 40%;
@@ -84,9 +100,9 @@
 		padding: 0 8px;
 		font-size: 0.8rem;
 		text-decoration: none !important;
-		color:#000 !important;
+		color: $text-color !important;
 		&:hover{
-			color:#222;
+			color: $text-color;
 			font-weight: 600;
 		}
 	}
