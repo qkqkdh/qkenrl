@@ -16,7 +16,7 @@
     margin-bottom: 2rem;
     width: 6rem;
     height: 6rem;
-    background-color: $main-color;
+    background-color: $sub-color;
     color: $text-color;
     animation: fadeIn 0.8s linear 0s both;
 }
@@ -35,7 +35,7 @@
 
 .text-area {
     text-align: center;
-    color: $main-color;
+    color: $sub-color;
     .title-area {
         @include font-default(700, 3rem);
         margin-bottom:2rem;
@@ -90,7 +90,7 @@
             transition-delay: 0s;
         }
         &:after {
-            background-color: $main-color;
+            background-color: $sub-color;
             transition-delay: .35s;
         }
         &:before, &:after {
