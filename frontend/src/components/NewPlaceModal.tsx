@@ -4,6 +4,7 @@ import { Modal, ModalProps } from '@material-ui/core';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { API_URL } from '../utils/CommonVariables';
 
 type Props = ModalProps
 const NewPlaceModal: React.FunctionComponent<Props> = ({ open, onClose }) => {
@@ -12,7 +13,7 @@ const NewPlaceModal: React.FunctionComponent<Props> = ({ open, onClose }) => {
 	const [clickedResult, setClickedResult] = useState<number>(-1);
 	const onSearchSubmit = async ({ query }: any) => {
 		try {
-			const result = await axios.get(`http://localhost:3001/search?keyword=${query}`);
+			const result = await axios.get(`${API_URL}/search?keyword=${query}`);
 			console.log(result.data);
 			setResults(result.data.documents);
 		} catch (err) {
@@ -22,7 +23,7 @@ const NewPlaceModal: React.FunctionComponent<Props> = ({ open, onClose }) => {
 	const handleClickResult = (idx: number) => async () => {
 		try {
 			const { place_name, address_name, road_address_name, x, y, phone, category_name, place_url } = results[idx];
-			const result = await axios.post(`http://localhost:3001/place`, {
+			const result = await axios.post(`${API_URL}/place`, {
 				name: place_name,
 				category: category_name,
 				location: address_name,

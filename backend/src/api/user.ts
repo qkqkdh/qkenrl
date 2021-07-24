@@ -69,7 +69,7 @@ router.post(
 						// FIXME
 
 					})
-					.catch((err) => {
+					.catch((err:any) => {
 						// FIXME
 						console.error(err);
 					});
