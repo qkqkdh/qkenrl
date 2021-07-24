@@ -33,6 +33,7 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 });
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+	// TODO : isMyPlace 추가해서 보내주기
 	const { x, y, keyword } = req.query;
 	if (!x && !y && !keyword) {
 		res.status(400).send();
@@ -96,6 +97,10 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 	const { userName, placeId } = req.body;
 	try {
 		const user = await User.findOne({ username: userName });
+		if(user.places.includes(placeId)){
+			res.status(403).send(); // 이미 있음
+			return;
+		}
 		const place = await PlaceModel.findOne({_id: placeId});
 		if (!place) {
 			res.status(400).send();
@@ -122,6 +127,28 @@ router.get('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunc
 			res.status(404).send();
 		}else{
 			res.status(200).json(places);
+		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).send();
+	}
+});
+
+router.delete('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 삭제
+	const { userName, placeId } = req.query;
+	if(!userName){
+		res.status(401).send();
+		return;
+	}
+	try {
+		const user = await User.findOne({ username: String(userName) });
+		const places = user.places;
+		if(places.includes(placeId)){
+			places.splice(places.findIndex((place : string) => place==String(placeId)),1);
+			user.save();
+			res.status(200).json(places);
+		}else{
+			res.status(403).send();
 		}
 	} catch (err) {
 		console.log(err);
