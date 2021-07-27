@@ -5,10 +5,20 @@
 
 /* Color */
 $COLOR: #000000;
-$main-color: white;
-$sub-color: gray;
-$dark-gray: #777777;
-$light-gray: lightgray;
+$main-color: #80CBC4;
+$main-light-color: #CCEEEB;
+$main-dark-color: #00897B;
+$main-deep-dark-color: #00695C;
+$sub-color: #ffffff;
+$subsub-light-color: #CACACA;
+$subsub-color: #777777;
+$em-color-1: #ff6600;
+$em-color-2: #ffc300;
+$em-color-3: #00b2ff;
+$text-color: #000000;
+$shadow-color: #000000;
+$correct-color: #008000;
+$transparent-color: rgba(0, 0, 0, 0);
 
 /* Padding */
 $padding: 100px; // content-padding

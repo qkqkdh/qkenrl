@@ -4,12 +4,12 @@
     margin: 1rem;
 	padding: 1rem;
 	border-radius: 1rem;
-	background-color: white;
-	border: 1px solid lightgray;
+	background-color: $sub-color;
+	border: 1px solid $subsub-light-color;
 	display: flex;
 	flex-direction: column;
 	&:hover{
-		box-shadow: 0 0 0.8rem gray;
+		box-shadow: 0 0 0.8rem $shadow-color;
 		border-color: $sub-color;
 	}
 	@include mobile {
@@ -47,20 +47,20 @@
 				margin-right: 1rem;
 			}
 			h6{
-				color: gray;
+				color: $subsub-color;
 			}
 		}
 		svg{
 			padding: 5px;
 			border-radius: 1rem;
-			background-color: $sub-color;
-			fill: white;
+			background-color: $main-color;
+			fill: $sub-color;
 			cursor: pointer;
 		}
 		.notMyPlace{
-			background-color: white;
-			fill: gray;
-			border: 1px solid gray;
+			background-color: $sub-color;
+			fill: $subsub-color;
+			border: 1px solid $subsub-color;
 		}
 	}
 	.place-info{
@@ -86,8 +86,8 @@
 				.lot-number{
 					strong{
 						padding: 5px;
-						background-color: #858585;
-						color: white;
+						background-color: $subsub-color;
+						color: $sub-color;
 						font-weight: 300;
 						border-radius: 5px;
 					}
@@ -117,7 +117,7 @@
 	}
 	.review-con{
 		padding-top : 1rem;
-		border-top : 1px solid lightgray;
+		border-top : 1px solid $subsub-light-color;
 		.review-title p{
 			font-weight: 600;
 		}

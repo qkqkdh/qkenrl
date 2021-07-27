@@ -1,8 +1,8 @@
 .search_bar {
-  border: 2px solid #000;
+  border: 1px solid $subsub-color;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: $sub-color;
   @include desktop {
     width: 80%;
     height: 3rem;
@@ -32,12 +32,17 @@
     }
   }
   #btn-submit {
-    border-left: 2px solid #000;
+    border-left: 1px solid $subsub-color;
     border-radius: 0;
-    background-color: $light-gray;
+    color: $sub-color;
+    background-color: $main-color;
     padding: 1rem 0 1rem 0;
     height: 100%;
     @include font-default(700, 1rem);
+  }
+  .MuiSvgIcon-root {
+    margin-left: 0.3rem;
+    color: $main-color;
   }
 }
 
@@ -52,7 +57,7 @@
 }
 
 .new_place_modal {
-  background-color: #fff;
+  background-color: $sub-color;
   margin: 5vw auto 0 auto;
   @include desktop {
 
@@ -67,7 +72,7 @@
 .search_result{
   z-index: 100;
   padding: 10px;
-  background-color: white;
+  background-color: $sub-color;
   border: 1px solid;
 }
 
@@ -77,5 +82,5 @@
 .new_place_modal .column {
   margin: 2vw;
   padding: 1vw;
-  border: 2px solid #000;
+  border: 2px solid $text-color;
 }
