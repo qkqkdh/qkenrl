@@ -12,8 +12,8 @@
 }
 
 .place-side-bar {
-    background-color: $main-color;
-    box-shadow: 0.01rem 0 1rem #000;
+    background-color: $sub-color;
+    box-shadow: 0.01rem 0 1rem $shadow-color;
     @include desktop {
 		width: 25%;
 		height: calc(100vh - 5rem);
