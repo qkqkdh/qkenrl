@@ -59,17 +59,17 @@ router.post(
 					code: sha256(newUser.username)
 				});
 				const mail = { // FIXME from, html template
-					from: 'todo.todo',
+					from: process.env.MAIL_USER,
 					to: email,
 					subject: `[BDCS] 회원가입 인증메일입니다.`,
-					html: `<p><a href="http://localhost:3001/user/verification/${newUser._id}/${code.code}>링크</a>를 클릭해서 인증을 완료해주세요.</p>`
+					html: `<p><a href="http://localhost:3001/user/verification/${newUser._id}/${code.code}">링크</a>를 클릭해서 인증을 완료해주세요.</p>`
 				};
 				transporter.sendMail(mail)
 					.then(() => {
 						// FIXME
 
 					})
-					.catch((err) => {
+					.catch((err: any) => {
 						// FIXME
 						console.error(err);
 					});
