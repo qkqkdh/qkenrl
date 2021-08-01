@@ -1,14 +1,12 @@
 // JWT Strategy
 import passport from 'passport';
-import User, { IUser } from '../../model/User';
+import User, { IUser, UserDocument } from '../../model/User';
 import localStrategy from './local';
 import jwtStrategy from './jwt';
 
 declare global {
 	namespace Express {
-		interface User extends IUser {
-			id: any;
-		}
+		interface User extends UserDocument {}
 	}
 }
 
