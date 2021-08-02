@@ -43,7 +43,7 @@ const SignIn: React.FunctionComponent = () => {
 				username: id,
 				password: pw
 			});
-			console.log(result);
+			console.log(result); // setHeader 하기~
 		} catch (err) {
 			console.log(err);
 			alert('로그인에 실패했습니다.');
