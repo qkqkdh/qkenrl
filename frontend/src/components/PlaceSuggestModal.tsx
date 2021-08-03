@@ -8,7 +8,10 @@ import {
 	Typography,
 	Modal,
 	IconButton,
-	Paper
+	Paper,
+	Select,
+	MenuItem,
+	FormControl
 } from "@material-ui/core";
 import "../css/components/_suggestmodal.scss";
 
@@ -19,6 +22,8 @@ type Props = {
 
 const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 	const [name, setName] = useState("");
+	const [kindVal, setKindVal] = useState(0);
+	const kind = ['식당', '애견동반카페', '병원', '호텔', '유치원', '애견카페', '공원'];
 	const submitHandler = (e: any) => {
 		e.preventDefault();
 		console.log('hi');
@@ -36,6 +41,16 @@ const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 						<p>여러분의 소중한 의견은 사이트를 개선하는 데에 큰 도움이 됩니다.</p>
 					</Grid>
 					<Grid className="modal-card-con">
+						<Grid className="modal-card">
+							<Grid className="modal-card-title">장소 종류</Grid>
+							<FormControl variant="outlined">
+								<Select fullWidth value={kindVal} onChange={(e: any) => setKindVal(e.target.value)}>
+									{
+										kind.map((v:string, i) => <MenuItem value={i}>{v}</MenuItem>)
+									}
+								</Select>
+							</FormControl>
+						</Grid>
 						<Grid className="modal-card">
 							<Grid className="modal-card-title">주소 검색</Grid>
 							<form onSubmit={submitHandler}>
