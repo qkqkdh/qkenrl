@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Place, PlaceInfo } from "../utils/types";
 import NewPlaceModal from './NewPlaceModal';
 import { usePlaceDispatch } from '../Model/PlaceModel';
+import { API_URL } from "../utils/CommonVariables";
 
 interface Props {
 	handleSearchResult: (place: PlaceInfo[]) => void;
@@ -24,7 +25,7 @@ const SearchBar: React.FunctionComponent<Props> = ({ handleSearchResult, handleS
 				// todo : keyword 없어지면 위치로 api 호출
 				return;
 			}
-			const result = await axios.get(`http://localhost:3001/place?keyword=${keyword}`);
+			const result = await axios.get(`${API_URL}/place?keyword=${keyword}`);
 			handleSearchResult(result.data); // map 에 marker 셋팅
 			// setResults(result.data); // 자동완성 결과 표시
 		} catch (err) {
