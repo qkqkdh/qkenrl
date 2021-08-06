@@ -11,10 +11,13 @@ import { FilterQuery } from "mongoose";
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
-	console.log(req);
 	passport.authenticate('local', { session: false }, (err, user, info) => {
 		if (err || !user || user.status === 'pending') {
-			res.status(401).send();
+			let message = '';
+			if(user.status === 'pending') {
+				message = "EmailVerificationRequired";
+			}
+			res.status(401).send(message);
 		} else {
 			req.logIn(user, { session: false }, (err) => {
 				if (err) {
@@ -23,7 +26,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
 					const { username } = user;
 					const token = jwt.sign({
 						username,
-					}, "process.env.JWT_SECRET as string", { expiresIn: 1000 * 60 * 30 });
+					}, "process.env.JWT_SECRET", { expiresIn: 1000 * 60 * 30 });
 					res.status(200).json({ token });
 				}
 			});
