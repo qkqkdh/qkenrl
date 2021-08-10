@@ -45,4 +45,3 @@ export function useHeaderDispatch() {
 	const context = useContext(HeaderDispatch);
 	return context;
 }
-
