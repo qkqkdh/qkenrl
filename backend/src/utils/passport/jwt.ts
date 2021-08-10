@@ -5,7 +5,6 @@ import User from '../../model/User';
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: "process.env.JWT_SECRET",
-	passReqToCallback: undefined, //
 };
 
 const JWTStrategy = (passport: passport.PassportStatic) => {

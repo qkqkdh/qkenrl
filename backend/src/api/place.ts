@@ -61,13 +61,13 @@ router.get('/category', async (req: Request, res: Response, next: NextFunction) 
 	if (!x || !y || !category) {
 		res.status(400).send();
 	}
-	try{
+	try {
 		let reg = `\\${category}\+`;
-		if(category === "전체"){
+		if (category === "전체") {
 			reg = ".";
-		}else if(category === "식당"){
+		} else if (category === "식당") {
 			reg = `\\${"음식점"}\+`;
-		}else if(category === "카페"){
+		} else if (category === "카페") {
 			reg = `\\${"애견동반카페"}\+`;
 		}
 
@@ -77,16 +77,16 @@ router.get('/category', async (req: Request, res: Response, next: NextFunction) 
 					$centerSphere: [[y, x], 5 / 6378.1] // TODO : 5가 아니라 현재 보고 있는 zoom 반영
 				}
 			},
-			category : { $regex: reg , $options : 'i'}
+			category: { $regex: reg, $options: 'i' }
 		});
-		
-		if(!places){
+
+		if (!places) {
 			res.status(404).send();
 			return;
 		}
 
 		res.status(200).json(places);
-	}catch(err){
+	} catch (err) {
 		console.log(err);
 		res.status(500).send();
 	}
@@ -96,7 +96,7 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 	const { userName, placeId } = req.body;
 	try {
 		const user = await User.findOne({ username: userName });
-		const place = await PlaceModel.findOne({_id: placeId});
+		const place = await PlaceModel.findOne({ _id: placeId });
 		if (!place) {
 			res.status(400).send();
 		} else {
@@ -111,16 +111,16 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 
 router.get('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 가져오기
 	const { userName } = req.query;
-	if(!userName){
+	if (!userName) {
 		res.status(401).send();
 		return;
 	}
 	try {
 		const user = await User.findOne({ username: String(userName) });
-		const places = user.places;
-		if(!places){
+		const { places } = user;
+		if (!places) {
 			res.status(404).send();
-		}else{
+		} else {
 			res.status(200).json(places);
 		}
 	} catch (err) {

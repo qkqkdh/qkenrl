@@ -22,31 +22,63 @@ import CloseIcon from '@material-ui/icons/Close';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import "../css/Login.scss";
+import { API_URL } from "../utils/CommonVariables";
 
 type Props = {
 	// Props 정의
 	ropen: boolean
 	closeHandler: () => void
 };
-
-type FormData = {
-	id: string;
-	password: string;
-	email: string;
+type stepProps = {
+	activeStep: number
+	value: string
+	value2: string
+	valueHandle: (e:any) => void
+	value2Handle: (e:any) => void
+	name: string
+	id: string
+	pw: string
+	pwCheck: string
+	email: string
+	setName: React.Dispatch<React.SetStateAction<string>>
+	setId: React.Dispatch<React.SetStateAction<string>>
+	setPw: React.Dispatch<React.SetStateAction<string>>
+	setPwCheck: React.Dispatch<React.SetStateAction<string>>
+	setEmail: React.Dispatch<React.SetStateAction<string>>
 };
 
 const getSteps = () => ['약관동의', '정보입력', '이메일 인증'];
 
-function getStepContent(step:number) {
-	const [value, setValue] = useState('disagree');
-	const valueHandle = (e:any) => {
-		setValue(e.target.value);
+function getStepContent(props:stepProps) {
+	// <-- props, state
+	const [helper, setHelper] = useState('');
+	const pwCheckHandler = (e:any) => {
+		setPwCheck(e.target.value);
+		if (e.target.value === pw) {
+			setHelper('');
+		} else {
+			setHelper('비밀번호가 다릅니다.');
+		}
 	};
-	const [value2, setValue2] = useState('disagree');
-	const value2Handle = (e:any) => {
-		setValue2(e.target.value);
-	};
-	const [email, setEmail] = useState('abc@defg');
+	const {
+		activeStep,
+		value,
+		value2,
+		valueHandle,
+		value2Handle,
+		name,
+		id,
+		pw,
+		pwCheck,
+		email,
+		setName,
+		setId,
+		setPw,
+		setPwCheck,
+		setEmail,
+	} = props;
+	// props, state -->
+	// <-- 내용 모음
 	const agreeContent = (
 		<>
 			<p>제2항과 제3항의 처분에 대하여는 법원에 제소할 수 없다. 피고인의 자백이 고문·폭행·협박·구속의 부당한 장기화 또는 기망 기타의 방법에 의하여 자의로 진술된 것이 아니라고 인정될 때 또는 정식재판에 있어서 피고인의 자백이 그에게 불리한 유일한 증거일 때에는 이를 유죄의 증거로 삼거나 이를 이유로 처벌할 수 없다.</p>
@@ -74,7 +106,15 @@ function getStepContent(step:number) {
 			2. 메일이 도착하지 않았다면, 스팸함을 확인해주시기 바랍니다.
 		</Typography>
 	);
-	switch (step) {
+	// 내용 모음 -->
+	const idCheck = async () => { // api 미완
+		try {
+			const res = axios.get(`${API_URL}/user/verification?id=${id}`);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	switch (activeStep) {
 	case 0:
 		return (
 			<>
@@ -110,13 +150,13 @@ function getStepContent(step:number) {
 					<Grid className="stepfirst-grid">
 						<Grid className="grid-left">이름</Grid>
 						<Grid className="grid-right">
-							<TextField variant="outlined" style={{ width: '70%' }} />
+							<TextField value={name} onChange={(e:any) => setName(e.target.value)} variant="outlined" style={{ width: '70%' }} />
 						</Grid>
 					</Grid>
 					<Grid className="stepfirst-grid">
 						<Grid className="grid-left">아이디</Grid>
 						<Grid className="grid-right">
-							<TextField variant="outlined" style={{ width: '70%' }} />
+							<TextField value={id} onChange={(e:any) => setId(e.target.value)} variant="outlined" style={{ width: '70%' }} />
 							<Button
 								variant="contained"
 								style={{ padding: '2px 10px', background: 'green', color: 'white', marginLeft: 10, borderRadius: 30, boxShadow: 'none' }}
@@ -128,19 +168,38 @@ function getStepContent(step:number) {
 					<Grid className="stepfirst-grid">
 						<Grid className="grid-left">비밀번호</Grid>
 						<Grid className="grid-right">
-							<TextField variant="outlined" style={{ width: '70%' }} />
+							<TextField
+								value={pw}
+								onChange={(e:any) => setPw(e.target.value)}
+								variant="outlined"
+								type="password"
+								style={{ width: '70%' }}
+							/>
 						</Grid>
 					</Grid>
 					<Grid className="stepfirst-grid">
 						<Grid className="grid-left">비밀번호 확인</Grid>
 						<Grid className="grid-right">
-							<TextField variant="outlined" style={{ width: '70%' }} />
+							<TextField
+								value={pwCheck}
+								onChange={pwCheckHandler}
+								variant="outlined"
+								type="password"
+								style={{ width: '70%' }}
+								helperText={helper}
+							/>
 						</Grid>
 					</Grid>
 					<Grid className="stepfirst-grid">
 						<Grid className="grid-left">이메일</Grid>
 						<Grid className="grid-right">
-							<TextField variant="outlined" style={{ width: '70%' }} />
+							<TextField
+								value={email}
+								onChange={(e:any) => setEmail(e.target.value)}
+								variant="outlined"
+								type="email"
+								style={{ width: '70%' }}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>
@@ -168,14 +227,53 @@ function getStepContent(step:number) {
 
 const Register: React.FunctionComponent<Props> = ({ ropen, closeHandler }) => {
 	const [activeStep, setActiveStep] = React.useState(0);
+	const [value, setValue] = useState('disagree');
+	const valueHandle = (e:any) => {
+		setValue(e.target.value);
+	};
+	const [value2, setValue2] = useState('disagree');
+	const value2Handle = (e:any) => {
+		setValue2(e.target.value);
+	};
+	const [name, setName] = useState('');
+	const [id, setId] = useState('');
+	const [pw, setPw] = useState('');
+	const [pwCheck, setPwCheck] = useState('');
+	const [email, setEmail] = useState('');
 	const steps = getSteps();
 
-	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1);
+	const handleNext = async () => {
+		if (activeStep === 0) {
+			if (value === "agree" && value2 === "agree") {
+				setActiveStep((prevActiveStep) => prevActiveStep + 1);
+			} else {
+				alert('약관에 동의해주세요.');
+			}
+		} else if (activeStep === 1) {
+			if (id === '' || pw === '' || email === '') {
+				alert('입력 칸을 채워주세요.');
+			} else if (pw !== pwCheck) {
+				alert('비밀번호가 다릅니다.');
+			} else {
+				try {
+					const result = await axios.post(`${API_URL}/user/signup`, {
+						id,
+						password: pw,
+						email
+					});
+					console.log(result.data);
+					// status pending시 처리하기
+					// 정답 응답시 넘어가게 하기
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		}
 	};
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
+
 	return (
 		<>
 			<Modal open={ropen} onClose={closeHandler}>
@@ -196,7 +294,7 @@ const Register: React.FunctionComponent<Props> = ({ ropen, closeHandler }) => {
 								))}
 							</Stepper>
 							<Grid className="step-grid">
-								{getStepContent(activeStep)}
+								{getStepContent({ activeStep, value, value2, valueHandle, value2Handle, name, id, pw, pwCheck, email, setName, setId, setPw, setEmail, setPwCheck })}
 							</Grid>
 						</Grid>
 						<Grid container className="register-btngroup" spacing={2}>

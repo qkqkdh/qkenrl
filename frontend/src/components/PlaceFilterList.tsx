@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Center, PlaceInfo } from '../utils/types';
 import { clearMarker, createMarker } from '../utils/f';
 import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
+import { API_URL } from "../utils/CommonVariables";
 
 type Props = {
 	center : Center
@@ -61,7 +62,7 @@ const PlaceFilterList: React.FunctionComponent<Props> = ({ center }) => {
 
 	const [tag, setTag] = useState<string>("전체");
 	const fetchPlace = async () => {
-		const result = await axios.get(`http://localhost:3001/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
+		const result = await axios.get(`${API_URL}/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
 		const { data } = result;
 		const _ = data.map((place: PlaceInfo) => createMarker(place));
 		setPlaces(_);
