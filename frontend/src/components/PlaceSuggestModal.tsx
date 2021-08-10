@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
 	Avatar,
 	Button,
@@ -14,6 +15,7 @@ import {
 	FormControl
 } from "@material-ui/core";
 import "../css/components/_suggestmodal.scss";
+import { API_URL } from "../utils/CommonVariables";
 
 type Props = {
 	open: boolean;
@@ -22,10 +24,19 @@ type Props = {
 
 const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 	const [name, setName] = useState("");
+	const [keyword, setKeyword] = useState("");
 	const [kindVal, setKindVal] = useState(0);
 	const kind = ['식당', '애견동반카페', '병원', '호텔', '유치원', '애견카페', '공원'];
-	const submitHandler = (e: any) => {
+	const keywordHandler = (e: any) => {
+		setKeyword(e.target.value);
+	};
+	const submitHandler = async (e: any) => {
 		e.preventDefault();
+		console.log(keyword);
+		await axios.get(`${API_URL}/search?keyword=${keyword}`).then((res) => {
+			console.log(keyword);
+			console.log(res);
+		});
 		console.log('hi');
 	};
 	return (
@@ -56,8 +67,11 @@ const PlaceSuggestModal: React.FC<Props> = ({ open, handleClose }) => {
 							<form onSubmit={submitHandler}>
 								<Grid className="modal-search-con">
 									<TextField
+										type="text"
 										variant="outlined"
 										placeholder="반려견 동반 가능 장소 검색"
+										value={keyword}
+										onChange={keywordHandler}
 									/>
 									<Button className="modal-btn" variant="outlined" type="submit">검색</Button>
 								</Grid>
