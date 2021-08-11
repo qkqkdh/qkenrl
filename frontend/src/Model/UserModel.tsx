@@ -1,17 +1,16 @@
 import React, { createContext, useContext, useState, Dispatch, useEffect } from 'react';
 import { childrenObj, User } from '../utils/types';
 
-const UserState = createContext<User | undefined>(undefined);
-const UserDispatch = createContext<Dispatch<User>>(() => {});
+const UserState = createContext<User | undefined | string>(undefined);
+const UserDispatch = createContext<Dispatch<User | string>>(() => {});
 const HeaderState = createContext('');
 const HeaderDispatch = createContext<Dispatch<string>>(() => {});
 
 export const UserContextProvider = ({ children }: childrenObj) => {
-	const [user, setUser] = useState<User | undefined>(undefined);
+	const [user, setUser] = useState<User | undefined | string>(undefined);
 	const [header, setHeader] = useState('');
 
 	useEffect(() => { // try login if browser has cookie
-
 	}, []);
 	return (
 		<UserState.Provider value={user}>

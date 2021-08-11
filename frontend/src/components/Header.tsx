@@ -1,13 +1,16 @@
 // Header Component
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { Grid, Menu, MenuItem } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { SignIn } from ".";
+import { useUserState } from "../Model/UserModel";
 
 interface Props { }
 const Header: React.FunctionComponent<Props> = () => {
+	const User = useUserState();
+	console.log(User);
 	const name = "홍길동";
 	const [isLogined, setIsLogined] = useState<boolean>(false);
 	const [open, setOpen] = useState<boolean>(false);
@@ -20,6 +23,10 @@ const Header: React.FunctionComponent<Props> = () => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	useEffect(() => {
+		if (User !== undefined) setIsLogined(true);
+	}, [User]);
 
 	return (
 		<Grid className="header">

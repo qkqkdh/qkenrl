@@ -16,10 +16,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Register } from ".";
 import "../css/Login.scss";
 import { API_URL } from "../utils/CommonVariables";
-import { useHeaderDispatch } from "../Model/UserModel";
+import { useHeaderDispatch, useUserDispatch } from "../Model/UserModel";
 
 const SignIn: React.FunctionComponent = () => {
 	const setHeader = useHeaderDispatch();
+	const setUser = useUserDispatch();
 	const [Open, setOpen] = useState(false);
 	const [ropen, setRopen] = useState(false);
 	const [id, setId] = useState('');
@@ -47,6 +48,7 @@ const SignIn: React.FunctionComponent = () => {
 			});
 			console.log(result); // setHeader 하기~
 			setHeader(result.data.token);
+			setUser(id);
 			handleClose();
 		} catch (err) {
 			console.log(err);
