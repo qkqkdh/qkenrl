@@ -2,9 +2,15 @@ import passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import User from '../../model/User';
 
+declare const process : {
+	env: {
+		JWT_SECRET: string
+	}
+}
+
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-	secretOrKey: "process.env.JWT_SECRET",
+	secretOrKey: `${process.env.JWT_SECRET}`,
 };
 
 const JWTStrategy = (passport: passport.PassportStatic) => {

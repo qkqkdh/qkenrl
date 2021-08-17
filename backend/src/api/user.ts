@@ -10,6 +10,14 @@ import { FilterQuery } from "mongoose";
 
 const router = Router();
 
+declare const process : {
+	env: {
+		JWT_SECRET: string,
+		MAIL_USER: string,
+		DOMAIN: string
+	}
+}
+
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
 	passport.authenticate('local', { session: false }, (err, user, info) => {
 		if (err || !user || user.status === 'pending') {
@@ -26,7 +34,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
 					const { username } = user;
 					const token = jwt.sign({
 						username,
-					}, "process.env.JWT_SECRET", { expiresIn: 1000 * 60 * 30 });
+					}, `${process.env.JWT_SECRET}`, { expiresIn: 1000 * 60 * 30 });
 					res.status(200).json({ token });
 				}
 			});

@@ -1,3 +1,6 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 /* eslint-disable no-restricted-syntax */
 import express from "express";
 import cors from "cors";
@@ -12,6 +15,12 @@ import getInfo from './utils/crawling/crawling';
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 
+declare const process : {
+	env: {
+		MONGO_URI: string
+	}
+}
+
 class App {
 	app: express.Application;
 
@@ -20,7 +29,7 @@ class App {
 		this.config();
 		this.middleware();
 		this.route();
-		// getInfo(); //=> 처음 DB 데이터 불러올 때 사용
+		getInfo(); //=> 처음 DB 데이터 불러올 때 사용
 	}
 
 	private config() {
@@ -28,11 +37,11 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			"mongodb://localhost:27017/admin",
+			process.env.MONGO_URI,
 			{
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
-				dbName: "abaotest"
+				dbName: "babao"
 			},
 			() => {
 				console.log("DB CONNECTED");

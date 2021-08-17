@@ -4,13 +4,13 @@ import fs, { write } from 'fs';
 import Place from '../../model/Place';
 import PlaceModel from '../../model/Place';
 
+
 type ResultType = {
 	"title" : string,
 	"category" : string,
 	"info" : string[],//infoListType,
 	"alert" : string[]
 }
-
 // type infoListType = {
 // 	"phone_num" : string,
 // 	"address" : string,
@@ -59,7 +59,7 @@ const crawlingModule = async (idx : number) => {
 };
 
 const headers = {
-	Authorization: `KakaoAK 1b5f617c590c54a1f6b831bcc731704a`
+	Authorization: `KakaoAK ${process.env.KAKAO_REST_KEY}`
 };
 
 const getLocation = async (title : string) => { // 실제 주소 넣기
