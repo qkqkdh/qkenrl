@@ -45,12 +45,14 @@ const crawlingModule = async (idx : number) => {
 			alertList.push(obj(info).text());
 		});
 
-		putInfo({
-			"title" : title,
-			"category" : category,
-			"info" : infoList,
-			"alert" : [...alertList]
-		});
+		if (title) {
+			putInfo({
+				"title" : title,
+				"category" : category,
+				"info" : infoList,
+				"alert" : [...alertList]
+			});
+		}
 	})
 	.catch((e) => {
 		console.log("error");
