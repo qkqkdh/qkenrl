@@ -7,7 +7,16 @@ const Intro: React.FunctionComponent = () => {
 	const slogan = () => (
 		<>
 			<p>반려견과 함께하는 행복한 일상을 더 편리하게 :)</p>
-			<p>Better Dog Community Service</p>
+			<p>
+				<strong>B</strong>
+				etter&nbsp;
+				<strong>D</strong>
+				og&nbsp;
+				<strong>C</strong>
+				onvenient&nbsp;
+				<strong>S</strong>
+				ervice
+			</p>
 		</>
 	);
 	return (

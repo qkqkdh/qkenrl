@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
 	Avatar,
 	Button,
@@ -14,10 +15,13 @@ import PetsIcon from "@material-ui/icons/Pets";
 import CloseIcon from '@material-ui/icons/Close';
 import { Register } from ".";
 import "../css/Login.scss";
+import { API_URL } from "../utils/CommonVariables";
 
 const SignIn: React.FunctionComponent = () => {
 	const [Open, setOpen] = useState(false);
 	const [ropen, setRopen] = useState(false);
+	const [id, setId] = useState('');
+	const [pw, setPw] = useState('');
 
 	const handleOpen = () => {
 		setOpen(true);
@@ -31,6 +35,19 @@ const SignIn: React.FunctionComponent = () => {
 	};
 	const RegisterClose = () => {
 		setRopen(false);
+	};
+	const submitHandler = async (e:any) => {
+		e.preventDefault();
+		try {
+			const result = await axios.post(`${API_URL}/user/login`, {
+				username: id,
+				password: pw
+			});
+			console.log(result); // setHeader 하기~
+		} catch (err) {
+			console.log(err);
+			alert('로그인에 실패했습니다.');
+		}
 	};
 	return (
 		<>
@@ -51,9 +68,11 @@ const SignIn: React.FunctionComponent = () => {
 								<PetsIcon fontSize="large" />
 							</Avatar>
 							<Typography className="title">BDCS</Typography>
-							<form className="form" noValidate>
+							<form className="form" noValidate onSubmit={submitHandler}>
 								<TextField
 									variant="outlined"
+									value={id}
+									onChange={(e:any) => setId(e.target.value)}
 									fullWidth
 									size="small"
 									required
@@ -63,6 +82,8 @@ const SignIn: React.FunctionComponent = () => {
 								/>
 								<TextField
 									variant="outlined"
+									value={pw}
+									onChange={(e:any) => setPw(e.target.value)}
 									fullWidth
 									size="small"
 									required

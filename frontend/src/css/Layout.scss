@@ -14,19 +14,20 @@
 /* header */
 .header {
     width: 100%;
-    background-color: $main-color;
-    color: black;
+    background-color: $main-light-color;
+    color: $text-color;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 $padding;
-    box-shadow: 0.01rem 0 1rem #000;
+    box-shadow: 0.01rem 0 1rem $shadow-color;
     @include desktop {
       height: 5rem;
       z-index: 999;
     }
     @include mobile {
       display:none;
+      background-color: $sub-color;
     }
     &>div{
       display: flex;
@@ -57,11 +58,11 @@
               & a{
                   font-weight: 600;
               }
-              border-bottom: 1px solid black;
+              border-bottom: 1px solid $text-color;
           }
           a{
               text-decoration: none;
-              color: black;
+              color: $text-color;
           }
           
       }
@@ -77,8 +78,8 @@
           }
       }
       .menu-btn{
-          background-color: $dark-gray;
-          color: white;
+          background-color: $subsub-color;
+          color: $sub-color;
           cursor: pointer;
       }
     }

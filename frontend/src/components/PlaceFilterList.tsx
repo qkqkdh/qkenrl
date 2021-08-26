@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Center, PlaceInfo } from '../utils/types';
 import { clearMarker, createMarker } from '../utils/f';
 import { usePlaceDispatch, usePlaceState } from '../Model/PlaceModel';
+import { API_URL } from "../utils/CommonVariables";
 
 type Props = {
 	center : Center
@@ -21,19 +22,19 @@ const FilterIcon: React.FunctionComponent<FilterProps> = ({ category }) => {
 	/* eslint에서 switch문 탭간격 이상하게 잡아요.. */
 	switch (category) {
 	case "카페":
-		return <LocalCafe />;
+		return <img src="/img/icon_cafe.png" alt="icon_cafe" />;
 	case "식당":
-		return <Restaurant />;
+		return <img src="/img/icon_restaurant.png" alt="icon_restaurant" />;
 	case "호텔":
-		return <Apartment />;
+		return <img src="/img/icon_hotel.png" alt="icon_hotel" />;
 	case "유치원":
-		return <School />;
+		return <img src="/img/icon_kindergarden.png" alt="icon_kindergarden" />;
 	case "병원":
-		return <LocalHospital />;
+		return <img src="/img/icon_hospital.png" alt="icon_hospital" />;
 	case "공원":
-		return <LocalFlorist />;
+		return <img src="/img/icon_walk.png" alt="icon_walk" />;
 	default:
-		return <LocalCafe />;
+		return <img src="/img/icon_cafe.png" alt="icon_cafe" />;
 	}
 };
 
@@ -61,7 +62,7 @@ const PlaceFilterList: React.FunctionComponent<Props> = ({ center }) => {
 
 	const [tag, setTag] = useState<string>("전체");
 	const fetchPlace = async () => {
-		const result = await axios.get(`http://localhost:3001/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
+		const result = await axios.get(`${API_URL}/place/category?x=${center.x}&y=${center.y}&category=${tag}`);
 		const { data } = result;
 		const _ = data.map((place: PlaceInfo) => createMarker(place));
 		setPlaces(_);

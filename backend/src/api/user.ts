@@ -1,9 +1,12 @@
 import { Response, Request, NextFunction, Router } from "express";
 import passport from "passport";
 import jwt from 'jsonwebtoken';
-import UserModel from "../model/User";
+import { sha256 } from 'js-sha256';
+import UserModel, { UserDocument } from "../model/User";
 import SecretCodeModel from "../model/Secretcode";
 import { isLoggedIn } from "../utils/middleware";
+import { transporter } from "../utils/mailer";
+import { FilterQuery } from "mongoose";
 
 require('dotenv').config();
 
@@ -12,7 +15,11 @@ const router = Router();
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
 	passport.authenticate('local', { session: false }, (err, user, info) => {
 		if (err || !user || user.status === 'pending') {
-			res.status(401).send();
+			let message = '';
+			if(user.status === 'pending') {
+				message = "EmailVerificationRequired";
+			}
+			res.status(401).send(message);
 		} else {
 			req.logIn(user, { session: false }, (err) => {
 				if (err) {
@@ -38,9 +45,15 @@ router.post(
 	async (req: Request, res: Response, next: NextFunction) => {
 		const { id, password, email } = req.body;
 		try {
-			const user = await UserModel.findOne({ username: id });
+			const user = await UserModel.findOne({
+				$or: [{ username: id }, { email }]
+			});
 			if (user) {
-				res.status(400).send();
+				if (user.username === id) {
+					res.status(400).send("AlreadyExistsId");
+				} else if (user.email === email) {
+					res.status(400).send("AlreadyExistsEmail");
+				}
 			} else {
 				const newUser = await UserModel.create({
 					username: id,
@@ -49,12 +62,25 @@ router.post(
 				});
 				const code = await SecretCodeModel.create({
 					userid: newUser._id,
-					code: "test"
+					code: sha256(newUser.username)
 				});
+				const mail = { // FIXME from, html template
+					from: process.env.MAIL_USER,
+					to: email,
+					subject: `[BDCS] 회원가입 인증메일입니다.`,
+					html: `<p><a href="${process.env.DOMAIN || 'http://localhost:3001'}/user/verification/${newUser._id}/${code.code}">링크</a>를 클릭해서 인증을 완료해주세요.</p>`
+				};
+				transporter.sendMail(mail)
+					.then(() => {
+						// FIXME
+
+					})
+
+					.catch((err: any) => {
+						// FIXME
+						console.error(err);
+					});
 				res.status(200).send(JSON.stringify(newUser));
-				// URL : ??/api/auth/verification/${newUser._id}/${code.code}
-				// TODO : make code and send email to user for authentication
-				// TODO : need to check email limitation
 			}
 		} catch (err) {
 			console.log(err);
@@ -90,6 +116,26 @@ router.get('/verification', async (req: Request, res: Response, next: NextFuncti
 	const { id, email } = req.query;
 	if (!id && !email) {
 		res.status(400).send();
+	}
+	const _id = id as string;
+	const _email = email as string;
+	try {
+		const opts: FilterQuery<UserDocument> = {};
+		if(_id) {
+			opts['username'] = _id;
+		}
+		if(_email) {
+			opts['email'] = _email;
+		}
+		const user = await UserModel.findOne(opts);
+		if(user) {
+			res.status(400).send();
+		} else {
+			res.status(200).send();
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).send();
 	}
 });
 export default router;
