@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Place } from "../utils/types";
 import { ReviewModal, ModifyModal } from ".";
-import { useSelectedPlaceDispatch, useMyPlaceState, useMyPlaceDispatch } from '../Model/PlaceModel';
+import { useSelectedPlaceDispatch, useMyPlaceState, useFetchPlace } from '../Model/PlaceModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
@@ -23,14 +23,18 @@ type PlaceProps = {
 
 const PlaceInfo = ({ size, place, index }: PlaceProps) => {
 	const myPlace = useMyPlaceState();
-	const setMyPlace = useMyPlaceDispatch();
 	const setSelected = useSelectedPlaceDispatch();
+	const fetchMyPlace = useFetchPlace();
 	const userName = "gmldms784"; // TODO : 로그인 연동 후 해당 유저 정보로 받아오기
 
 	const [sizeState, setSizeState] = useState<string>(size);
 	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
 	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
 	const [reviewNumber, setReviewNumber] = useState<number>(2); // 보이는 review 갯수
+
+	useEffect(() => {
+		fetchMyPlace();
+	}, []);
 
 	useEffect(() => {
 		setSizeState(size);
@@ -42,22 +46,22 @@ const PlaceInfo = ({ size, place, index }: PlaceProps) => {
 
 	const handleReviewClose = () => setReviewOpen(false);
 	const handleModifyClose = () => setModifyOpen(false);
-	const handleClickMyPlace = (id: string, mode : string) => {
+	const handleClickMyPlace = (id: string, mode: string) => {
 		if (mode === 'on') {
 			axios.post(`http://localhost:3001/place/my`, {
 				userName,
 				placeId: id
+			}, {
+				withCredentials: true
 			}).then(() => {
-				const places = Object.assign([], myPlace);
-				places.push(id);
-				setMyPlace(places);
+				fetchMyPlace();
 			});
 		} else {
-			axios.delete(`http://localhost:3001/place/my?userName=${userName}&placeId=${id}`)
+			axios.delete(`http://localhost:3001/place/my?userName=${userName}&placeId=${id}`, {
+				withCredentials: true
+			})
 				.then(() => {
-					const places = Object.assign([], myPlace);
-					places.splice(places.findIndex((place : string) => place === id), 1);
-					setMyPlace(places);
+					fetchMyPlace();
 				});
 		}
 	};

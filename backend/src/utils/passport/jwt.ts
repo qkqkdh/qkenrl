@@ -2,6 +2,8 @@ import passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import User from '../../model/User';
 
+require('dotenv').config();
+
 const jwtOptions = {
 	jwtFromRequest: ExtractJwt.fromHeader('authorization'),
 	secretOrKey: process.env.JWT_SECRET,

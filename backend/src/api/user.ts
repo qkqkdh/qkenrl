@@ -5,6 +5,8 @@ import UserModel from "../model/User";
 import SecretCodeModel from "../model/Secretcode";
 import { isLoggedIn } from "../utils/middleware";
 
+require('dotenv').config();
+
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {

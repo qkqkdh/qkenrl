@@ -9,6 +9,8 @@ import api from "./api";
 import { API_PORT } from "./utils/constants";
 import getInfo from './utils/crawling/crawling';
 
+require('dotenv').config();
+
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 
@@ -20,7 +22,7 @@ class App {
 		this.config();
 		this.middleware();
 		this.route();
-		// getInfo(); //=> 처음 DB 데이터 불러올 때 사용
+		getInfo(); //= > 처음 DB 데이터 불러올 때 사용
 	}
 
 	private config() {
@@ -28,7 +30,7 @@ class App {
 		this.app.use(bodyParser.json());
 		// TODO : DB CONFIG
 		const connect = mongoose.connect(
-			"mongodb://localhost:27017/admin",
+			process.env.MONGO_URI as string,
 			{
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
@@ -44,8 +46,12 @@ class App {
 	}
 
 	private middleware() {
-		// TODO : CORS
-		this.app.use(cors());
+		const corsOptions = {
+			origin: process.env.FRONT_HOST,
+			credentials: true
+		};
+
+		this.app.use(cors(corsOptions));
 		this.app.use(
 			"/docs",
 			swaggerUi.serve,
