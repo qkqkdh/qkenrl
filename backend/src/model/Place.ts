@@ -19,7 +19,7 @@ interface IPlace { // Interface for Place
 	};
 	phone: string;
 	desc: string;
-	timeInfo: String;//any[];
+	timeInfo: String;// any[];
 	reviews: Review[];
 }
 

@@ -8,6 +8,8 @@ import { isLoggedIn } from "../utils/middleware";
 import { transporter } from "../utils/mailer";
 import { FilterQuery } from "mongoose";
 
+require('dotenv').config();
+
 const router = Router();
 
 router.post("/login", async (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +28,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction) =>
 					const { username } = user;
 					const token = jwt.sign({
 						username,
-					}, "process.env.JWT_SECRET", { expiresIn: 1000 * 60 * 30 });
+					}, process.env.JWT_SECRET as string, { expiresIn: 1000 * 60 * 30 });
 					res.status(200).json({ token });
 				}
 			});

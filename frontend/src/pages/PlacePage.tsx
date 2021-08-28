@@ -6,7 +6,7 @@ import Map from '../components/Map';
 import { Center, Place, PlaceInfo } from '../utils/types';
 import { createMarker, InitializeMap, debounce, clearMarker } from '../utils/f';
 import { Layout, PlaceFilterList, SearchBar, SearchContent, SideBar } from '../components';
-import { usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
+import { useMyPlaceDispatch, usePlaceDispatch, usePlaceState, useSelectedPlaceDispatch, useSelectedPlaceState } from '../Model/PlaceModel';
 
 type Props = {
 
@@ -14,6 +14,7 @@ type Props = {
 
 const { kakao } = window;
 const Main: React.FunctionComponent = (props) => {
+	const userName = "gmldms784"; // TODO : 로그인 연동 후 받아오기
 	const [sideBarOpen, setSideBarOpen] = useState<boolean>(false);
 	const [map, setMap] = useState<any>(null); // state for map
 	const [center, setCenter] = useState<Center | null>(null); // state for center loc
@@ -21,6 +22,7 @@ const Main: React.FunctionComponent = (props) => {
 	const setPlaces = usePlaceDispatch();
 	const selected = useSelectedPlaceState();
 	const setSelected = useSelectedPlaceDispatch();
+	const setMyPlace = useMyPlaceDispatch();
 	const cancelToken = useRef(axios.CancelToken.source());
 
 	useEffect(() => {
@@ -73,6 +75,10 @@ const Main: React.FunctionComponent = (props) => {
 
 	const handleSearchResult = (places: PlaceInfo[]) => {
 		setPlaces(places.map((place) => createMarker(place)));
+		axios.get(`http://localhost:3001/place/my?userName=${userName}`)
+			.then((res) => {
+				setMyPlace(res.data);
+			});
 	};
 
 	const handleSideBarOpen = () => {

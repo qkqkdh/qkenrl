@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import { Grid, Button } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -11,22 +12,29 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { Place } from "../utils/types";
 import { ReviewModal, ModifyModal } from ".";
-import { useSelectedPlaceDispatch } from '../Model/PlaceModel';
+import { useSelectedPlaceDispatch, useMyPlaceState, useFetchPlace } from '../Model/PlaceModel';
 
 type SizeMap = ["sm", "lg"];
 type PlaceProps = {
 	size: SizeMap[number];
 	place: Place;
-	index : number;
+	index: number;
 }
 
 const PlaceInfo = ({ size, place, index }: PlaceProps) => {
+	const myPlace = useMyPlaceState();
 	const setSelected = useSelectedPlaceDispatch();
+	const fetchMyPlace = useFetchPlace();
+	const userName = "gmldms784"; // TODO : 로그인 연동 후 해당 유저 정보로 받아오기
 
 	const [sizeState, setSizeState] = useState<string>(size);
 	const [reviewOpen, setReviewOpen] = useState<boolean>(false);
 	const [modifyOpen, setModifyOpen] = useState<boolean>(false);
 	const [reviewNumber, setReviewNumber] = useState<number>(2); // 보이는 review 갯수
+
+	useEffect(() => {
+		fetchMyPlace();
+	}, []);
 
 	useEffect(() => {
 		setSizeState(size);
@@ -38,13 +46,25 @@ const PlaceInfo = ({ size, place, index }: PlaceProps) => {
 
 	const handleReviewClose = () => setReviewOpen(false);
 	const handleModifyClose = () => setModifyOpen(false);
-	const handleClickMyPlace = () => { };
-	/*
-	const switchMyPlace = () => {
-		place.info.isMyPlace = !place.info.isMyPlace;
-		updatePlace(place);
+	const handleClickMyPlace = (id: string, mode: string) => {
+		if (mode === 'on') {
+			axios.post(`http://localhost:3001/place/my`, {
+				userName,
+				placeId: id
+			}, {
+				withCredentials: true
+			}).then(() => {
+				fetchMyPlace();
+			});
+		} else {
+			axios.delete(`http://localhost:3001/place/my?userName=${userName}&placeId=${id}`, {
+				withCredentials: true
+			})
+				.then(() => {
+					fetchMyPlace();
+				});
+		}
 	};
-	*/
 
 	const changeSelectedPlace = () => {
 		setSelected(index);
@@ -69,12 +89,12 @@ const PlaceInfo = ({ size, place, index }: PlaceProps) => {
 							<h6>{place.info.category}</h6>
 						</Grid>
 						{
-							place.info.isMyPlace ?
+							myPlace.includes(place.info._id) ?
 								<FavoriteIcon
-									onClick={handleClickMyPlace}
+									onClick={() => handleClickMyPlace(place.info._id, 'off')}
 								/> :
 								<FavoriteBorderIcon
-									onClick={handleClickMyPlace}
+									onClick={() => handleClickMyPlace(place.info._id, 'on')}
 								/>
 						}
 					</Grid>

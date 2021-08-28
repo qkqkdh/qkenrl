@@ -33,6 +33,7 @@ router.post('/', isLoggedIn, async (req: Request, res: Response, next: NextFunct
 });
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+	// TODO : isMyPlace 추가해서 보내주기
 	const { x, y, keyword } = req.query;
 	if (!x && !y && !keyword) {
 		res.status(400).send();
@@ -94,8 +95,16 @@ router.get('/category', async (req: Request, res: Response, next: NextFunction) 
 
 router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 추가
 	const { userName, placeId } = req.body;
+
 	try {
 		const user = await User.findOne({ username: userName });
+		if (!user) { // TODO : isLoggedIn 확정되면 없애기
+			res.status(401).send();
+		}
+		if (user.places.includes(placeId)) {
+			res.status(403).send(); // 이미 있음
+			return;
+		}
 		const place = await PlaceModel.findOne({ _id: placeId });
 		if (!place) {
 			res.status(400).send();
@@ -112,16 +121,42 @@ router.post('/my', isLoggedIn, async (req: Request, res: Response, next: NextFun
 router.get('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 가져오기
 	const { userName } = req.query;
 	if (!userName) {
+		res.status(404).send();
+		return;
+	}
+	try {
+		const user = await User.findOne({ username: String(userName) });
+		if (!user) { // TODO : isLoggedIn 확정되면 없애기
+			res.status(401).send();
+		}
+		const { places } = user;
+		if (!places) {
+			res.status(404).send();
+		} else {
+			res.status(200).json(places);
+		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).send();
+	}
+});
+
+router.delete('/my', isLoggedIn, async (req: Request, res: Response, next: NextFunction) => { // 내 장소 삭제
+	const { userName, placeId } = req.query;
+	if (!userName) {
 		res.status(401).send();
 		return;
 	}
 	try {
 		const user = await User.findOne({ username: String(userName) });
 		const { places } = user;
-		if (!places) {
-			res.status(404).send();
+		if (places.includes(placeId)) {
+			const idx = places.findIndex((place : string) => place == String(placeId));
+			const place = places.splice(idx, idx + 1);
+			user.save();
+			res.status(200).json(place);
 		} else {
-			res.status(200).json(places);
+			res.status(403).send();
 		}
 	} catch (err) {
 		console.log(err);
