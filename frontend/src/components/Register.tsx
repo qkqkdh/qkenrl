@@ -261,11 +261,9 @@ const Register: React.FunctionComponent<Props> = ({ ropen, closeHandler }) => {
 						password: pw,
 						email
 					});
-					console.log(result.data);
-					// status pending시 처리하기
-					// 정답 응답시 넘어가게 하기
+					setActiveStep((prevActiveStep) => prevActiveStep + 1);
 				} catch (err) {
-					console.log(err);
+					alert(err.response.data);
 				}
 			}
 		}
